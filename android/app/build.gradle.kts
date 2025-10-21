@@ -19,6 +19,11 @@ android {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
+    // Suprimir warnings de Java obsoleto en dependencias
+    tasks.withType<JavaCompile> {
+        options.compilerArgs.add("-Xlint:-options")
+    }
+
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "com.example.global66_poke_app"

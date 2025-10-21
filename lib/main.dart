@@ -1,20 +1,20 @@
+/*
+ * @class Main
+ * @description Clase encargada de iniciar la aplicación.
+ * @autor Angela Andrade
+ * @version 1.0 21/10/2025 Documentación y creación de la clase.
+ */
+
 import 'package:flutter/material.dart';
 
+import 'app.dart';
+import 'di/injection.dart';
+
 void main() {
-  runApp(const MainApp());
-}
-
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
-  }
+  // Asegurar que los bindings de Flutter estén inicializados
+  WidgetsFlutterBinding.ensureInitialized();
+  // Inicializar inyección de dependencias
+  init();
+  // Ejecutar la aplicación
+  runApp(const App());
 }

@@ -1,5 +1,4 @@
 name: global66_poke_app
-description: "A new Flutter project."
 publish_to: 'none'
 version: 0.1.0
 
@@ -9,11 +8,31 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  connectivity_plus: ^4.0.0
+  dio: ^5.9.0
+  flutter_localizations:
+    sdk: flutter
+  get_it: ^7.6.0
+  go_router: ^6.5.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: "assets/onboarding/global66_logo.png"
 
 flutter:
   uses-material-design: true
+  generate: true
+  assets:
+    - assets/common/
+    - assets/favorites/
+    - assets/onboarding/
+    - assets/pokedex/
+    - assets/profile/
+    - assets/regions/
