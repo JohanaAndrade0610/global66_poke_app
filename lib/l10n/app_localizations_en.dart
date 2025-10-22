@@ -21,6 +21,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get bottomNavigationBarProfile => 'Profile';
 
   @override
+  String get no_connection_title => 'Offline';
+
+  @override
+  String get no_connection_message => 'Please check your internet connection';
+
+  @override
   String get onboardingTittle01 => 'All Pokémon in one place';
 
   @override

@@ -13,23 +13,23 @@ class AppColors {
   AppColors._();
 
   // Tonos azules
-  static const Color blue1E88E5 = Color(0xFF1E88E5); // Azul principal
-  static const Color blue173EA5 = Color(0xFF173EA5); // Azul oscuro
-  static const Color blue0D47A1 = Color(0xFF0D47A1); // Azul oscuro
+  static const Color blue1E88E5 = Color(0xFF1E88E5);
+  static const Color blue173EA5 = Color(0xFF173EA5);
+  static const Color blue0D47A1 = Color(0xFF0D47A1);
 
   // Tonos tema claro y oscuro
-  static const Color whiteFFFFFF = Color(0xFFFFFFFF); // Blanco
-  static const Color backgroundDark = Color(
-    0xFF292A36,
-  ); // Gris oscuro para dark mode
+  static const Color whiteFFFFFF = Color(0xFFFFFFFF);
+  static const Color backgroundDark = Color(0xFF292A36);
 
   // Tonos grises y negros
-  static const Color black121212 = Color(0xFF121212); // Negro principal
-  static const Color black424242 = Color(0xFF424242); // Negro secundario
+  static const Color black121212 = Color(0xFF121212);
+  static const Color black424242 = Color(0xFF424242);
+  static const Color blackColorDD000000 = Color(0xDD000000);
+  static const Color blackColor8A000000 = Color(0x8A000000);
 
   // Tipo de negrita aplicada a los textos
-  static const FontWeight fontWeightMedium = FontWeight.w500;
   static const FontWeight fontWeightRegular = FontWeight.w400;
+  static const FontWeight fontWeightMedium = FontWeight.w500;
   static const FontWeight fontWeightSemiBold = FontWeight.w600;
 
   // Estilos de texto
@@ -49,6 +49,18 @@ class AppColors {
     fontSize: 16,
     color: whiteFFFFFF,
     fontWeight: fontWeightSemiBold,
+  );
+
+  static const TextStyle textPoppins20SemiboldDD000000 = TextStyle(
+    fontSize: 20,
+    color: blackColorDD000000,
+    fontWeight: FontWeight.w600,
+  );
+
+  static const TextStyle textPoppins14Medium8A000000 = TextStyle(
+    fontSize: 14,
+    color: blackColor8A000000,
+    fontWeight: FontWeight.w500,
   );
 }
 

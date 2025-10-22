@@ -6,6 +6,7 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app.dart';
 import 'di/injection.dart';
@@ -15,6 +16,6 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   // Inicializar inyección de dependencias
   init();
-  // Ejecutar la aplicación
-  runApp(const App());
+  // Ejecutar la aplicación.
+  runApp(ProviderScope(child: const App()));
 }

@@ -119,6 +119,18 @@ abstract class AppLocalizations {
   /// **'Profile'**
   String get bottomNavigationBarProfile;
 
+  /// No description provided for @no_connection_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline'**
+  String get no_connection_title;
+
+  /// No description provided for @no_connection_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Please check your internet connection'**
+  String get no_connection_message;
+
   /// No description provided for @onboardingTittle01.
   ///
   /// In en, this message translates to:

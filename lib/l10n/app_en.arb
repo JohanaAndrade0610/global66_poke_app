@@ -3,6 +3,8 @@
   "bottomNavigationBarRegions": "Regions",
   "bottomNavigationBarFavorites": "Favorites",
   "bottomNavigationBarProfile": "Profile",
+  "no_connection_title": "Offline",
+  "no_connection_message": "Please check your internet connection",
   "onboardingTittle01": "All Pokémon in one place",
   "onboardingDescription01": "Access an extensive list of Pokémon from every generation created by Nintendo.",
   "onboardingContinueButton": "Continue",
