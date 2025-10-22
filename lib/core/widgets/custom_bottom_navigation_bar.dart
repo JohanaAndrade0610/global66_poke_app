@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../app_theme.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
   // Índice del elemento seleccionado
@@ -30,37 +31,35 @@ class CustomBottomNavigationBar extends StatelessWidget {
     final Color backgroundColor = isDark
         ? const Color(0xFF23273A)
         : const Color(0xFFFAFAFA);
-    // Color del item seleccionado
-    const Color selectedColor = AppColors.blue0D47A1;
     // Control de localización para multiples idiomas
     final l10n = AppLocalizations.of(context)!;
     // Items de navegación
     final items = [
       // Item Pokedex
       _FooterNavItemData(
-        asset: 'assets/common/bottom_navigation_bar/pokedex_icon.png',
+        asset: 'assets/common/bottom_navigation_bar/pokedex_icon.svg',
         label: l10n.bottomNavigationBarPokedex,
       ),
       // Item Regiones
       _FooterNavItemData(
-        asset: 'assets/common/bottom_navigation_bar/regions_icon.png',
+        asset: 'assets/common/bottom_navigation_bar/regions_icon.svg',
         label: l10n.bottomNavigationBarRegions,
       ),
       // Item Favoritos
       _FooterNavItemData(
-        asset: 'assets/common/bottom_navigation_bar/favorites_icon.png',
+        asset: 'assets/common/bottom_navigation_bar/favorites_icon.svg',
         label: l10n.bottomNavigationBarFavorites,
       ),
       // Item Perfil
       _FooterNavItemData(
-        asset: 'assets/common/bottom_navigation_bar/profile_icon.png',
+        asset: 'assets/common/bottom_navigation_bar/profile_icon.svg',
         label: l10n.bottomNavigationBarProfile,
       ),
     ];
 
     return Container(
       width: double.infinity,
-      // Diseño del contenedor del footer
+      // Diseño del contenedor del bottom navigation bar
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: const BorderRadius.only(
@@ -70,9 +69,9 @@ class CustomBottomNavigationBar extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: const Color(0xFFE0E0E0),
-            blurRadius: 16,
+            blurRadius: 8,
             offset: const Offset(0, -4),
-            spreadRadius: 2,
+            spreadRadius: 1,
           ),
         ],
       ),
@@ -81,10 +80,9 @@ class CustomBottomNavigationBar extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: List.generate(items.length, (i) {
           final isSelected = selectedIndex == i;
-          const Color customUnselectedColor = Color(0xFF424242);
           return Expanded(
             child: InkWell(
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(20),
               onTap: () => onItemTapped(i),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
@@ -93,33 +91,36 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     // Icono del item
-                    Image.asset(
+                    SvgPicture.asset(
                       items[i].asset,
-                      width: 28,
-                      height: 28,
-                      color: isSelected ? selectedColor : customUnselectedColor,
+                      width: 17,
+                      height: 17,
+                      color: isSelected
+                          ? AppColors.blue0D47A1
+                          : AppColors.black424242,
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 10),
                     // Nombre del item
                     MediaQuery(
                       data: MediaQuery.of(
                         context,
                       ).copyWith(textScaleFactor: 1.0),
-                      child: Text(
-                        items[i].label,
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: isSelected
-                              ? FontWeight.w600
-                              : FontWeight.w400,
-                          color: isSelected
-                              ? selectedColor
-                              : customUnselectedColor,
-                          letterSpacing: 0.5,
+                      child: Container(
+                        height: 18,
+                        alignment: Alignment.center,
+                        child: Text(
+                          items[i].label,
+                          style: isSelected
+                              ? AppColors.textPoppinsBold0D47A1.copyWith(
+                                  fontSize: 12,
+                                )
+                              : AppColors.textPoppins14Medium424242.copyWith(
+                                  fontSize: 12,
+                                ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          textAlign: TextAlign.center,
                         ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        textAlign: TextAlign.center,
                       ),
                     ),
                   ],

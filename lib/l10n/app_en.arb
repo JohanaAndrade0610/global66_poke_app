@@ -3,12 +3,14 @@
   "bottomNavigationBarRegions": "Regions",
   "bottomNavigationBarFavorites": "Favorites",
   "bottomNavigationBarProfile": "Profile",
-  "no_connection_title": "Offline",
-  "no_connection_message": "Please check your internet connection",
+  "noConnectionTitle": "Offline",
+  "noConnectionMessage": "Please check your internet connection",
   "onboardingTittle01": "All Pokémon in one place",
   "onboardingDescription01": "Access an extensive list of Pokémon from every generation created by Nintendo.",
   "onboardingContinueButton": "Continue",
   "onboardingTittle02": "Keep your Pokédex up to date",
   "onboardingDescription02": "Sign up to save your profile, favorite Pokémon, settings, and much more within the app.",
-  "onboardingStartButton": "Let's get started"
+  "onboardingStartButton": "Let's get started",
+  "regionsTitle": "Coming soon!",
+  "regionsDescription": "We’re working hard to bring you this section. Please check back later to discover all the latest updates."
 }

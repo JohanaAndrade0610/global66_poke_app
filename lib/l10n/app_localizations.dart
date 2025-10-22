@@ -119,17 +119,17 @@ abstract class AppLocalizations {
   /// **'Profile'**
   String get bottomNavigationBarProfile;
 
-  /// No description provided for @no_connection_title.
+  /// No description provided for @noConnectionTitle.
   ///
   /// In en, this message translates to:
   /// **'Offline'**
-  String get no_connection_title;
+  String get noConnectionTitle;
 
-  /// No description provided for @no_connection_message.
+  /// No description provided for @noConnectionMessage.
   ///
   /// In en, this message translates to:
   /// **'Please check your internet connection'**
-  String get no_connection_message;
+  String get noConnectionMessage;
 
   /// No description provided for @onboardingTittle01.
   ///
@@ -166,6 +166,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Let\'s get started'**
   String get onboardingStartButton;
+
+  /// No description provided for @regionsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Coming soon!'**
+  String get regionsTitle;
+
+  /// No description provided for @regionsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'We’re working hard to bring you this section. Please check back later to discover all the latest updates.'**
+  String get regionsDescription;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

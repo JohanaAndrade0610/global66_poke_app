@@ -10,6 +10,7 @@ import 'package:go_router/go_router.dart';
 import '../features/onboarding/presentation/screens/splash_screen.dart';
 import '../features/onboarding/presentation/screens/onboarding_screen.dart';
 import '../features/pokedex/presentation/screens/pokedex_screen.dart';
+import '../features/regions/presentation/screens/regions_screen.dart';
 
 class AppRouter {
   AppRouter._();
@@ -31,8 +32,11 @@ class AppRouter {
         path: '/pokedex',
         builder: (context, state) => const PokedexScreen(),
       ),
-      // // Regions
-      // GoRoute(path: '/regions', builder: (context, state) => RegionsScreen()),
+      // Regions
+      GoRoute(
+        path: '/regions',
+        builder: (context, state) => const RegionsScreen(),
+      ),
       // // Favorites
       // GoRoute(path: '/favorites', builder: (context, state) => FavoritesScreen()),
       // // Profile

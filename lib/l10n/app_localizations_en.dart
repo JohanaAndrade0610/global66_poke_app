@@ -21,10 +21,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get bottomNavigationBarProfile => 'Profile';
 
   @override
-  String get no_connection_title => 'Offline';
+  String get noConnectionTitle => 'Offline';
 
   @override
-  String get no_connection_message => 'Please check your internet connection';
+  String get noConnectionMessage => 'Please check your internet connection';
 
   @override
   String get onboardingTittle01 => 'All Pokémon in one place';
@@ -43,4 +43,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onboardingStartButton => 'Let\'s get started';
+
+  @override
+  String get regionsTitle => 'Coming soon!';
+
+  @override
+  String get regionsDescription => 'We’re working hard to bring you this section. Please check back later to discover all the latest updates.';
 }
