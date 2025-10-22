@@ -8,6 +8,7 @@
 import 'package:go_router/go_router.dart';
 
 import '../features/onboarding/presentation/screens/splash_screen.dart';
+import '../features/onboarding/presentation/screens/onboarding_screen.dart';
 
 class AppRouter {
   AppRouter._();
@@ -18,9 +19,12 @@ class AppRouter {
     initialLocation: '/',
     routes: [
       // Splash
-      GoRoute(path: '/', builder: (context, state) => SplashScreen()),
+      GoRoute(path: '/', builder: (context, state) => const SplashScreen()),
       // Onboarding
-      // GoRoute(path: '/onboarding', builder: (context, state) => OnboardingScreen()),
+      GoRoute(
+        path: '/onboarding',
+        builder: (context, state) => const OnboardingScreen(),
+      ),
       // // Pokedex
       // GoRoute(path: '/pokedex', builder: (context, state) => PokedexScreen()),
       // // Regions

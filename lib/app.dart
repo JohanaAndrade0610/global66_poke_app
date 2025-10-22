@@ -7,10 +7,14 @@
 
 import 'package:flutter/material.dart';
 import 'core/app_router.dart';
+import 'core/app_theme.dart';
 import 'core/connectivity/connectivity_handler.dart';
 import 'core/connectivity/connectivity_service.dart';
 import 'core/locale_notifier.dart';
 import 'core/theme_mode_notifier.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+import 'l10n/app_localizations.dart';
 
 // Servicio de conectividad para toda la aplicación
 final ConnectivityService _connectivityService = ConnectivityService();
@@ -32,15 +36,18 @@ class App extends StatelessWidget {
           builder: (context, locale, _) {
             return MaterialApp.router(
               title: 'global66_poke_app',
-              theme: ThemeData.light().copyWith(
-                scaffoldBackgroundColor: Colors.white,
-              ),
-              // Gris personalizado para el modo oscuro
-              darkTheme: ThemeData.dark().copyWith(
-                scaffoldBackgroundColor: const Color(0xFF292A36),
-              ),
+              theme: AppTheme.lightTheme, // Tema claro de la aplicación
+              darkTheme: AppTheme.darkTheme, // Tema oscuro de la aplicación
               themeMode: mode,
               locale: locale,
+              // Configuración de idiomas
+              supportedLocales: AppLocalizations.supportedLocales,
+              localizationsDelegates: [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
               routerConfig: router,
               // Manejo de la conectividad en toda la aplicación
               builder: (context, child) => ConnectivityHandler(

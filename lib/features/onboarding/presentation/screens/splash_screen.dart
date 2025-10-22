@@ -5,6 +5,7 @@
  * @version 1.0 21/10/2025 Documentación y creación de la clase.
  */
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -52,6 +53,10 @@ class _SplashScreenState extends State<SplashScreen>
     _zoomController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         _rotationController.stop();
+        // Navegar al onboarding después de completar la animación
+        if (mounted) {
+          context.go('/onboarding');
+        }
       }
     });
   }

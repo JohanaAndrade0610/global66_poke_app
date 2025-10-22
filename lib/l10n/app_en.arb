@@ -1,0 +1,12 @@
+{
+  "bottomNavigationBarPokedex": "Pokedex",
+  "bottomNavigationBarRegions": "Regions",
+  "bottomNavigationBarFavorites": "Favorites",
+  "bottomNavigationBarProfile": "Profile",
+  "onboardingTittle01": "All Pokémon in one place",
+  "onboardingDescription01": "Access an extensive list of Pokémon from every generation created by Nintendo.",
+  "onboardingContinueButton": "Continue",
+  "onboardingTittle02": "Keep your Pokédex up to date",
+  "onboardingDescription02": "Sign up to save your profile, favorite Pokémon, settings, and much more within the app.",
+  "onboardingStartButton": "Let's get started"
+}

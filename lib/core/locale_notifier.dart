@@ -8,4 +8,4 @@
 import 'package:flutter/material.dart';
 
 // Notificador para la configuración regional de la aplicación
-final localeNotifier = ValueNotifier<Locale>(const Locale('en'));
+final localeNotifier = ValueNotifier<Locale>(const Locale('es'));
