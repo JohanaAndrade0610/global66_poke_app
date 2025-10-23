@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'core/app_router.dart';
-import 'core/app_theme.dart';
+import 'core/theme/app_theme.dart';
 import 'core/connectivity/connectivity_handler.dart';
 import 'core/connectivity/connectivity_service.dart';
 import 'core/locale_notifier.dart';

@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 
 import '../../l10n/app_localizations.dart';
-import '../app_theme.dart';
+import '../theme/app_theme.dart';
 
 class NoConnectionScreen extends StatelessWidget {
   const NoConnectionScreen({super.key});

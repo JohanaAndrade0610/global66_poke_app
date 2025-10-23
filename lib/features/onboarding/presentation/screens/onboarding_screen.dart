@@ -10,7 +10,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/widgets/custom_loading.dart';
 
-import '../../../../core/app_theme.dart';
+import '../../../../core/theme/app_theme.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../provider/onboarding_provider.dart';
 import '../provider/onboarding_state.dart';
@@ -131,23 +131,24 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       child: SizedBox(
                         width: double.infinity,
                         height: 58,
-                        child: ElevatedButton(
-                          onPressed: onboardingState.loading
-                              ? null
-                              : () => _onContinue(ref),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.blue1E88E5,
-                            foregroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(100),
+                        child: AbsorbPointer(
+                          absorbing: onboardingState.loading,
+                          child: ElevatedButton(
+                            onPressed: () => _onContinue(ref),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.blue1E88E5,
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                              elevation: 0,
                             ),
-                            elevation: 0,
-                          ),
-                          child: Text(
-                            onboardingState.currentPage == 0
-                                ? l10n.onboardingContinueButton
-                                : l10n.onboardingStartButton,
-                            style: AppColors.textPoppins16SemiBoldFFFFFF,
+                            child: Text(
+                              onboardingState.currentPage == 0
+                                  ? l10n.onboardingContinueButton
+                                  : l10n.onboardingStartButton,
+                              style: AppColors.textPoppins16SemiBoldFFFFFF,
+                            ),
                           ),
                         ),
                       ),

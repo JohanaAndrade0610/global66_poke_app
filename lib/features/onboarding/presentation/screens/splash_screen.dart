@@ -36,7 +36,14 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
   void initState() {
     super.initState();
     _setupAnimations();
-    _startAnimations();
+    // Retrasar el inicio de la animación para asegurar que el widget esté renderizado
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(const Duration(milliseconds: 400), () {
+        if (mounted) {
+          _startAnimations();
+        }
+      });
+    });
   }
 
   /*
@@ -53,7 +60,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
       duration: const Duration(milliseconds: 1400),
     );
     _scaleAnimation = Tween<double>(
-      begin: 0.01,
+      begin: 0.1,
       end: 1.0,
     ).chain(CurveTween(curve: Curves.easeOutCubic)).animate(_zoomController);
     _rotationYAnimation = Tween<double>(
@@ -140,6 +147,30 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                   fit: BoxFit.contain,
                 ),
               ),
+            ),
+          ),
+          // Texto y logo ubicados en la parte inferior
+          Padding(
+            padding: const EdgeInsets.only(bottom: 32.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Para Global66',
+                  style: TextStyle(
+                    color: Color(0xFF2746c7),
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                    letterSpacing: 1.2,
+                  ),
+                ),
+                SizedBox(width: 10),
+                Image.asset(
+                  'assets/onboarding/global66_logo.png',
+                  height: 28,
+                  fit: BoxFit.contain,
+                ),
+              ],
             ),
           ),
         ],
