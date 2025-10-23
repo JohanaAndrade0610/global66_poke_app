@@ -42,6 +42,7 @@ flutter:
   generate: true
   assets:
     - assets/common/bottom_navigation_bar/
+    - assets/common/information/
     - assets/favorites/
     - assets/onboarding/
     - assets/pokedex/

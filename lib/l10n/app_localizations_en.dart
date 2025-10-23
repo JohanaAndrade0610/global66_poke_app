@@ -27,6 +27,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noConnectionMessage => 'Please check your internet connection';
 
   @override
+  String get onboardingInformationTitle => 'Something went wrong...';
+
+  @override
+  String get onboardingInformationDescription => 'We couldn\'t load the information at this time. Please check your connection or try again later.';
+
+  @override
+  String get onboardingInformationRetryButton => 'Retry';
+
+  @override
   String get onboardingTittle01 => 'All Pokémon in one place';
 
   @override

@@ -131,6 +131,24 @@ abstract class AppLocalizations {
   /// **'Please check your internet connection'**
   String get noConnectionMessage;
 
+  /// No description provided for @onboardingInformationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong...'**
+  String get onboardingInformationTitle;
+
+  /// No description provided for @onboardingInformationDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'We couldn\'t load the information at this time. Please check your connection or try again later.'**
+  String get onboardingInformationDescription;
+
+  /// No description provided for @onboardingInformationRetryButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get onboardingInformationRetryButton;
+
   /// No description provided for @onboardingTittle01.
   ///
   /// In en, this message translates to:
