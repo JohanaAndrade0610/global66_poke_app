@@ -31,8 +31,7 @@ class OnboardingController extends _$OnboardingController {
   void onSplashAnimationCompleted() {
     state = state.copyWith(
       splashCompleted: true,
-      navigationRoute:
-          '/onboarding', // Ruta a la que se debe navegar después del splash
+      navigationRoute: '/onboarding', // Ruta a la que se debe navegar después del splash
     );
   }
 
@@ -72,14 +71,15 @@ class OnboardingController extends _$OnboardingController {
     try {
       await ref.read(pokedexProvider.notifier).fetchPokemonsForOnboarding();
       state = state.copyWith(
-        loading: false,
         completed: true,
         canNavigateToPokedex: true,
-        navigationRoute:
-            '/pokedex', // Ruta a la que se debe navegar después de la carga de datos
+        navigationRoute: '/pokedex', // Ruta a la que se debe navegar después de cargar los datos
       );
     } catch (e) {
-      state = state.copyWith(loading: false, error: e.toString());
+      state = state.copyWith(
+        error: e.toString(),
+        navigationRoute: '/pokedex', // Ruta a la que se debe navegar en caso de error
+      );
     }
   }
 

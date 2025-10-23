@@ -6,7 +6,7 @@
  */
 
 import 'package:flutter/material.dart';
-import '../../../../core/app_theme.dart';
+import '../../../../core/theme/app_theme.dart';
 
 class OnboardingPageWidget extends StatelessWidget {
   // Ruta de la imagen de la página
