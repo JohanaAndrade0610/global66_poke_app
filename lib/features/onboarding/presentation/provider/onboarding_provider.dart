@@ -44,6 +44,14 @@ class OnboardingController extends _$OnboardingController {
   }
 
   /*
+    * @method ensureLoadingFalse
+    * @description Método encargado de asegurar que el loading se vuelva false despues de navegar a Pokedex.
+    */
+  void ensureLoadingFalse() {
+    state = state.copyWith(loading: false);
+  }
+
+  /*
     * @method setCurrentPage
     * @description Método encargado de establecer la página actual de la pantalla onboarding.
     * @param page Página actual.

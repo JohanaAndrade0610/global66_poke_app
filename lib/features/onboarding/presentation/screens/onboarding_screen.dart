@@ -65,7 +65,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           next,
         ) {
           if (next.navigationRoute != null && mounted) {
-            context.go(next.navigationRoute!);
+            context.push(next.navigationRoute!);
             ref.read(onboardingControllerProvider.notifier).clearNavigation();
           }
         });
