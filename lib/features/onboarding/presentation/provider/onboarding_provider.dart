@@ -77,7 +77,7 @@ class OnboardingController extends _$OnboardingController {
   Future<void> callApiPokedex() async {
     state = state.copyWith(loading: true);
     try {
-      await ref.read(pokedexProvider.notifier).fetchPokemonsForOnboarding();
+      await ref.read(pokedexNotifierProvider.notifier).fetchPokedexList();
       state = state.copyWith(
         completed: true,
         canNavigateToPokedex: true,

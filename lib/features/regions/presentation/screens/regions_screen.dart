@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../core/app_theme.dart';
+import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/custom_bottom_navigation_bar.dart';
 import '../../../../l10n/app_localizations.dart';
 
