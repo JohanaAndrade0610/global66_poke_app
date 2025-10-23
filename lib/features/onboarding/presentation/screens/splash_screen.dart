@@ -5,16 +5,19 @@
  * @version 1.0 21/10/2025 Documentación y creación de la clase.
  */
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../provider/onboarding_provider.dart';
+import '../provider/onboarding_state.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  ConsumerState<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen>
+class _SplashScreenState extends ConsumerState<SplashScreen>
     with TickerProviderStateMixin {
   // Controlador para el crecimiento del logo
   late AnimationController _zoomController;
@@ -32,6 +35,15 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
+    _setupAnimations();
+    _startAnimations();
+  }
+
+  /*
+  * @method _setupAnimations
+  * @description Configura las animaciones del splash.
+  */
+  void _setupAnimations() {
     _zoomController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1400),
@@ -48,17 +60,30 @@ class _SplashScreenState extends State<SplashScreen>
       begin: 0.0,
       end: 8.0 * 3.1416,
     ).chain(CurveTween(curve: Curves.linear)).animate(_rotationController);
+  }
+
+  /*
+  * @method _startAnimations
+  * @description Inicia las animaciones y configura el listener.
+  */
+  void _startAnimations() {
     _zoomController.forward();
     _rotationController.forward();
-    _zoomController.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        _rotationController.stop();
-        // Navegar al onboarding después de completar la animación
-        if (mounted) {
-          context.go('/onboarding');
-        }
-      }
-    });
+    _zoomController.addStatusListener(_onAnimationStatusChanged);
+  }
+
+  /*
+  * @method _onAnimationStatusChanged
+  * @description Maneja el cambio de estado de la animación.
+  */
+  void _onAnimationStatusChanged(AnimationStatus status) {
+    if (status == AnimationStatus.completed) {
+      _rotationController.stop();
+      // Notificar al provider que la animación terminó
+      ref
+          .read(onboardingControllerProvider.notifier)
+          .onSplashAnimationCompleted();
+    }
   }
 
   /*
@@ -74,6 +99,17 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
+    // Escuchar cambios en el estado para realizar la navegación a la siguiente pantalla
+    ref.listen<OnboardingState>(onboardingControllerProvider, (previous, next) {
+      // Si hay una ruta de navegación pendiente, ejecutarla
+      if (next.navigationRoute != null && mounted) {
+        // Navegar a la ruta especificada por el provider
+        context.go(next.navigationRoute!);
+        // Limpiar la navegación después de ejecutarla
+        ref.read(onboardingControllerProvider.notifier).clearNavigation();
+      }
+    });
+
     return Scaffold(
       // Fondo blanco para el splash
       backgroundColor: Colors.white,
