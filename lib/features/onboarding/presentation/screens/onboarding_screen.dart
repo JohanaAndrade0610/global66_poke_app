@@ -72,10 +72,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         return Scaffold(
           // Fondo blanco para la pantalla de onboarding
           backgroundColor: Colors.white,
-          body: SafeArea(
-            child: Stack(
-              children: [
-                Column(
+          body: Stack(
+            children: [
+              SafeArea(
+                child: Column(
                   children: [
                     // PageView con las páginas de onboarding
                     Expanded(
@@ -155,10 +155,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                   ],
                 ),
-                if (onboardingState.loading)
-                  Positioned.fill(child: IgnorePointer(child: CustomLoading())),
-              ],
-            ),
+              ),
+              if (onboardingState.loading)
+                Positioned.fill(child: IgnorePointer(child: CustomLoading())),
+            ],
           ),
         );
       },
