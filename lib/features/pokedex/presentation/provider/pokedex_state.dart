@@ -15,7 +15,11 @@ class PokedexState with _$PokedexState {
   // Estado de carga en la pantalla.
   const factory PokedexState.loading() = _Loading;
   // Estado con la lista de Pokémon cargada.
-  const factory PokedexState.loaded(List<PokedexEntity> pokemons) = _Loaded;
+  const factory PokedexState.loaded({
+    required List<PokedexEntity> pokemons,
+    @Default('') String searchQuery,
+    @Default([]) List<String> selectedTypes,
+  }) = _Loaded;
   // Estado de error con mensaje descriptivo.
   const factory PokedexState.error(String error) = _Error;
 }

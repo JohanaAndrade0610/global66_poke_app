@@ -233,6 +233,54 @@ abstract class AppLocalizations {
   /// **'Let\'s get started'**
   String get onboardingStartButton;
 
+  /// No description provided for @pokedexSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search Pokémon...'**
+  String get pokedexSearchHint;
+
+  /// No description provided for @pokedexFilterByType.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter by your preferences'**
+  String get pokedexFilterByType;
+
+  /// No description provided for @pokedexApplyBottom.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get pokedexApplyBottom;
+
+  /// No description provided for @pokedexCancelBottom.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get pokedexCancelBottom;
+
+  /// No description provided for @pokedexLabelType.
+  ///
+  /// In en, this message translates to:
+  /// **'Type '**
+  String get pokedexLabelType;
+
+  /// No description provided for @pokedexLabelFilter1.
+  ///
+  /// In en, this message translates to:
+  /// **'Found '**
+  String get pokedexLabelFilter1;
+
+  /// No description provided for @pokedexLabelFilter2.
+  ///
+  /// In en, this message translates to:
+  /// **' results'**
+  String get pokedexLabelFilter2;
+
+  /// No description provided for @pokedexClearFilters.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear filter'**
+  String get pokedexClearFilters;
+
   /// No description provided for @pokemonTypeBug.
   ///
   /// In en, this message translates to:

@@ -78,6 +78,30 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboardingStartButton => 'Let\'s get started';
 
   @override
+  String get pokedexSearchHint => 'Search Pokémon...';
+
+  @override
+  String get pokedexFilterByType => 'Filter by your preferences';
+
+  @override
+  String get pokedexApplyBottom => 'Apply';
+
+  @override
+  String get pokedexCancelBottom => 'Cancel';
+
+  @override
+  String get pokedexLabelType => 'Type ';
+
+  @override
+  String get pokedexLabelFilter1 => 'Found ';
+
+  @override
+  String get pokedexLabelFilter2 => ' results';
+
+  @override
+  String get pokedexClearFilters => 'Clear filter';
+
+  @override
   String get pokemonTypeBug => 'Bug';
 
   @override

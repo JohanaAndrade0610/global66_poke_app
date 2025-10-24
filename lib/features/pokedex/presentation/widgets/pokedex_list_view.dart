@@ -11,11 +11,11 @@ import '../../domain/entities/pokedex_entity.dart';
 import '../../../../core/widgets/pokemon_card.dart';
 import '../../../favorites/presentation/provider/favorites_provider.dart';
 
-class PokemonListView extends ConsumerWidget {
+class PokedexListView extends ConsumerWidget {
   // Lista de Pokémon a mostrar
   final List<PokedexEntity> pokemons;
 
-  const PokemonListView({Key? key, required this.pokemons}) : super(key: key);
+  const PokedexListView({Key? key, required this.pokemons}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -24,7 +24,7 @@ class PokemonListView extends ConsumerWidget {
     ref.watch(favoritesNotifierProvider);
 
     return ListView.builder(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
       itemCount: pokemons.length,
       itemBuilder: (context, index) {
         final pokemon = pokemons[index];
