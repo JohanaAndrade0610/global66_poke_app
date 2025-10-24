@@ -33,6 +33,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get favoritesInformationDescription => 'Select the heart icon on your preferred Pokémon to add them to your favorites list.';
 
   @override
+  String get favoritesDeleteDialogContent => 'Are you sure you want to remove ';
+
+  @override
+  String get favoritesDeleteDialogCancel => 'Cancel';
+
+  @override
+  String get favoritesDeleteDialogConfirm => 'Remove';
+
+  @override
+  String get favoritesDeletedMessage => 'was removed from favorites';
+
+  @override
   String get noConnectionTitle => 'Offline';
 
   @override

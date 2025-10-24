@@ -17,11 +17,16 @@ class AppColors {
   static const Color blue173EA5 = Color(0xFF173EA5);
   static const Color blue0D47A1 = Color(0xFF0D47A1);
 
-  // Tonos claros y oscuros
+  // Tonos rojizos
+  static const Color redCD3131 = Color(0xFFCD3131);
+
+  // Tonos blancos y claros
   static const Color whiteFFFFFF = Color(0xFFFFFFFF);
   static const Color whiteFAFAFA = Color(0xFFFAFAFA);
 
   // Tonos grises y negros
+  static const Color greyE0E0E0 = Color(0xFFE0E0E0);
+  static const Color grey9E9E9E = Color(0xFF9E9E9E);
   static const Color grey121212 = Color(0xFF121212);
   static const Color grey424242 = Color(0xFF424242);
   static const Color grey333333 = Color(0xFF333333);
@@ -47,6 +52,25 @@ class AppTextStyles {
     color: AppColors.whiteFAFAFA,
     fontWeight: fontWeightMedium,
   );
+
+  static TextStyle textPoppins12Medium424242 = GoogleFonts.poppins(
+    fontSize: 12,
+    color: AppColors.grey424242,
+    fontWeight: fontWeightMedium,
+  );
+
+  static TextStyle textPoppins12SemiBoldFFFFFF = GoogleFonts.poppins(
+    fontSize: 12,
+    color: AppColors.whiteFFFFFF,
+    fontWeight: fontWeightSemiBold,
+  );
+
+  static TextStyle textPoppins12SemiBold121212 = GoogleFonts.poppins(
+    fontSize: 12,
+    color: AppColors.grey121212,
+    fontWeight: fontWeightSemiBold,
+  );
+
   static TextStyle textPoppins12Semibold424242 = GoogleFonts.poppins(
     fontSize: 12,
     color: AppColors.grey424242,

@@ -143,6 +143,30 @@ abstract class AppLocalizations {
   /// **'Select the heart icon on your preferred Pokémon to add them to your favorites list.'**
   String get favoritesInformationDescription;
 
+  /// No description provided for @favoritesDeleteDialogContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to remove '**
+  String get favoritesDeleteDialogContent;
+
+  /// No description provided for @favoritesDeleteDialogCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get favoritesDeleteDialogCancel;
+
+  /// No description provided for @favoritesDeleteDialogConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get favoritesDeleteDialogConfirm;
+
+  /// No description provided for @favoritesDeletedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'was removed from favorites'**
+  String get favoritesDeletedMessage;
+
   /// No description provided for @noConnectionTitle.
   ///
   /// In en, this message translates to:

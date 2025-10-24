@@ -11,10 +11,10 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/widgets/custom_bottom_navigation_bar.dart';
 import '../../../../core/widgets/custom_information.dart';
-import '../../../../core/widgets/pokemon_card.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../pokedex/domain/entities/pokedex_entity.dart';
 import '../provider/favorites_provider.dart';
+import '../widgets/dismissible_favorite_card.dart';
 
 class FavoritesScreen extends ConsumerWidget {
   const FavoritesScreen({Key? key}) : super(key: key);
@@ -80,13 +80,10 @@ class FavoritesScreen extends ConsumerWidget {
                 imageUrl: favorite.imageUrl,
                 types: favorite.types,
               );
-              return PokemonCard(
+
+              return DismissibleFavoriteCard(
                 pokemon: pokemon,
-                isFavorite: true,
-                onFavoriteTap: () {
-                  // Funcionalidad al pulsar el icono de favorito
-                  favoritesNotifier.toggleFavorite(pokemon);
-                },
+                onDelete: () => favoritesNotifier.toggleFavorite(pokemon),
               );
             },
           );
