@@ -42,7 +42,7 @@ class RegionsScreen extends StatelessWidget {
                   data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
                   child: Text(
                     l10n.regionsTitle,
-                    style: AppColors.textPoppins20Semibold333333,
+                    style: AppTextStyles.textPoppins20Semibold333333,
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -54,7 +54,7 @@ class RegionsScreen extends StatelessWidget {
                   data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
                   child: Text(
                     l10n.regionsDescription,
-                    style: AppColors.textPoppins14Regular4D4D4D,
+                    style: AppTextStyles.textPoppins14Regular4D4D4D,
                     textAlign: TextAlign.center,
                   ),
                 ),

@@ -50,7 +50,7 @@ class CustomInformation extends StatelessWidget {
               data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
               child: Text(
                 title,
-                style: AppColors.textPoppins20Semibold333333,
+                style: AppTextStyles.textPoppins20Semibold333333,
                 textAlign: TextAlign.center,
               ),
             ),
@@ -62,7 +62,7 @@ class CustomInformation extends StatelessWidget {
               data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
               child: Text(
                 description,
-                style: AppColors.textPoppins14Regular4D4D4D,
+                style: AppTextStyles.textPoppins14Regular4D4D4D,
                 textAlign: TextAlign.center,
               ),
             ),
@@ -87,7 +87,7 @@ class CustomInformation extends StatelessWidget {
                   ),
                   child: Text(
                     buttonText!,
-                    style: AppColors.textPoppins16SemiBoldFFFFFF,
+                    style: AppTextStyles.textPoppins16SemiBoldFFFFFF,
                   ),
                 ),
               ),

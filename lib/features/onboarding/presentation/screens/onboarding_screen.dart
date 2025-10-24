@@ -147,7 +147,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               onboardingState.currentPage == 0
                                   ? l10n.onboardingContinueButton
                                   : l10n.onboardingStartButton,
-                              style: AppColors.textPoppins16SemiBoldFFFFFF,
+                              style: AppTextStyles.textPoppins16SemiBoldFFFFFF,
                             ),
                           ),
                         ),

@@ -47,14 +47,14 @@ class OnboardingPageWidget extends StatelessWidget {
           Text(
             title,
             textAlign: TextAlign.center,
-            style: AppColors.textPoppins26Medium121212,
+            style: AppTextStyles.textPoppins26Medium121212,
           ),
           const SizedBox(height: 20),
           // Descripción de la página
           Text(
             description,
             textAlign: TextAlign.center,
-            style: AppColors.textPoppins14Regular424242,
+            style: AppTextStyles.textPoppins14Regular424242,
           ),
           const SizedBox(height: 14),
         ],

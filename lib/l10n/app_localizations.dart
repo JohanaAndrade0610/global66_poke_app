@@ -194,8 +194,116 @@ abstract class AppLocalizations {
   /// No description provided for @regionsDescription.
   ///
   /// In en, this message translates to:
-  /// **'We’re working hard to bring you this section. Please check back later to discover all the latest updates.'**
+  /// **'We\'re working hard to bring you this section. Please check back later to discover all the latest updates.'**
   String get regionsDescription;
+
+  /// No description provided for @pokemonTypeBug.
+  ///
+  /// In en, this message translates to:
+  /// **'Bug'**
+  String get pokemonTypeBug;
+
+  /// No description provided for @pokemonTypeDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get pokemonTypeDark;
+
+  /// No description provided for @pokemonTypeDragon.
+  ///
+  /// In en, this message translates to:
+  /// **'Dragon'**
+  String get pokemonTypeDragon;
+
+  /// No description provided for @pokemonTypeElectric.
+  ///
+  /// In en, this message translates to:
+  /// **'Electric'**
+  String get pokemonTypeElectric;
+
+  /// No description provided for @pokemonTypeFairy.
+  ///
+  /// In en, this message translates to:
+  /// **'Fairy'**
+  String get pokemonTypeFairy;
+
+  /// No description provided for @pokemonTypeFighting.
+  ///
+  /// In en, this message translates to:
+  /// **'Fighting'**
+  String get pokemonTypeFighting;
+
+  /// No description provided for @pokemonTypeFire.
+  ///
+  /// In en, this message translates to:
+  /// **'Fire'**
+  String get pokemonTypeFire;
+
+  /// No description provided for @pokemonTypeFlying.
+  ///
+  /// In en, this message translates to:
+  /// **'Flying'**
+  String get pokemonTypeFlying;
+
+  /// No description provided for @pokemonTypeGhost.
+  ///
+  /// In en, this message translates to:
+  /// **'Ghost'**
+  String get pokemonTypeGhost;
+
+  /// No description provided for @pokemonTypeGrass.
+  ///
+  /// In en, this message translates to:
+  /// **'Grass'**
+  String get pokemonTypeGrass;
+
+  /// No description provided for @pokemonTypeGround.
+  ///
+  /// In en, this message translates to:
+  /// **'Ground'**
+  String get pokemonTypeGround;
+
+  /// No description provided for @pokemonTypeIce.
+  ///
+  /// In en, this message translates to:
+  /// **'Ice'**
+  String get pokemonTypeIce;
+
+  /// No description provided for @pokemonTypeNormal.
+  ///
+  /// In en, this message translates to:
+  /// **'Normal'**
+  String get pokemonTypeNormal;
+
+  /// No description provided for @pokemonTypePoison.
+  ///
+  /// In en, this message translates to:
+  /// **'Poison'**
+  String get pokemonTypePoison;
+
+  /// No description provided for @pokemonTypePsychic.
+  ///
+  /// In en, this message translates to:
+  /// **'Psychic'**
+  String get pokemonTypePsychic;
+
+  /// No description provided for @pokemonTypeRock.
+  ///
+  /// In en, this message translates to:
+  /// **'Rock'**
+  String get pokemonTypeRock;
+
+  /// No description provided for @pokemonTypeSteel.
+  ///
+  /// In en, this message translates to:
+  /// **'Steel'**
+  String get pokemonTypeSteel;
+
+  /// No description provided for @pokemonTypeWater.
+  ///
+  /// In en, this message translates to:
+  /// **'Water'**
+  String get pokemonTypeWater;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

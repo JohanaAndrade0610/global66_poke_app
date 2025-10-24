@@ -58,4 +58,58 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get regionsDescription => 'Estamos trabajando para traerte esta sección. Vuelve más adelante para descubrir todas las novedades.';
+
+  @override
+  String get pokemonTypeBug => 'Bicho';
+
+  @override
+  String get pokemonTypeDark => 'Siniestro';
+
+  @override
+  String get pokemonTypeDragon => 'Dragón';
+
+  @override
+  String get pokemonTypeElectric => 'Eléctrico';
+
+  @override
+  String get pokemonTypeFairy => 'Hada';
+
+  @override
+  String get pokemonTypeFighting => 'Lucha';
+
+  @override
+  String get pokemonTypeFire => 'Fuego';
+
+  @override
+  String get pokemonTypeFlying => 'Volador';
+
+  @override
+  String get pokemonTypeGhost => 'Fantasma';
+
+  @override
+  String get pokemonTypeGrass => 'Planta';
+
+  @override
+  String get pokemonTypeGround => 'Tierra';
+
+  @override
+  String get pokemonTypeIce => 'Hielo';
+
+  @override
+  String get pokemonTypeNormal => 'Normal';
+
+  @override
+  String get pokemonTypePoison => 'Veneno';
+
+  @override
+  String get pokemonTypePsychic => 'Psíquico';
+
+  @override
+  String get pokemonTypeRock => 'Roca';
+
+  @override
+  String get pokemonTypeSteel => 'Acero';
+
+  @override
+  String get pokemonTypeWater => 'Agua';
 }

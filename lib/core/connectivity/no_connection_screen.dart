@@ -37,13 +37,13 @@ class NoConnectionScreen extends StatelessWidget {
                 // Título de la pantalla
                 Text(
                   l10n.noConnectionTitle,
-                  style: AppColors.textPoppins20SemiboldDD000000,
+                  style: AppTextStyles.textPoppins20SemiboldDD000000,
                 ),
                 const SizedBox(height: 8),
                 // Mensaje de la pantalla
                 Text(
                   l10n.noConnectionMessage,
-                  style: AppColors.textPoppins14Medium8A000000,
+                  style: AppTextStyles.textPoppins14Medium8A000000,
                   textAlign: TextAlign.center,
                 ),
               ],
