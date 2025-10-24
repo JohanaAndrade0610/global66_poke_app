@@ -21,6 +21,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get bottomNavigationBarProfile => 'Profile';
 
   @override
+  String get errorInformationTitle => 'An error has occurred.';
+
+  @override
+  String get errorInformationDescription => 'Please try again later.';
+
+  @override
+  String get favoritesInformationTitle => 'No Pokémon have been marked as favorites';
+
+  @override
+  String get favoritesInformationDescription => 'Select the heart icon on your preferred Pokémon to add them to your favorites list.';
+
+  @override
   String get noConnectionTitle => 'Offline';
 
   @override

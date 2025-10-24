@@ -119,6 +119,30 @@ abstract class AppLocalizations {
   /// **'Profile'**
   String get bottomNavigationBarProfile;
 
+  /// No description provided for @errorInformationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'An error has occurred.'**
+  String get errorInformationTitle;
+
+  /// No description provided for @errorInformationDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Please try again later.'**
+  String get errorInformationDescription;
+
+  /// No description provided for @favoritesInformationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No Pokémon have been marked as favorites'**
+  String get favoritesInformationTitle;
+
+  /// No description provided for @favoritesInformationDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Select the heart icon on your preferred Pokémon to add them to your favorites list.'**
+  String get favoritesInformationDescription;
+
   /// No description provided for @noConnectionTitle.
   ///
   /// In en, this message translates to:

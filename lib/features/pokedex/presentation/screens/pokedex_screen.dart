@@ -73,7 +73,7 @@ class _PokedexScreenState extends ConsumerState<PokedexScreen> {
             selectedIndex: 0,
             onItemTapped: (index) {
               if (index == 0) {
-                // Pokedex actual
+                // Ventana actual
               } else if (index == 1) {
                 context.go('/regions');
               } else if (index == 2) {

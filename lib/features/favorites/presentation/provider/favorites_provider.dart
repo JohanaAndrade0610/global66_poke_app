@@ -6,6 +6,8 @@
  */
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../../../../core/config.dart';
 import '../../../../di/injection.dart';
 import '../../../pokedex/domain/entities/pokedex_entity.dart';
 import '../../domain/entities/favorite_entity.dart';
@@ -36,6 +38,8 @@ class FavoritesNotifier extends _$FavoritesNotifier {
     try {
       final usecase = getIt<GetAllFavoritesUsecase>();
       final favorites = await usecase.call();
+      // Ordenar los Pokémonpor ID
+      favorites.sort((a, b) => a.id.compareTo(b.id));
       final favoriteIds = favorites.map((f) => f.id).toSet();
       state = FavoritesState.loaded(
         favorites: favorites,
@@ -67,16 +71,20 @@ class FavoritesNotifier extends _$FavoritesNotifier {
         loaded: (currentFavorites, currentFavoriteIds) {
           if (wasAdded) {
             // Se agrega a favoritos
+            final updatedFavorites = [...currentFavorites, favorite];
+            // Ordenar Pokémon por ID
+            updatedFavorites.sort((a, b) => a.id.compareTo(b.id));
             state = FavoritesState.loaded(
-              favorites: [favorite, ...currentFavorites],
+              favorites: updatedFavorites,
               favoriteIds: {...currentFavoriteIds, pokemon.id},
             );
           } else {
             // Se elimina de favoritos
+            final updatedFavorites = currentFavorites
+                .where((f) => f.id != pokemon.id)
+                .toList();
             state = FavoritesState.loaded(
-              favorites: currentFavorites
-                  .where((f) => f.id != pokemon.id)
-                  .toList(),
+              favorites: updatedFavorites,
               favoriteIds: currentFavoriteIds
                   .where((id) => id != pokemon.id)
                   .toSet(),
@@ -105,5 +113,19 @@ class FavoritesNotifier extends _$FavoritesNotifier {
       loaded: (favorites, favoriteIds) => favoriteIds.contains(pokemonId),
       orElse: () => false,
     );
+  }
+
+  /*
+  * @method launchWhatsApp
+  * @description Abre WhatsApp para contacto.
+  * @returns Future<bool> True si se pudo abrir WhatsApp correctamente.
+  */
+  Future<bool> launchWhatsApp() async {
+    try {
+      final url = Uri.parse('https://wa.me/${AppConfig.whatsappNumber}');
+      return await launchUrl(url, mode: LaunchMode.externalApplication);
+    } catch (e) {
+      return false;
+    }
   }
 }
