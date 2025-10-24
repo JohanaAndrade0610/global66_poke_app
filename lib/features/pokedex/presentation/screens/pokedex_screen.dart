@@ -12,6 +12,7 @@ import '../../../../core/widgets/custom_bottom_navigation_bar.dart';
 import '../../../../core/widgets/custom_information.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../onboarding/presentation/provider/onboarding_provider.dart';
+import '../../../favorites/presentation/provider/favorites_provider.dart';
 import '../provider/pokedex_provider.dart';
 import '../widgets/pokemon_list_view.dart';
 
@@ -33,6 +34,8 @@ class _PokedexScreenState extends ConsumerState<PokedexScreen> {
     // Limpiar el loading de onboarding en cuanto se ingresa a Pokedex
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(onboardingControllerProvider.notifier).ensureLoadingFalse();
+      // Cargar favoritos al iniciar la aplicación
+      ref.read(favoritesNotifierProvider.notifier).loadFavorites();
     });
   }
 

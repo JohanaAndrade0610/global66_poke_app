@@ -20,13 +20,14 @@ class AppColors {
   // Tonos claros y oscuros
   static const Color whiteFFFFFF = Color(0xFFFFFFFF);
   static const Color whiteFAFAFA = Color(0xFFFAFAFA);
-  static const Color backgroundDark = Color(0xFF292A36);
 
   // Tonos grises y negros
-  static const Color black121212 = Color(0xFF121212);
-  static const Color black424242 = Color(0xFF424242);
-  static const Color black333333 = Color(0xFF333333);
-  static const Color black4D4D4D = Color(0xFF4D4D4D);
+  static const Color grey121212 = Color(0xFF121212);
+  static const Color grey424242 = Color(0xFF424242);
+  static const Color grey333333 = Color(0xFF333333);
+  static const Color grey4D4D4D = Color(0xFF4D4D4D);
+  static const Color grey757575 = Color(0xFF757575);
+  static const Color grey292A36 = Color(0xFF292A36);
   static const Color blackDD000000 = Color(0xDD000000);
   static const Color black8A000000 = Color(0x8A000000);
 }
@@ -48,19 +49,19 @@ class AppTextStyles {
   );
   static TextStyle textPoppins12Semibold424242 = GoogleFonts.poppins(
     fontSize: 12,
-    color: AppColors.black424242,
+    color: AppColors.grey424242,
     fontWeight: fontWeightSemiBold,
   );
 
   static TextStyle textPoppins14Regular424242 = GoogleFonts.poppins(
     fontSize: 14,
-    color: AppColors.black424242,
+    color: AppColors.grey424242,
     fontWeight: fontWeightRegular,
   );
 
   static TextStyle textPoppins14Regular4D4D4D = GoogleFonts.poppins(
     fontSize: 14,
-    color: AppColors.black4D4D4D,
+    color: AppColors.grey4D4D4D,
     fontWeight: fontWeightRegular,
   );
 
@@ -72,7 +73,7 @@ class AppTextStyles {
 
   static TextStyle textPoppins14Medium424242 = GoogleFonts.poppins(
     fontSize: 14,
-    color: AppColors.black424242,
+    color: AppColors.grey424242,
     fontWeight: fontWeightMedium,
   );
 
@@ -96,19 +97,19 @@ class AppTextStyles {
 
   static const TextStyle textPoppins20Semibold333333 = TextStyle(
     fontSize: 20,
-    color: AppColors.black333333,
+    color: AppColors.grey333333,
     fontWeight: fontWeightSemiBold,
   );
 
   static TextStyle textPoppins21Semibold121212 = GoogleFonts.poppins(
     fontSize: 21,
-    color: AppColors.black121212,
+    color: AppColors.grey121212,
     fontWeight: fontWeightSemiBold,
   );
 
   static TextStyle textPoppins26Medium121212 = GoogleFonts.poppins(
     fontSize: 26,
-    color: AppColors.black121212,
+    color: AppColors.grey121212,
     fontWeight: fontWeightMedium,
   );
 }
@@ -175,6 +176,6 @@ class AppTheme {
     textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme),
     brightness: Brightness.dark,
     primaryColor: AppColors.blue1E88E5,
-    scaffoldBackgroundColor: AppColors.backgroundDark,
+    scaffoldBackgroundColor: AppColors.grey292A36,
   );
 }

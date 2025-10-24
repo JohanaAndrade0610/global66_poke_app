@@ -185,18 +185,6 @@ abstract class AppLocalizations {
   /// **'Let\'s get started'**
   String get onboardingStartButton;
 
-  /// No description provided for @regionsTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Coming soon!'**
-  String get regionsTitle;
-
-  /// No description provided for @regionsDescription.
-  ///
-  /// In en, this message translates to:
-  /// **'We\'re working hard to bring you this section. Please check back later to discover all the latest updates.'**
-  String get regionsDescription;
-
   /// No description provided for @pokemonTypeBug.
   ///
   /// In en, this message translates to:
@@ -304,6 +292,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Water'**
   String get pokemonTypeWater;
+
+  /// No description provided for @profileGuest.
+  ///
+  /// In en, this message translates to:
+  /// **'Guest'**
+  String get profileGuest;
+
+  /// No description provided for @regionsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Coming soon!'**
+  String get regionsTitle;
+
+  /// No description provided for @regionsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'We\'re working hard to bring you this section. Please check back later to discover all the latest updates.'**
+  String get regionsDescription;
+
+  /// No description provided for @splashText.
+  ///
+  /// In en, this message translates to:
+  /// **'For'**
+  String get splashText;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

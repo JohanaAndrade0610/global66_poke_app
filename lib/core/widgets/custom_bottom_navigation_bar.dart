@@ -97,7 +97,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                       height: 17,
                       color: isSelected
                           ? AppColors.blue0D47A1
-                          : AppColors.black424242,
+                          : AppColors.grey424242,
                     ),
                     const SizedBox(height: 10),
                     // Nombre del item

@@ -7,6 +7,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../provider/onboarding_provider.dart';
 import '../provider/onboarding_state.dart';
 
@@ -106,6 +107,8 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
+    // Internacionalización de los textos
+    final l10n = AppLocalizations.of(context)!;
     // Escuchar cambios en el estado para realizar la navegación a la siguiente pantalla
     ref.listen<OnboardingState>(onboardingControllerProvider, (previous, next) {
       // Si hay una ruta de navegación pendiente, ejecutarla
@@ -156,7 +159,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Para Global66',
+                  '${l10n.splashText} Global66',
                   style: TextStyle(
                     color: Color(0xFF2746c7),
                     fontWeight: FontWeight.w500,

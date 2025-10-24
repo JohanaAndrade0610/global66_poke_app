@@ -54,12 +54,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get onboardingStartButton => 'Empecemos';
 
   @override
-  String get regionsTitle => '¡Muy pronto disponible!';
-
-  @override
-  String get regionsDescription => 'Estamos trabajando para traerte esta sección. Vuelve más adelante para descubrir todas las novedades.';
-
-  @override
   String get pokemonTypeBug => 'Bicho';
 
   @override
@@ -112,4 +106,16 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get pokemonTypeWater => 'Agua';
+
+  @override
+  String get profileGuest => 'Invitado';
+
+  @override
+  String get regionsTitle => '¡Muy pronto disponible!';
+
+  @override
+  String get regionsDescription => 'Estamos trabajando para traerte esta sección. Vuelve más adelante para descubrir todas las novedades.';
+
+  @override
+  String get splashText => 'Para';
 }

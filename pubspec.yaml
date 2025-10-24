@@ -44,6 +44,7 @@ flutter:
   generate: true
   assets:
     - assets/common/bottom_navigation_bar/
+    - assets/common/favorites/
     - assets/common/information/
     - assets/favorites/
     - assets/onboarding/

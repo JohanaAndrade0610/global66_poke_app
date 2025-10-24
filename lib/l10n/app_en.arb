@@ -14,8 +14,6 @@
   "onboardingTittle02": "Keep your Pokédex up to date",
   "onboardingDescription02": "Sign up to save your profile, favorite Pokémon, settings, and much more within the app.",
   "onboardingStartButton": "Let's get started",
-  "regionsTitle": "Coming soon!",
-  "regionsDescription": "We're working hard to bring you this section. Please check back later to discover all the latest updates.",
   "pokemonTypeBug": "Bug",
   "pokemonTypeDark": "Dark",
   "pokemonTypeDragon": "Dragon",
@@ -33,5 +31,9 @@
   "pokemonTypePsychic": "Psychic",
   "pokemonTypeRock": "Rock",
   "pokemonTypeSteel": "Steel",
-  "pokemonTypeWater": "Water"
+  "pokemonTypeWater": "Water",
+  "profileGuest": "Guest",
+  "regionsTitle": "Coming soon!",
+  "regionsDescription": "We're working hard to bring you this section. Please check back later to discover all the latest updates.",
+  "splashText": "For"
 }
