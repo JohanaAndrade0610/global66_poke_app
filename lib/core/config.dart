@@ -9,5 +9,5 @@ class AppConfig {
   // URL base para consumir la API externa de PokéAPI
   static const String pokeApiBaseUrl = 'https://pokeapi.co/api/v2';
   // Número de WhatsApp para la sección de soporte
-  static const String whatsappNumber = '573186875106';
+  static const String whatsappNumber = '573173927094';
 }

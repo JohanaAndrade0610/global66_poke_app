@@ -17,8 +17,9 @@ class AppColors {
   static const Color blue173EA5 = Color(0xFF173EA5);
   static const Color blue0D47A1 = Color(0xFF0D47A1);
 
-  // Tonos tema claro y oscuro
+  // Tonos claros y oscuros
   static const Color whiteFFFFFF = Color(0xFFFFFFFF);
+  static const Color whiteFAFAFA = Color(0xFFFAFAFA);
   static const Color backgroundDark = Color(0xFF292A36);
 
   // Tonos grises y negros
@@ -28,6 +29,11 @@ class AppColors {
   static const Color black4D4D4D = Color(0xFF4D4D4D);
   static const Color blackDD000000 = Color(0xDD000000);
   static const Color black8A000000 = Color(0x8A000000);
+}
+
+// Estilos de texto de la aplicación
+class AppTextStyles {
+  AppTextStyles._();
 
   // Tipo de negrita aplicada a los textos
   static const FontWeight fontWeightRegular = FontWeight.w400;
@@ -35,67 +41,126 @@ class AppColors {
   static const FontWeight fontWeightSemiBold = FontWeight.w600;
   static const FontWeight fontWeightBold = FontWeight.w700;
 
-  // Estilos de texto
+  static TextStyle textPoppins11MediumFAFAFA = GoogleFonts.poppins(
+    fontSize: 11,
+    color: AppColors.whiteFAFAFA,
+    fontWeight: fontWeightMedium,
+  );
+  static TextStyle textPoppins12Semibold424242 = GoogleFonts.poppins(
+    fontSize: 12,
+    color: AppColors.black424242,
+    fontWeight: fontWeightSemiBold,
+  );
+
   static TextStyle textPoppins14Regular424242 = GoogleFonts.poppins(
     fontSize: 14,
-    color: black424242,
+    color: AppColors.black424242,
     fontWeight: fontWeightRegular,
   );
 
   static TextStyle textPoppins14Regular4D4D4D = GoogleFonts.poppins(
     fontSize: 14,
-    color: black4D4D4D,
+    color: AppColors.black4D4D4D,
     fontWeight: fontWeightRegular,
   );
 
   static const TextStyle textPoppins14Medium8A000000 = TextStyle(
     fontSize: 14,
-    color: black8A000000,
+    color: AppColors.black8A000000,
     fontWeight: fontWeightMedium,
   );
 
   static TextStyle textPoppins14Medium424242 = GoogleFonts.poppins(
     fontSize: 14,
-    color: black424242,
+    color: AppColors.black424242,
     fontWeight: fontWeightMedium,
   );
 
   static TextStyle textPoppinsBold0D47A1 = GoogleFonts.poppins(
     fontSize: 14,
-    color: blue0D47A1,
+    color: AppColors.blue0D47A1,
     fontWeight: fontWeightBold,
   );
 
   static TextStyle textPoppins16SemiBoldFFFFFF = GoogleFonts.poppins(
     fontSize: 16,
-    color: whiteFFFFFF,
+    color: AppColors.whiteFFFFFF,
     fontWeight: fontWeightSemiBold,
   );
 
   static const TextStyle textPoppins20SemiboldDD000000 = TextStyle(
     fontSize: 20,
-    color: blackDD000000,
+    color: AppColors.blackDD000000,
     fontWeight: fontWeightSemiBold,
   );
 
   static const TextStyle textPoppins20Semibold333333 = TextStyle(
     fontSize: 20,
-    color: black333333,
+    color: AppColors.black333333,
+    fontWeight: fontWeightSemiBold,
+  );
+
+  static TextStyle textPoppins21Semibold121212 = GoogleFonts.poppins(
+    fontSize: 21,
+    color: AppColors.black121212,
     fontWeight: fontWeightSemiBold,
   );
 
   static TextStyle textPoppins26Medium121212 = GoogleFonts.poppins(
     fontSize: 26,
-    color: black121212,
+    color: AppColors.black121212,
     fontWeight: fontWeightMedium,
   );
 }
 
-/// Temas de la aplicación
+// Colores de los tipos de Pokémon
+class PokemonTypeColors {
+  PokemonTypeColors._();
+  // Mapa de colores asociados a cada tipo de Pokémon
+  static const Map<String, Color> typeColors = {
+    'bug': Color(0xFF43A047),
+    'dark': Color(0xFF8BC34A),
+    'dragon': Color(0xFF00ACC1),
+    'electric': Color(0xFFFDD835),
+    'fairy': Color(0xFFE91E63),
+    'fighting': Color(0xFFE53935),
+    'fire': Color(0xFFFF9800),
+    'flying': Color(0xFF00BCD4),
+    'ghost': Color(0xFF8E24AA),
+    'grass': Color(0xFF8BC34A),
+    'ground': Color(0xFFFDD835),
+    'ice': Color(0xFF3D8BFF),
+    'normal': Color(0xFF8BC34A),
+    'poison': Color(0xFF9C27B0),
+    'psychic': Color(0xFF673AB7),
+    'rock': Color(0xFF795548),
+    'steel': Color(0xFF8BC34A),
+    'water': Color(0xFF2196F3),
+  };
+
+  // Se obtiene el color correspondiente al tipo de Pokémon
+  static Color getTypeColor(String type) {
+    return typeColors[type.toLowerCase()]!;
+  }
+
+  // Se obtiene la ruta del asset del logo de la imagen según el tipo de Pokémon
+  static String getTypeLogoPath(String type) {
+    final typeKey = type.toLowerCase();
+    return 'assets/pokedex/types/$typeKey.svg';
+  }
+
+  // Se obtiene la ruta del asset del logo del label según el tipo de Pokémon
+  static String getTypeLabelLogoPath(String type) {
+    final typeKey = type.toLowerCase();
+    return 'assets/pokedex/labels/$typeKey.svg';
+  }
+}
+
+// Temas de la aplicación
 class AppTheme {
   AppTheme._();
 
-  /// Tema claro
+  // Tema claro
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     textTheme: GoogleFonts.poppinsTextTheme(),
@@ -104,7 +169,7 @@ class AppTheme {
     scaffoldBackgroundColor: AppColors.whiteFFFFFF,
   );
 
-  /// Tema oscuro
+  // Tema oscuro
   static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
     textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme),

@@ -6,6 +6,9 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // Notificador para el modo de tema (claro/oscuro)
 final themeModeNotifier = ValueNotifier<ThemeMode>(ThemeMode.light);
+// Proveedor de Riverpod para el notificador del modo de tema
+final themeModeNotifierProvider = Provider<ValueNotifier<ThemeMode>>((ref) => themeModeNotifier);
