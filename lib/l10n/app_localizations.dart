@@ -412,6 +412,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'For'**
   String get splashText;
+
+  /// No description provided for @pokedexDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pokémon Detail'**
+  String get pokedexDetailTitle;
+
+  /// No description provided for @pokedexCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get pokedexCategory;
+
+  /// No description provided for @pokedexAbility.
+  ///
+  /// In en, this message translates to:
+  /// **'Ability'**
+  String get pokedexAbility;
+
+  /// No description provided for @pokedexWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight'**
+  String get pokedexWeight;
+
+  /// No description provided for @pokedexHeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Height'**
+  String get pokedexHeight;
+
+  /// No description provided for @pokedexMale.
+  ///
+  /// In en, this message translates to:
+  /// **'Male'**
+  String get pokedexMale;
+
+  /// No description provided for @pokedexFemale.
+  ///
+  /// In en, this message translates to:
+  /// **'Female'**
+  String get pokedexFemale;
+
+  /// No description provided for @pokedexWeaknesses.
+  ///
+  /// In en, this message translates to:
+  /// **'Weaknesses'**
+  String get pokedexWeaknesses;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

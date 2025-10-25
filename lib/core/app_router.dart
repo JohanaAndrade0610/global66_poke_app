@@ -11,6 +11,7 @@ import '../features/favorites/presentation/screens/favorites_screen.dart';
 import '../features/onboarding/presentation/screens/splash_screen.dart';
 import '../features/onboarding/presentation/screens/onboarding_screen.dart';
 import '../features/pokedex/presentation/screens/pokedex_screen.dart';
+import '../features/pokedex/presentation/screens/pokemon_detail_screen.dart';
 import '../features/regions/presentation/screens/regions_screen.dart';
 import '../features/profile/profile_screen.dart';
 
@@ -33,6 +34,12 @@ class AppRouter {
       GoRoute(
         path: '/pokedex',
         builder: (context, state) => const PokedexScreen(),
+      ),
+      // Detalle de Pokémon
+      GoRoute(
+        path: '/pokemon/:name',
+        builder: (context, state) =>
+            PokemonDetailScreen(name: state.params['name'] ?? ''),
       ),
       // Regions
       GoRoute(

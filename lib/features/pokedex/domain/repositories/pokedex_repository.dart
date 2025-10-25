@@ -6,6 +6,7 @@
  */
 
 import '../entities/pokedex_entity.dart';
+import '../entities/pokemon_detail_entity.dart';
 
 abstract class PokedexRepository {
   /*
@@ -14,4 +15,11 @@ abstract class PokedexRepository {
     * @returns Future<List<PokedexEntity>> Lista de entidades de la Pokédex.
     */
   Future<List<PokedexEntity>> getPokedexList();
+
+  /*
+    * @method getPokemonDetail
+    * @description Obtiene el detalle de un Pokémon por nombre.
+    * @returns Future<PokemonDetailEntity> Detalle del Pokémon.
+    */
+  Future<PokemonDetailEntity> getPokemonDetail(String name);
 }

@@ -166,4 +166,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get splashText => 'For';
+
+  @override
+  String get pokedexDetailTitle => 'Pokémon Detail';
+
+  @override
+  String get pokedexCategory => 'Category';
+
+  @override
+  String get pokedexAbility => 'Ability';
+
+  @override
+  String get pokedexWeight => 'Weight';
+
+  @override
+  String get pokedexHeight => 'Height';
+
+  @override
+  String get pokedexMale => 'Male';
+
+  @override
+  String get pokedexFemale => 'Female';
+
+  @override
+  String get pokedexWeaknesses => 'Weaknesses';
 }

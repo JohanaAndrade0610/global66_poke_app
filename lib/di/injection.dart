@@ -17,6 +17,7 @@ import '../features/favorites/domain/repositories/favorites_repository.dart';
 import '../features/favorites/domain/usecases/get_all_favorites_usecase.dart';
 import '../features/favorites/domain/usecases/is_favorite_usecase.dart';
 import '../features/favorites/domain/usecases/toggle_favorite_usecase.dart';
+import '../features/pokedex/domain/usecases/get_pokemon_detail_usecase.dart';
 
 // Instancia de GetIt para la inyección de dependencias
 final getIt = GetIt.instance;
@@ -38,6 +39,11 @@ void init() {
   // Caso de uso para obtener la lista de Pokedex
   getIt.registerLazySingleton<GetPokedexListUsecase>(
     () => GetPokedexListUsecase(getIt<PokedexRepository>()),
+  );
+
+  // Caso de uso para obtener los detalles de un Pokémon
+  getIt.registerLazySingleton<GetPokemonDetailUsecase>(
+    () => GetPokemonDetailUsecase(getIt<PokedexRepository>()),
   );
 
   // Fuente de datos local de Favoritos (SQLite)

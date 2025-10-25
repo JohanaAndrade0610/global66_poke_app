@@ -152,6 +152,12 @@ class AppTextStyles {
     fontWeight: fontWeightSemiBold,
   );
 
+  static TextStyle textPoppins16Medium424242 = GoogleFonts.poppins(
+    fontSize: 16,
+    color: AppColors.grey424242,
+    fontWeight: fontWeightMedium,
+  );
+
   static TextStyle textPoppins16SemiBold121212 = GoogleFonts.poppins(
     fontSize: 16,
     color: AppColors.grey121212,
@@ -178,6 +184,12 @@ class AppTextStyles {
 
   static TextStyle textPoppins26Medium121212 = GoogleFonts.poppins(
     fontSize: 26,
+    color: AppColors.grey121212,
+    fontWeight: fontWeightMedium,
+  );
+
+  static TextStyle textPoppins32Medium121212 = GoogleFonts.poppins(
+    fontSize: 32,
     color: AppColors.grey121212,
     fontWeight: fontWeightMedium,
   );

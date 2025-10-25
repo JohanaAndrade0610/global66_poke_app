@@ -51,5 +51,13 @@
   "profileGuest": "Guest",
   "regionsTitle": "Coming soon!",
   "regionsDescription": "We're working hard to bring you this section. Please check back later to discover all the latest updates.",
-  "splashText": "For"
+  "splashText": "For",
+  "pokedexDetailTitle": "Pokémon Detail",
+  "pokedexCategory": "Category",
+  "pokedexAbility": "Ability",
+  "pokedexWeight": "Weight",
+  "pokedexHeight": "Height",
+  "pokedexMale": "Male",
+  "pokedexFemale": "Female",
+  "pokedexWeaknesses": "Weaknesses"
 }

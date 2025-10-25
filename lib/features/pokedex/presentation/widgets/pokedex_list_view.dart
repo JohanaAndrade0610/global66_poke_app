@@ -7,6 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../../domain/entities/pokedex_entity.dart';
 import '../../../../core/widgets/pokemon_card.dart';
 import '../../../favorites/presentation/provider/favorites_provider.dart';
@@ -30,13 +31,18 @@ class PokedexListView extends ConsumerWidget {
         final pokemon = pokemons[index];
         // Verificar si el Pokémon está en favoritos
         final isFavorite = favoritesNotifier.isFavorite(pokemon.id);
-        return PokemonCard(
-          pokemon: pokemon,
-          isFavorite: isFavorite,
-          onFavoriteTap: () {
-            // Icono del estado de favorito
-            favoritesNotifier.toggleFavorite(pokemon);
+        return GestureDetector(
+          onTap: () {
+            context.go('/pokemon/${pokemon.name}');
           },
+          child: PokemonCard(
+            pokemon: pokemon,
+            isFavorite: isFavorite,
+            onFavoriteTap: () {
+              // Icono del estado de favorito
+              favoritesNotifier.toggleFavorite(pokemon);
+            },
+          ),
         );
       },
     );
