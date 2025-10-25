@@ -15,10 +15,12 @@ class AppColors {
   // Tonos azules
   static const Color blue1E88E5 = Color(0xFF1E88E5);
   static const Color blue173EA5 = Color(0xFF173EA5);
+  static const Color blue2551C3 = Color(0xFF2551C3);
   static const Color blue0D47A1 = Color(0xFF0D47A1);
 
   // Tonos rojizos
   static const Color redCD3131 = Color(0xFFCD3131);
+  static const Color pinkFF7596 = Color(0xFFFF7596);
 
   // Tonos blancos y claros
   static const Color whiteFFFFFF = Color(0xFFFFFFFF);
@@ -162,6 +164,12 @@ class AppTextStyles {
     fontSize: 16,
     color: AppColors.grey121212,
     fontWeight: fontWeightSemiBold,
+  );
+
+  static TextStyle textPoppins18Medium121212 = GoogleFonts.poppins(
+    fontSize: 18,
+    color: AppColors.grey121212,
+    fontWeight: fontWeightMedium,
   );
 
   static const TextStyle textPoppins20SemiboldDD000000 = TextStyle(

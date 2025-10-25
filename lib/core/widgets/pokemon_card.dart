@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../features/pokedex/domain/entities/pokedex_entity.dart';
-import '../../../features/pokedex/presentation/utils/pokemon_type_localization.dart';
+import 'pokemon_type_label.dart';
 import '../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 
@@ -139,13 +139,6 @@ class PokemonCard extends StatelessWidget {
                         // Tipos del Pokémon
                         Row(
                           children: pokemon.types.map((type) {
-                            final typeNameTranslated =
-                                getPokemonTypeTranslatedName(type, l10n);
-                            final typeColor = PokemonTypeColors.getTypeColor(
-                              type,
-                            );
-                            final typeIconPath =
-                                PokemonTypeColors.getTypeLabelLogoPath(type);
                             return Padding(
                               padding: EdgeInsets.only(
                                 right:
@@ -154,32 +147,7 @@ class PokemonCard extends StatelessWidget {
                                     ? 6
                                     : 0,
                               ),
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 8,
-                                  vertical: 5,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: typeColor,
-                                  borderRadius: BorderRadius.circular(50),
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    SvgPicture.asset(
-                                      typeIconPath,
-                                      width: 20,
-                                      height: 20,
-                                    ),
-                                    const SizedBox(width: 5),
-                                    Text(
-                                      typeNameTranslated,
-                                      style: AppTextStyles
-                                          .textPoppins11MediumFAFAFA,
-                                    ),
-                                  ],
-                                ),
-                              ),
+                              child: PokemonTypeLabel(type: type, l10n: l10n),
                             );
                           }).toList(),
                         ),

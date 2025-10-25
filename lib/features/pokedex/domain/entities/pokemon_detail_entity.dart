@@ -23,5 +23,6 @@ class PokemonDetailEntity with _$PokemonDetailEntity {
     required double maleRate, // Tasa de género masculino
     required double femaleRate, // Tasa de género femenino
     required List<String> weaknesses, // Debilidades del Pokémon
+    required String description, // Descripción del Pokémon
   }) = _PokemonDetailEntity;
 }

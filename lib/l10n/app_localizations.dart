@@ -413,12 +413,6 @@ abstract class AppLocalizations {
   /// **'For'**
   String get splashText;
 
-  /// No description provided for @pokedexDetailTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Pokémon Detail'**
-  String get pokedexDetailTitle;
-
   /// No description provided for @pokedexCategory.
   ///
   /// In en, this message translates to:
@@ -443,17 +437,11 @@ abstract class AppLocalizations {
   /// **'Height'**
   String get pokedexHeight;
 
-  /// No description provided for @pokedexMale.
+  /// No description provided for @pokedexGender.
   ///
   /// In en, this message translates to:
-  /// **'Male'**
-  String get pokedexMale;
-
-  /// No description provided for @pokedexFemale.
-  ///
-  /// In en, this message translates to:
-  /// **'Female'**
-  String get pokedexFemale;
+  /// **'Gender'**
+  String get pokedexGender;
 
   /// No description provided for @pokedexWeaknesses.
   ///

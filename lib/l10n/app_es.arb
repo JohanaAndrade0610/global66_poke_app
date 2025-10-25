@@ -52,12 +52,10 @@
   "regionsTitle": "¡Muy pronto disponible!",
   "regionsDescription": "Estamos trabajando para traerte esta sección. Vuelve más adelante para descubrir todas las novedades.",
   "splashText": "Para",
-  "pokedexDetailTitle": "Detalle de Pokémon",
   "pokedexCategory": "Categoría",
   "pokedexAbility": "Habilidad",
   "pokedexWeight": "Peso",
   "pokedexHeight": "Altura",
-  "pokedexMale": "Macho",
-  "pokedexFemale": "Hembra",
+  "pokedexGender": "Genero",
   "pokedexWeaknesses": "Debilidades"
 }

@@ -168,9 +168,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get splashText => 'Para';
 
   @override
-  String get pokedexDetailTitle => 'Detalle de Pokémon';
-
-  @override
   String get pokedexCategory => 'Categoría';
 
   @override
@@ -183,10 +180,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get pokedexHeight => 'Altura';
 
   @override
-  String get pokedexMale => 'Macho';
-
-  @override
-  String get pokedexFemale => 'Hembra';
+  String get pokedexGender => 'Genero';
 
   @override
   String get pokedexWeaknesses => 'Debilidades';

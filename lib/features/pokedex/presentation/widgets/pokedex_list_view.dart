@@ -11,6 +11,7 @@ import 'package:go_router/go_router.dart';
 import '../../domain/entities/pokedex_entity.dart';
 import '../../../../core/widgets/pokemon_card.dart';
 import '../../../favorites/presentation/provider/favorites_provider.dart';
+import '../provider/pokemon_detail_provider.dart';
 
 class PokedexListView extends ConsumerWidget {
   // Lista de Pokémon a mostrar
@@ -32,7 +33,12 @@ class PokedexListView extends ConsumerWidget {
         // Verificar si el Pokémon está en favoritos
         final isFavorite = favoritesNotifier.isFavorite(pokemon.id);
         return GestureDetector(
-          onTap: () {
+          onTap: () async {
+            // Se dispara la petición de detalle de un Pokémon al hacer tap
+            await ref
+                .read(pokemonDetailNotifierProvider.notifier)
+                .fetchDetail(pokemon.name);
+            // Navegación a la pantalla de detalle
             context.go('/pokemon/${pokemon.name}');
           },
           child: PokemonCard(

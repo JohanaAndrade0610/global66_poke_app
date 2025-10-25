@@ -47,6 +47,7 @@ flutter:
     - assets/common/favorites/
     - assets/common/information/
     - assets/onboarding/
+    - assets/pokedex/details/
     - assets/pokedex/icons/
     - assets/pokedex/labels/
     - assets/pokedex/types/

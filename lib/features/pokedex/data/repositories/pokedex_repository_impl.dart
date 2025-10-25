@@ -56,6 +56,7 @@ class PokedexRepositoryImpl implements PokedexRepository {
       maleRate: model.maleRate,
       femaleRate: model.femaleRate,
       weaknesses: model.weaknesses,
+      description: model.description,
     );
   }
 }

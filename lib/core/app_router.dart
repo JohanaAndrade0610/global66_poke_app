@@ -39,7 +39,7 @@ class AppRouter {
       GoRoute(
         path: '/pokemon/:name',
         builder: (context, state) =>
-            PokemonDetailScreen(name: state.params['name'] ?? ''),
+            PokemonDetailScreen(pokemonName: state.params['name']!),
       ),
       // Regions
       GoRoute(
