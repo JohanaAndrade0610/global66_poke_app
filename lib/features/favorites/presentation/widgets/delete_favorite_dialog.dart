@@ -80,56 +80,42 @@ class DeleteFavoriteDialog extends StatelessWidget {
       actionsPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
       actions: [
         // Botón Cancelar
-        Expanded(
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.grey.shade200,
-              borderRadius: BorderRadius.circular(50),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.grey.shade200,
+            borderRadius: BorderRadius.circular(50),
+          ),
+          // Icono del botón
+          child: TextButton.icon(
+            onPressed: () => Navigator.of(context).pop(false),
+            icon: const Icon(Icons.close_rounded, color: AppColors.grey121212),
+            // Texto del botón
+            label: Text(
+              l10n.favoritesDeleteDialogCancel,
+              style: AppTextStyles.textPoppins12SemiBold121212,
             ),
-            // Icono del botón
-            child: TextButton.icon(
-              onPressed: () => Navigator.of(context).pop(false),
-              icon: const Icon(
-                Icons.close_rounded,
-                color: AppColors.grey121212,
-              ),
-              // Texto del botón
-              label: Text(
-                l10n.favoritesDeleteDialogCancel,
-                style: AppTextStyles.textPoppins12SemiBold121212,
-              ),
-              style: TextButton.styleFrom(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 12,
-                  horizontal: 16,
-                ),
-              ),
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
             ),
           ),
         ),
         // Botón Eliminar
-        Expanded(
-          // Diseño del contenedor
-          child: Container(
-            decoration: BoxDecoration(
-              color: AppColors.redCD3131,
-              borderRadius: BorderRadius.circular(50),
+        Container(
+          decoration: BoxDecoration(
+            color: AppColors.redCD3131,
+            borderRadius: BorderRadius.circular(50),
+          ),
+          // Icono del botón
+          child: TextButton.icon(
+            onPressed: () => Navigator.of(context).pop(true),
+            icon: const Icon(Icons.delete_rounded, color: Colors.white),
+            // Texto del botón
+            label: Text(
+              l10n.favoritesDeleteDialogConfirm,
+              style: AppTextStyles.textPoppins12SemiBoldFFFFFF,
             ),
-            // Icono del botón
-            child: TextButton.icon(
-              onPressed: () => Navigator.of(context).pop(true),
-              icon: const Icon(Icons.delete_rounded, color: Colors.white),
-              // Texto del botón
-              label: Text(
-                l10n.favoritesDeleteDialogConfirm,
-                style: AppTextStyles.textPoppins12SemiBoldFFFFFF,
-              ),
-              style: TextButton.styleFrom(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 12,
-                  horizontal: 16,
-                ),
-              ),
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
             ),
           ),
         ),

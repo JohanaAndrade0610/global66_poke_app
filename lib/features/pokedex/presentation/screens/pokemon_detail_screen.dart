@@ -18,6 +18,7 @@ import '../../../../l10n/app_localizations.dart';
 import '../provider/pokemon_detail_provider.dart';
 import '../../../favorites/presentation/provider/favorites_provider.dart';
 import '../../domain/entities/pokedex_entity.dart';
+import '../widgets/pokemon_header.dart';
 
 class PokemonDetailScreen extends ConsumerWidget {
   // Nombre del Pokémon cuyos detalles se mostrarán
@@ -31,6 +32,10 @@ class PokemonDetailScreen extends ConsumerWidget {
     final size = MediaQuery.of(context).size;
     // Altura del semicírculo superior
     final semicircleHeight = size.height * 0.3;
+    // Factores del header (deben coincidir con el widget para alinear el espacio inferior)
+    const imgHFactor = 0.6;
+    const overlapFactor = 0.4;
+    final pokemonImageOverlap = semicircleHeight * imgHFactor * overlapFactor;
     // Internacionalización de los textos de la pantalla
     final l10n = AppLocalizations.of(context)!;
     // Estado del proveedor de detalles del Pokémon
@@ -47,11 +52,14 @@ class PokemonDetailScreen extends ConsumerWidget {
       orElse: () => false,
     );
     return Scaffold(
+      // Permite que el cuerpo se dibuje detrás del AppBar para que el color del semicírculo lo cubra
+      extendBodyBehindAppBar: true,
       // Appbar generico de la aplicación
       appBar: CustomAppBar(
         showTitle: false,
         showFavoriteIcon: true,
         isFavorite: isFavorite,
+        forceLightIcon: true,
         onBackTap: () {
           context.go('/pokedex');
         },
@@ -76,30 +84,40 @@ class PokemonDetailScreen extends ConsumerWidget {
       body: Column(
         children: [
           // Semicírculo superior con color dinámico según el tipo del Pokémon
-          SafeArea(
-            child: state.maybeWhen(
-              loaded: (detail) => Container(
-                width: size.width,
-                height: semicircleHeight,
-                decoration: BoxDecoration(
-                  color: PokemonTypeColors.getTypeColor(detail.types.first),
-                  borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(180),
-                    bottomRight: Radius.circular(200),
+          // y el logo del tipo con máscara de degradado
+          // No aplicamos padding superior para que el color también cubra la zona del AppBar
+          SizedBox(
+            height: semicircleHeight,
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                SafeArea(
+                  top: false,
+                  child: PokemonHeader(
+                    height: semicircleHeight,
+                    primaryType: state.maybeWhen(
+                      loaded: (d) => d.types.first,
+                      orElse: () => null,
+                    ),
+                    imageUrl: state.maybeWhen(
+                      loaded: (d) => d.imageUrl,
+                      orElse: () => null,
+                    ),
+                    imageWidthFactor: 0.8,
+                    imageHeightFactor: imgHFactor,
+                    overlapFactor: overlapFactor,
                   ),
                 ),
-              ),
-              orElse: () => Container(
-                width: size.width,
-                height: semicircleHeight,
-                decoration: const BoxDecoration(
-                  color: AppColors.blue1E88E5,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(180),
-                    bottomRight: Radius.circular(200),
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: MediaQuery.of(context).padding.top,
+                  child: Container(
+                    color: Theme.of(context).scaffoldBackgroundColor,
                   ),
                 ),
-              ),
+              ],
             ),
           ),
           Expanded(
@@ -108,6 +126,8 @@ class PokemonDetailScreen extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Espacio para que el Pokémon que sobresale no tape el contenido
+                    SizedBox(height: pokemonImageOverlap + 8),
                     // Nombre del Pokémon
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24),

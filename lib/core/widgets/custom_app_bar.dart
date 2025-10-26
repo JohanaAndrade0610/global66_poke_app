@@ -24,6 +24,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool isFavorite;
   // Color del icono
   final Color? iconColor;
+  // Fuerza iconosde color claro
+  final bool forceLightIcon;
 
   const CustomAppBar({
     Key? key,
@@ -34,6 +36,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.isFavorite = false,
     this.iconColor,
     this.onFavoriteTap,
+    this.forceLightIcon = false,
   }) : super(key: key);
 
   @override
@@ -42,13 +45,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final defaultIconColor = iconColor ?? (isDarkMode ? AppColors.whiteFAFAFA : AppColors.grey121212);
+    // Color por defecto del icono según tema
+    final defaultIconColor =
+        iconColor ??
+        ((isDarkMode || forceLightIcon)
+            ? AppColors.whiteFAFAFA
+            : AppColors.grey121212);
     final titleStyle = isDarkMode
         ? AppTextStyles.textPoppins14SemiBoldFAFAFA
         : AppTextStyles.textPoppins14SemiBold121212;
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
+      surfaceTintColor: Colors.transparent,
+      scrolledUnderElevation: 0,
       // Icono de volver
       leading: IconButton(
         icon: Icon(Icons.arrow_back_ios_new, color: defaultIconColor, size: 15),
