@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/pokemon_card.dart';
-import '../../../../l10n/app_localizations.dart';
 import '../../../pokedex/domain/entities/pokedex_entity.dart';
 import 'delete_favorite_dialog.dart';
 
@@ -35,23 +34,7 @@ class DismissibleFavoriteCard extends StatelessWidget {
 
     if (confirmed == true) {
       onDelete();
-      _showDeletedSnackBar(context);
     }
-  }
-
-  /*
-  * @method _showDeletedSnackBar
-  * @description Muestra un SnackBar confirmando la eliminación del favorito.
-  * @param context - BuildContext de la aplicación.
-  */
-  void _showDeletedSnackBar(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('${pokemon.name} ${l10n.favoritesDeletedMessage}'),
-        duration: const Duration(seconds: 2),
-      ),
-    );
   }
 
   @override
@@ -81,7 +64,6 @@ class DismissibleFavoriteCard extends StatelessWidget {
           DeleteFavoriteDialog.show(context, pokemon.name),
       onDismissed: (direction) {
         onDelete();
-        _showDeletedSnackBar(context);
       },
       // Card del Pokémon
       child: PokemonCard(

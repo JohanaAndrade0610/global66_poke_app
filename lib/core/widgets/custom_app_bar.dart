@@ -49,11 +49,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: IconButton(
         icon: Icon(Icons.arrow_back_ios_new, color: defaultIconColor, size: 15),
         onPressed: onBackTap,
+        color: AppColors.grey424242,
       ),
       // Título de la pantalla
       centerTitle: true,
       title: showTitle && title != null
-          ? Text(title!, style: AppTextStyles.textPoppins16SemiBold121212)
+          ? Text(title!, style: AppTextStyles.textPoppins14SemiBold121212)
           : null,
       actions: [
         // Icono de favoritos

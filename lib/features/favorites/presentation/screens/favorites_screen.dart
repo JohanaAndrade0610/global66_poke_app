@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/widgets/custom_app_bar.dart';
 import '../../../../core/widgets/custom_bottom_navigation_bar.dart';
 import '../../../../core/widgets/custom_information.dart';
 import '../../../../l10n/app_localizations.dart';
@@ -30,17 +31,11 @@ class FavoritesScreen extends ConsumerWidget {
 
     return Scaffold(
       // AppBar condicionado a aparecer dependiendo de si hay favoritos
-      appBar: favoritesState.maybeWhen(
-        loaded: (favorites, _) => favorites.isNotEmpty
-            ? AppBar(
-                title: Text(l10n.bottomNavigationBarFavorites),
-                leading: const BackButton(),
-              )
-            : null,
-        orElse: () => AppBar(
-          title: Text(l10n.bottomNavigationBarFavorites),
-          leading: const BackButton(),
-        ),
+      appBar: CustomAppBar(
+        title: l10n.bottomNavigationBarFavorites,
+        showTitle: true,
+        showFavoriteIcon: false,
+        onBackTap: () => context.go('/pokedex'),
       ),
       body: favoritesState.when(
         // Estado de carga
