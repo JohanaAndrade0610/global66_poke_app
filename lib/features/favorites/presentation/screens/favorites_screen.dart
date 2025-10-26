@@ -31,11 +31,16 @@ class FavoritesScreen extends ConsumerWidget {
 
     return Scaffold(
       // AppBar condicionado a aparecer dependiendo de si hay favoritos
-      appBar: CustomAppBar(
-        title: l10n.bottomNavigationBarFavorites,
-        showTitle: true,
-        showFavoriteIcon: false,
-        onBackTap: () => context.go('/pokedex'),
+      appBar: favoritesState.maybeWhen(
+        loaded: (favorites, favoriteIds) => favorites.isNotEmpty
+            ? CustomAppBar(
+                title: l10n.bottomNavigationBarFavorites,
+                showTitle: true,
+                showFavoriteIcon: false,
+                onBackTap: () => context.go('/pokedex'),
+              )
+            : null,
+        orElse: () => null,
       ),
       body: favoritesState.when(
         // Estado de carga

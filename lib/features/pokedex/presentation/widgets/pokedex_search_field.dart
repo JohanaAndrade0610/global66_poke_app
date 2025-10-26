@@ -54,11 +54,13 @@ class _PokedexSearchFieldState extends State<PokedexSearchField> {
   Widget build(BuildContext context) {
     // Internacionalización de los textos
     final l10n = AppLocalizations.of(context)!;
+    // Verificar si el tema es oscuro
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     // Diseño del contenedor del TextField
     return Container(
       height: 48,
       decoration: BoxDecoration(
-        color: AppColors.whiteFFFFFF,
+        color: Colors.transparent,
         borderRadius: BorderRadius.circular(24),
         border: Border.all(color: AppColors.greyE0E0E0, width: 1.5),
       ),
@@ -66,8 +68,10 @@ class _PokedexSearchFieldState extends State<PokedexSearchField> {
       child: TextField(
         controller: _searchController,
         onChanged: widget.onSearchChanged,
-        style: AppTextStyles.textPoppins14Regular424242,
-        cursorColor: AppColors.grey424242,
+        style: AppTextStyles.textPoppins14Regular424242.copyWith(
+          color: isDarkMode ? AppColors.whiteFAFAFA : AppColors.grey424242,
+        ),
+        cursorColor: isDarkMode ? AppColors.whiteFAFAFA : AppColors.grey424242,
         decoration: InputDecoration(
           hintText: l10n.pokedexSearchHint,
           hintStyle: AppTextStyles.textPoppins14Regular9E9E9E,
@@ -78,6 +82,10 @@ class _PokedexSearchFieldState extends State<PokedexSearchField> {
               'assets/pokedex/icons/search_icon.svg',
               width: 20,
               height: 20,
+              colorFilter: ColorFilter.mode(
+                isDarkMode ? AppColors.whiteFAFAFA : AppColors.grey757575,
+                BlendMode.srcIn,
+              ),
             ),
           ),
           // Icono para limpiar el texto ingresado
@@ -85,7 +93,9 @@ class _PokedexSearchFieldState extends State<PokedexSearchField> {
               ? IconButton(
                   icon: Icon(
                     Icons.close,
-                    color: AppColors.grey757575,
+                    color: isDarkMode
+                        ? AppColors.whiteFAFAFA
+                        : AppColors.grey757575,
                     size: 20,
                   ),
                   onPressed: () {

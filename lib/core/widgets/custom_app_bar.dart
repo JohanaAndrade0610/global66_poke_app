@@ -41,7 +41,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final defaultIconColor = iconColor ?? AppColors.grey121212;
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final defaultIconColor = iconColor ?? (isDarkMode ? AppColors.whiteFAFAFA : AppColors.grey121212);
+    final titleStyle = isDarkMode
+        ? AppTextStyles.textPoppins14SemiBoldFAFAFA
+        : AppTextStyles.textPoppins14SemiBold121212;
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
@@ -54,7 +58,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       // Título de la pantalla
       centerTitle: true,
       title: showTitle && title != null
-          ? Text(title!, style: AppTextStyles.textPoppins14SemiBold121212)
+          ? Text(title!, style: titleStyle)
           : null,
       actions: [
         // Icono de favoritos

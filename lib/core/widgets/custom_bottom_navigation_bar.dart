@@ -31,6 +31,14 @@ class CustomBottomNavigationBar extends StatelessWidget {
     final Color backgroundColor = isDark
         ? const Color(0xFF23273A)
         : const Color(0xFFFAFAFA);
+    // Color para íconos y texto no seleccionados
+    final Color unselectedColor = isDark
+        ? AppColors.whiteFAFAFA
+        : AppColors.grey424242;
+    // Color azul para íconos y texto seleccionados
+    final Color selectedColor = isDark
+        ? AppColors.blue1E88E5
+        : AppColors.blue0D47A1;
     // Control de localización para multiples idiomas
     final l10n = AppLocalizations.of(context)!;
     // Items de navegación
@@ -95,9 +103,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                       items[i].asset,
                       width: 17,
                       height: 17,
-                      color: isSelected
-                          ? AppColors.blue0D47A1
-                          : AppColors.grey424242,
+                      color: isSelected ? selectedColor : unselectedColor,
                     ),
                     const SizedBox(height: 10),
                     // Nombre del item
@@ -113,10 +119,13 @@ class CustomBottomNavigationBar extends StatelessWidget {
                           style: isSelected
                               ? AppTextStyles.textPoppinsBold0D47A1.copyWith(
                                   fontSize: 12,
+                                  color: selectedColor,
                                 )
-                              : AppTextStyles.textPoppins14Medium424242.copyWith(
-                                  fontSize: 12,
-                                ),
+                              : AppTextStyles.textPoppins14Medium424242
+                                    .copyWith(
+                                      fontSize: 12,
+                                      color: unselectedColor,
+                                    ),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           textAlign: TextAlign.center,

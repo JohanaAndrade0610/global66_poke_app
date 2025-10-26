@@ -29,6 +29,17 @@ class CustomInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final titleStyle = isDark
+        ? AppTextStyles.textPoppins20Semibold333333.copyWith(
+            color: AppColors.whiteFAFAFA,
+          )
+        : AppTextStyles.textPoppins20Semibold333333;
+    final descriptionStyle = isDark
+        ? AppTextStyles.textPoppins14Regular4D4D4D.copyWith(
+            color: AppColors.whiteFAFAFA,
+          )
+        : AppTextStyles.textPoppins14Regular4D4D4D;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
       child: Column(
@@ -50,7 +61,7 @@ class CustomInformation extends StatelessWidget {
               data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
               child: Text(
                 title,
-                style: AppTextStyles.textPoppins20Semibold333333,
+                style: titleStyle,
                 textAlign: TextAlign.center,
               ),
             ),
@@ -62,7 +73,7 @@ class CustomInformation extends StatelessWidget {
               data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
               child: Text(
                 description,
-                style: AppTextStyles.textPoppins14Regular4D4D4D,
+                style: descriptionStyle,
                 textAlign: TextAlign.center,
               ),
             ),

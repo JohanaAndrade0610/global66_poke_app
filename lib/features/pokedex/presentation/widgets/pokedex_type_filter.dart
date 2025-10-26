@@ -74,6 +74,9 @@ class _PokedexTypeFilterState extends State<PokedexTypeFilter> {
 
   @override
   Widget build(BuildContext context) {
+    // Verificar si el tema es oscuro
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     // Diseño del botón del filtro
     return GestureDetector(
       onTap: _showFilterModal,
@@ -81,11 +84,15 @@ class _PokedexTypeFilterState extends State<PokedexTypeFilter> {
         height: 48,
         width: 48,
         decoration: BoxDecoration(
-          color: AppColors.whiteFFFFFF,
+          color: Colors.transparent,
           borderRadius: BorderRadius.circular(24),
           border: Border.all(color: AppColors.greyE0E0E0, width: 1.5),
         ),
-        child: Icon(Icons.filter_list, color: AppColors.grey757575, size: 24),
+        child: Icon(
+          Icons.filter_list,
+          color: isDarkMode ? AppColors.whiteFAFAFA : AppColors.grey757575,
+          size: 24,
+        ),
       ),
     );
   }

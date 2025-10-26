@@ -18,8 +18,10 @@ class RegionsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // Control de localización para multiples idiomas
     final l10n = AppLocalizations.of(context)!;
+    // Verificar si el tema es oscuro
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
@@ -30,7 +32,9 @@ class RegionsScreen extends StatelessWidget {
               // Imagen principal de la pantalla
               Center(
                 child: Image.asset(
-                  'assets/regions/regions_image.png',
+                  isDarkMode
+                      ? 'assets/regions/regions_image_dark.png'
+                      : 'assets/regions/regions_image.png',
                   width: MediaQuery.of(context).size.width * 0.45,
                   fit: BoxFit.contain,
                 ),
@@ -42,7 +46,11 @@ class RegionsScreen extends StatelessWidget {
                   data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
                   child: Text(
                     l10n.regionsTitle,
-                    style: AppTextStyles.textPoppins20Semibold333333,
+                    style: AppTextStyles.textPoppins20Semibold333333.copyWith(
+                      color: isDarkMode
+                          ? AppColors.whiteFAFAFA
+                          : AppColors.grey333333,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -54,7 +62,11 @@ class RegionsScreen extends StatelessWidget {
                   data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
                   child: Text(
                     l10n.regionsDescription,
-                    style: AppTextStyles.textPoppins14Regular4D4D4D,
+                    style: AppTextStyles.textPoppins14Regular4D4D4D.copyWith(
+                      color: isDarkMode
+                          ? AppColors.whiteFAFAFA
+                          : AppColors.grey4D4D4D,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                 ),
