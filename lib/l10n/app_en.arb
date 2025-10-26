@@ -56,6 +56,6 @@
   "pokedexAbility": "Ability",
   "pokedexWeight": "Weight",
   "pokedexHeight": "Height",
-  "pokedexGender": "Gender",
+  "pokedexGender": "GENDER",
   "pokedexWeaknesses": "Weaknesses"
 }

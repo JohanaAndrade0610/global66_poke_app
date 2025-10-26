@@ -180,7 +180,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pokedexHeight => 'Height';
 
   @override
-  String get pokedexGender => 'Gender';
+  String get pokedexGender => 'GENDER';
 
   @override
   String get pokedexWeaknesses => 'Weaknesses';

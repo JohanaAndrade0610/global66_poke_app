@@ -7,7 +7,6 @@
 
 import 'package:dio/dio.dart';
 import '../../../../core/config.dart';
-import '../models/pokedex_model.dart';
 
 class PokedexRemoteDatasource {
   // Instancia de Dio para realizar solicitudes HTTP
@@ -19,27 +18,45 @@ class PokedexRemoteDatasource {
     * @description Obtiene la lista de Pokémon desde la API de Pokedex.
     * @returns Future<List<PokedexModel>> Lista de modelos de Pokedex.
     */
-  Future<List<PokedexModel>> fetchPokedexList() async {
-    // Url de la API para obtener la lista de Pokémon
+  Future<List<Map<String, dynamic>>> fetchPokedexRawList() async {
     final url = '${AppConfig.pokeApiBaseUrl}/pokemon';
-    // Realizar la solicitud GET
     final response = await dio.get(url);
     final results = response.data['results'] as List;
-    // Para cada Pokémon, obtener detalles mediante la url (id, nombre, imagen, tipos)
-    final List<PokedexModel> pokemons = [];
-    for (var item in results) {
-      final detail = await dio.get(item['url']);
-      pokemons.add(
-        PokedexModel(
-          id: detail.data['id'],
-          name: detail.data['name'],
-          imageUrl: detail.data['sprites']['front_default'],
-          types: (detail.data['types'] as List)
-              .map((t) => t['type']['name'] as String)
-              .toList(),
-        ),
-      );
-    }
-    return pokemons;
+    return results.cast<Map<String, dynamic>>();
+  }
+
+  /*
+    * @method fetchPokemonRaw
+    * @description Obtiene los datos crudos de un Pokémon desde la API por nombre o URL.
+    * @returns Future<Map<String, dynamic>> Datos crudos del Pokémon.
+    */
+  Future<Map<String, dynamic>> fetchPokemonRaw(String nameOrUrl) async {
+    final url = nameOrUrl.startsWith('http')
+        ? nameOrUrl
+        : '${AppConfig.pokeApiBaseUrl}/pokemon/$nameOrUrl';
+    final response = await dio.get(url);
+    return response.data as Map<String, dynamic>;
+  }
+
+  /*
+    * @method fetchTypeRaw
+    * @description Obtiene los datos crudos de un tipo de Pokémon desde la API por nombre.
+    * @returns Future<Map<String, dynamic>> Datos crudos del tipo de Pokémon.
+    */
+  Future<Map<String, dynamic>> fetchTypeRaw(String type) async {
+    final url = '${AppConfig.pokeApiBaseUrl}/type/$type';
+    final response = await dio.get(url);
+    return response.data as Map<String, dynamic>;
+  }
+
+  /*
+    * @method fetchSpeciesRaw
+    * @description Obtiene los datos crudos de la especie de un Pokémon desde la API por nombre.
+    * @returns Future<Map<String, dynamic>> Datos crudos de la especie del Pokémon.
+    */
+  Future<Map<String, dynamic>> fetchSpeciesRaw(String name) async {
+    final url = '${AppConfig.pokeApiBaseUrl}/pokemon-species/$name';
+    final response = await dio.get(url);
+    return response.data as Map<String, dynamic>;
   }
 }

@@ -16,10 +16,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showTitle;
   // Indica si se muestra el icono de favoritos o no
   final bool showFavoriteIcon;
-  // Callback para el tap en el icono de favoritos
-  final VoidCallback? onFavoriteTap;
   // Callback para el tap en el icono de volver
   final VoidCallback onBackTap;
+  // Callback para el tap en el icono de favoritos
+  final VoidCallback? onFavoriteTap;
   // Indica si el Pokémon es favorito o no
   final bool isFavorite;
   // Color del icono
@@ -30,10 +30,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.title,
     this.showTitle = true,
     this.showFavoriteIcon = false,
-    this.onFavoriteTap,
     required this.onBackTap,
     this.isFavorite = false,
     this.iconColor,
+    this.onFavoriteTap,
   }) : super(key: key);
 
   @override
@@ -60,7 +60,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         if (showFavoriteIcon)
           IconButton(
             icon: SvgPicture.asset(
-              'assets/common/favorites/favorites_icon.svg',
+              isFavorite
+                  ? 'assets/common/favorites/selected_favorite_icon.svg'
+                  : 'assets/common/favorites/favorites_icon.svg',
               color: isFavorite ? AppColors.redCD3131 : AppColors.greyE0E0E0,
               height: 24,
             ),

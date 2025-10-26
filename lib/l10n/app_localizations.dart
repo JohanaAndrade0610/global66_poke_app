@@ -440,7 +440,7 @@ abstract class AppLocalizations {
   /// No description provided for @pokedexGender.
   ///
   /// In en, this message translates to:
-  /// **'Gender'**
+  /// **'GENDER'**
   String get pokedexGender;
 
   /// No description provided for @pokedexWeaknesses.
