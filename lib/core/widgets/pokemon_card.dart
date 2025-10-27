@@ -146,7 +146,12 @@ class PokemonCard extends ConsumerWidget {
                         Text(
                           pokemon.name[0].toUpperCase() +
                               pokemon.name.substring(1),
-                          style: AppTextStyles.textPoppins21Semibold121212,
+                          style: AppTextStyles.textPoppins21Semibold121212
+                              .copyWith(
+                                color: isDark
+                                    ? AppColors.whiteFAFAFA
+                                    : AppColors.grey121212,
+                              ),
                         ),
                         const SizedBox(height: 6),
                         // Tipos del Pokémon

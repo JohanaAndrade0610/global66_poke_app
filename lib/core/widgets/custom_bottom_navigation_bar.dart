@@ -93,7 +93,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               onTap: () => onItemTapped(i),
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
+                padding: const EdgeInsets.symmetric(vertical: 25),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,

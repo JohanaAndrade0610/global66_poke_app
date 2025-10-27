@@ -106,15 +106,17 @@ class _PokedexTypeFilterState extends State<PokedexTypeFilter> {
     final l10n = AppLocalizations.of(context)!;
     // Obtener la altura de la pantalla
     final screenHeight = MediaQuery.of(context).size.height;
+    // Detectar modo oscuro
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return StatefulBuilder(
       builder: (context, setModalState) {
         // El contenedor ocupa el 80% de la altura de la pantalla
         return Container(
           constraints: BoxConstraints(maxHeight: screenHeight * 0.8),
-          decoration: const BoxDecoration(
-            color: AppColors.whiteFFFFFF,
-            borderRadius: BorderRadius.only(
+          decoration: BoxDecoration(
+            color: isDarkMode ? AppColors.blue23273A : AppColors.whiteFFFFFF,
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(20),
               topRight: Radius.circular(20),
             ),
@@ -132,7 +134,9 @@ class _PokedexTypeFilterState extends State<PokedexTypeFilter> {
                       child: IconButton(
                         icon: const Icon(Icons.close),
                         onPressed: () => Navigator.pop(context),
-                        color: AppColors.grey424242,
+                        color: isDarkMode
+                            ? AppColors.greyE0E0E0
+                            : AppColors.grey424242,
                         padding: EdgeInsets.zero,
                         constraints: const BoxConstraints(),
                       ),
@@ -141,7 +145,12 @@ class _PokedexTypeFilterState extends State<PokedexTypeFilter> {
                     Center(
                       child: Text(
                         l10n.pokedexFilterByType,
-                        style: AppTextStyles.textPoppins16SemiBold121212,
+                        style: AppTextStyles.textPoppins16SemiBold121212
+                            .copyWith(
+                              color: isDarkMode
+                                  ? AppColors.whiteFAFAFA
+                                  : AppColors.grey121212,
+                            ),
                       ),
                     ),
                   ],

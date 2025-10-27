@@ -74,7 +74,9 @@ class _PokedexSearchFieldState extends State<PokedexSearchField> {
         cursorColor: isDarkMode ? AppColors.whiteFAFAFA : AppColors.grey424242,
         decoration: InputDecoration(
           hintText: l10n.pokedexSearchHint,
-          hintStyle: AppTextStyles.textPoppins14Regular9E9E9E,
+          hintStyle: AppTextStyles.textPoppins14Regular9E9E9E.copyWith(
+            color: isDarkMode ? AppColors.greyE0E0E0 : AppColors.grey9E9E9E,
+          ),
           // Icono de búsqueda
           prefixIcon: Padding(
             padding: const EdgeInsets.all(14.0),

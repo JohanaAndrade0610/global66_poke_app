@@ -37,10 +37,12 @@ class PokedexTypeFilterCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Detectar modo oscuro
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     // Contenedor del card de tipos
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.whiteFFFFFF,
+        color: Colors.transparent,
         borderRadius: BorderRadius.circular(30),
         border: Border.all(color: AppColors.greyE0E0E0, width: 1),
       ),
@@ -64,14 +66,20 @@ class PokedexTypeFilterCard extends StatelessWidget {
                     // Etiqueta "Tipo"
                     Text(
                       l10n.pokedexLabelType,
-                      style: AppTextStyles.textPoppins14SemiBold121212,
+                      style: AppTextStyles.textPoppins14SemiBold121212.copyWith(
+                        color: isDarkMode
+                            ? AppColors.greyE0E0E0
+                            : AppColors.grey121212,
+                      ),
                     ),
                     // Icono de flecha para expandir/colapsar el card
                     Icon(
                       isTypeCardExpanded
                           ? Icons.keyboard_arrow_up
                           : Icons.keyboard_arrow_down,
-                      color: AppColors.grey757575,
+                      color: isDarkMode
+                          ? AppColors.whiteFAFAFA
+                          : AppColors.grey757575,
                     ),
                   ],
                 ),
@@ -97,7 +105,7 @@ class PokedexTypeFilterCard extends StatelessWidget {
                           vertical: 8,
                         ),
                         decoration: BoxDecoration(
-                          color: AppColors.whiteFFFFFF,
+                          color: Colors.transparent,
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Row(
@@ -120,7 +128,12 @@ class PokedexTypeFilterCard extends StatelessWidget {
                                   type,
                                   l10n,
                                 ),
-                                style: AppTextStyles.textPoppins12Medium424242,
+                                style: AppTextStyles.textPoppins12Medium424242
+                                    .copyWith(
+                                      color: isDarkMode
+                                          ? AppColors.greyE0E0E0
+                                          : AppColors.grey424242,
+                                    ),
                               ),
                             ),
                             // Checkbox para seleccionar/deseleccionar el tipo
