@@ -16,8 +16,17 @@ import '../provider/pokemon_detail_provider.dart';
 class PokedexListView extends ConsumerWidget {
   // Lista de Pokémon a mostrar
   final List<PokedexEntity> pokemons;
+  // Callback para iniciar el widget de loading
+  final VoidCallback? onLoadingStart;
+  // Callback para finalizar el widget de loading
+  final VoidCallback? onLoadingEnd;
 
-  const PokedexListView({Key? key, required this.pokemons}) : super(key: key);
+  const PokedexListView({
+    Key? key,
+    required this.pokemons,
+    this.onLoadingStart,
+    this.onLoadingEnd,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -34,12 +43,19 @@ class PokedexListView extends ConsumerWidget {
         final isFavorite = favoritesNotifier.isFavorite(pokemon.id);
         return GestureDetector(
           onTap: () async {
-            // Se dispara la petición de detalle de un Pokémon al hacer tap
-            await ref
-                .read(pokemonDetailNotifierProvider.notifier)
-                .fetchDetail(pokemon.name);
-            // Navegación a la pantalla de detalle
-            context.go('/pokemon/${pokemon.name}');
+            // Muestra el loading en la ventana de lista de pokémon
+            onLoadingStart?.call();
+            try {
+              // Se dispara la petición de detalle de un Pokémon al hacer tap
+              await ref
+                  .read(pokemonDetailNotifierProvider.notifier)
+                  .fetchDetail(pokemon.name);
+              if (!context.mounted) return;
+              // Navegación a la pantalla de detalle
+              context.go('/pokemon/${pokemon.name}');
+            } finally {
+              onLoadingEnd?.call();
+            }
           },
           child: PokemonCard(
             pokemon: pokemon,

@@ -83,7 +83,7 @@ class _PokedexSearchFieldState extends State<PokedexSearchField> {
               width: 20,
               height: 20,
               colorFilter: ColorFilter.mode(
-                isDarkMode ? AppColors.whiteFAFAFA : AppColors.grey757575,
+                isDarkMode ? AppColors.whiteFAFAFA : AppColors.grey9E9E9E,
                 BlendMode.srcIn,
               ),
             ),

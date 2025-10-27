@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/theme_mode_notifier.dart';
 import '../../../../core/widgets/custom_app_bar.dart';
 import '../../../../core/widgets/custom_bottom_navigation_bar.dart';
 import '../../../../core/widgets/pokemon_type_label.dart';
@@ -40,6 +41,12 @@ class PokemonDetailScreen extends ConsumerWidget {
     final l10n = AppLocalizations.of(context)!;
     // Estado del proveedor de detalles del Pokémon
     final state = ref.watch(pokemonDetailNotifierProvider);
+    // Notificador de modo de tema de la aplicación
+    final themeModeNotifier = ref.watch(themeModeNotifierProvider);
+    // Estado actual del modo de tema
+    final themeMode = themeModeNotifier.value;
+    // Verificar si el tema es oscuro
+    final isDark = themeMode == ThemeMode.dark;
 
     // Provider de favoritos
     final favoritesState = ref.watch(favoritesNotifierProvider);
@@ -137,12 +144,22 @@ class PokemonDetailScreen extends ConsumerWidget {
                           Text(
                             detail.name[0].toUpperCase() +
                                 detail.name.substring(1),
-                            style: AppTextStyles.textPoppins32Medium121212,
+                            style: AppTextStyles.textPoppins32Medium121212
+                                .copyWith(
+                                  color: isDark
+                                      ? AppColors.whiteFAFAFA
+                                      : AppColors.grey121212,
+                                ),
                           ),
                           // ID del Pokémon
                           Text(
                             'N°${detail.id.toString().padLeft(3, '0')}',
-                            style: AppTextStyles.textPoppins16Medium424242,
+                            style: AppTextStyles.textPoppins16Medium424242
+                                .copyWith(
+                                  color: isDark
+                                      ? AppColors.greyE0E0E0
+                                      : AppColors.grey424242,
+                                ),
                           ),
                           const SizedBox(height: 20),
                           // Etiquetas de tipos
@@ -160,7 +177,12 @@ class PokemonDetailScreen extends ConsumerWidget {
                           // Descripción del Pokémon
                           Text(
                             detail.description,
-                            style: AppTextStyles.textPoppins14Regular424242,
+                            style: AppTextStyles.textPoppins14Regular424242
+                                .copyWith(
+                                  color: isDark
+                                      ? AppColors.greyE0E0E0
+                                      : AppColors.grey424242,
+                                ),
                             textAlign: TextAlign.justify,
                           ),
                           SizedBox(height: 20),
@@ -218,7 +240,12 @@ class PokemonDetailScreen extends ConsumerWidget {
                           // Sección de debilidades
                           Text(
                             l10n.pokedexWeaknesses,
-                            style: AppTextStyles.textPoppins18Medium121212,
+                            style: AppTextStyles.textPoppins18Medium121212
+                                .copyWith(
+                                  color: isDark
+                                      ? AppColors.whiteFAFAFA
+                                      : AppColors.grey121212,
+                                ),
                           ),
                           const SizedBox(height: 16),
                           // Tipos de debilidades del Pokémon
@@ -232,7 +259,7 @@ class PokemonDetailScreen extends ConsumerWidget {
                                 )
                                 .toList(),
                           ),
-                          const SizedBox(height: 25),
+                          const SizedBox(height: 40),
                         ],
                       ),
                     ),

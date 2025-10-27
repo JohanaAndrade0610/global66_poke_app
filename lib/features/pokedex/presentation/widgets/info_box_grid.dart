@@ -6,9 +6,11 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/theme_mode_notifier.dart';
 
 class InfoBoxData {
   // URL del icono de la caja de información.
@@ -25,7 +27,7 @@ class InfoBoxData {
   });
 }
 
-class InfoBoxGrid extends StatelessWidget {
+class InfoBoxGrid extends ConsumerWidget {
   // Lista de elementos a mostrar en el grid.
   final List<InfoBoxData> items;
   // Número de columnas en el grid.
@@ -41,7 +43,13 @@ class InfoBoxGrid extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Notificador de modo de tema de la aplicación
+    final themeModeNotifier = ref.watch(themeModeNotifierProvider);
+    // Estado actual del modo de tema
+    final themeMode = themeModeNotifier.value;
+    // Verificar si el tema es oscuro
+    final isDark = themeMode == ThemeMode.dark;
     // Filas del grid
     List<Widget> rows = [];
     for (int i = 0; i < items.length; i += columns) {
@@ -63,14 +71,22 @@ class InfoBoxGrid extends StatelessWidget {
                             items[i + j].svgAsset,
                             width: 12,
                             height: 12,
-                            color: AppColors.grey424242,
+
+                            color: isDark
+                                ? AppColors.greyE0E0E0
+                                : AppColors.grey424242,
                           ),
                           const SizedBox(width: 6),
                           Flexible(
                             // Título de la caja de información
                             child: Text(
                               items[i + j].title.toUpperCase(),
-                              style: AppTextStyles.textPoppins12Medium424242,
+                              style: AppTextStyles.textPoppins12Medium424242
+                                  .copyWith(
+                                    color: isDark
+                                        ? AppColors.greyE0E0E0
+                                        : AppColors.grey424242,
+                                  ),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
@@ -85,13 +101,18 @@ class InfoBoxGrid extends StatelessWidget {
                           horizontal: 12,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: Colors.transparent,
                           borderRadius: BorderRadius.circular(15),
                           border: Border.all(color: AppColors.greyE0E0E0),
                         ),
                         child: Text(
                           items[i + j].value,
-                          style: AppTextStyles.textPoppins18Medium121212,
+                          style: AppTextStyles.textPoppins18Medium121212
+                              .copyWith(
+                                color: isDark
+                                    ? AppColors.whiteFAFAFA
+                                    : AppColors.grey121212,
+                              ),
                           textAlign: TextAlign.center,
                           overflow: TextOverflow.ellipsis,
                         ),

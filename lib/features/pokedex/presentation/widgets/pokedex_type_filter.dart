@@ -90,7 +90,7 @@ class _PokedexTypeFilterState extends State<PokedexTypeFilter> {
         ),
         child: Icon(
           Icons.filter_list,
-          color: isDarkMode ? AppColors.whiteFAFAFA : AppColors.grey757575,
+          color: isDarkMode ? AppColors.whiteFAFAFA : AppColors.grey9E9E9E,
           size: 24,
         ),
       ),

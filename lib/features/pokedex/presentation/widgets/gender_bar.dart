@@ -6,11 +6,13 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/theme_mode_notifier.dart';
 import '../../../../l10n/app_localizations.dart';
 
-class GenderBar extends StatelessWidget {
+class GenderBar extends ConsumerWidget {
   // Porcentaje de género masculino.
   final double maleRate;
   // Porcentaje de género femenino.
@@ -20,7 +22,7 @@ class GenderBar extends StatelessWidget {
     : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // Internacionalización de los textos.
     final l10n = AppLocalizations.of(context)!;
     // Sumatoria de los porcentajes para calcular proporciones.
@@ -29,6 +31,12 @@ class GenderBar extends StatelessWidget {
     final malePercent = total > 0 ? maleRate / total : 0.0;
     // Cálculo del porcentaje de género femenino.
     final femalePercent = total > 0 ? femaleRate / total : 0.0;
+    // Notificador de modo de tema de la aplicación
+    final themeModeNotifier = ref.watch(themeModeNotifierProvider);
+    // Estado actual del modo de tema
+    final themeMode = themeModeNotifier.value;
+    // Verificar si el tema es oscuro
+    final isDark = themeMode == ThemeMode.dark;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -36,7 +44,9 @@ class GenderBar extends StatelessWidget {
         Text(
           l10n.pokedexGender,
           textAlign: TextAlign.center,
-          style: AppTextStyles.textPoppins12Medium424242,
+          style: AppTextStyles.textPoppins12Medium424242.copyWith(
+            color: isDark ? AppColors.greyE0E0E0 : AppColors.grey424242,
+          ),
         ),
         const SizedBox(height: 8),
         Row(
@@ -82,13 +92,15 @@ class GenderBar extends StatelessWidget {
                   'assets/pokedex/details/masculine_gender_icon.svg',
                   width: 12,
                   height: 12,
-                  color: AppColors.grey424242,
+                  color: isDark ? AppColors.greyE0E0E0 : AppColors.grey424242,
                 ),
                 const SizedBox(width: 4),
                 // Porcentaje calculado del género masculino.
                 Text(
                   '${maleRate.toStringAsFixed(1).replaceAll('.', ',')}%',
-                  style: AppTextStyles.textPoppins12Medium424242,
+                  style: AppTextStyles.textPoppins12Medium424242.copyWith(
+                    color: isDark ? AppColors.greyE0E0E0 : AppColors.grey424242,
+                  ),
                 ),
               ],
             ),
@@ -99,13 +111,15 @@ class GenderBar extends StatelessWidget {
                   'assets/pokedex/details/female_gender_icon.svg',
                   width: 12,
                   height: 12,
-                  color: AppColors.grey424242,
+                  color: isDark ? AppColors.greyE0E0E0 : AppColors.grey424242,
                 ),
                 const SizedBox(width: 4),
                 // Porcentaje calculado del género femenino.
                 Text(
                   '${femaleRate.toStringAsFixed(1).replaceAll('.', ',')}%',
-                  style: AppTextStyles.textPoppins12Medium424242,
+                  style: AppTextStyles.textPoppins12Medium424242.copyWith(
+                    color: isDark ? AppColors.greyE0E0E0 : AppColors.grey424242,
+                  ),
                 ),
               ],
             ),

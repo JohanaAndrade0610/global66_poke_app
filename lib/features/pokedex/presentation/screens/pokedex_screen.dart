@@ -10,6 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/widgets/custom_bottom_navigation_bar.dart';
 import '../../../../core/widgets/custom_information.dart';
+import '../../../../core/widgets/custom_loading.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../onboarding/presentation/provider/onboarding_provider.dart';
@@ -26,6 +27,11 @@ class PokedexScreen extends ConsumerStatefulWidget {
 }
 
 class _PokedexScreenState extends ConsumerState<PokedexScreen> {
+  // Flag local para mostrar el overlay de carga inmediatamente al tocar "Reintentar"
+  bool _localRetryLoading = false;
+  // Último contenido estable (loaded o error) para mantenerlo visible bajo el overlay
+  Widget? _lastStableContent;
+
   /*
   * @method initState
   * @description Inicializa el estado y limpia el loading de onboarding.
@@ -45,8 +51,116 @@ class _PokedexScreenState extends ConsumerState<PokedexScreen> {
   Widget build(BuildContext context) {
     // Obtener el estado actual de la pantalla Pokédex
     final state = ref.watch(pokedexNotifierProvider);
+    // Flag para controlar el overlay de carga
+    final isLoading = state.maybeWhen(loading: () => true, orElse: () => false);
     // Internacionalización de los textos
     final l10n = AppLocalizations.of(context)!;
+    Widget content = state.when(
+      // Estado de carga
+      loading: () => _lastStableContent ?? Container(),
+      // Estado con la lista de Pokémon precargada
+      loaded: (pokemons, searchQuery, selectedTypes) {
+        final widget = Column(
+          children: [
+            SizedBox(height: 10),
+            // Widget para filtrar en la lista de Pokémon
+            SafeArea(
+              bottom: false,
+              child: PokedexFilters(
+                searchQuery: searchQuery,
+                selectedTypes: selectedTypes,
+                onSearchChanged: (query) {
+                  ref
+                      .read(pokedexNotifierProvider.notifier)
+                      .updateSearchQuery(query);
+                },
+                onTypesSelected: (types) {
+                  ref
+                      .read(pokedexNotifierProvider.notifier)
+                      .updateSelectedTypes(types);
+                },
+              ),
+            ),
+            // Mostrar cantidad de resultados y botón para limpiar los filtros activos
+            if (selectedTypes.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(left: 22, right: 22, bottom: 15),
+                child: Row(
+                  children: [
+                    Text(
+                      l10n.pokedexLabelFilter1,
+                      style: AppTextStyles.textPoppins12Regular9E9E9E,
+                    ),
+                    Text(
+                      pokemons.length.toString() + l10n.pokedexLabelFilter2,
+                      style: AppTextStyles.textPoppins12Bold9E9E9E,
+                    ),
+                    const SizedBox(width: 8),
+                    GestureDetector(
+                      onTap: () {
+                        ref
+                            .read(pokedexNotifierProvider.notifier)
+                            .updateSelectedTypes([]);
+                      },
+                      child: Text(
+                        l10n.pokedexClearFilters,
+                        style: AppTextStyles.textPoppins12Medium1E88E5Underline,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            // Lista de Pokémon
+            Expanded(
+              child: PokedexListView(
+                pokemons: pokemons,
+                onLoadingStart: () {
+                  if (!mounted) return;
+                  setState(() => _localRetryLoading = true);
+                },
+                onLoadingEnd: () {
+                  if (!mounted) return;
+                  setState(() => _localRetryLoading = false);
+                },
+              ),
+            ),
+          ],
+        );
+        _lastStableContent = widget;
+        return widget;
+      },
+      // Estado de error con mensaje descriptivo
+      error: (errorMessage) {
+        final widget = SafeArea(
+          // Widget de error personalizado
+          child: CustomInformation(
+            imagePath: 'assets/common/information/information_image.png',
+            title: l10n.onboardingInformationTitle,
+            description: l10n.onboardingInformationDescription,
+            showButton: true,
+            buttonText: l10n.onboardingInformationRetryButton,
+            onButtonTap: () {
+              // Mostrar el overlay inmediatamente mientras el provider entra en loading
+              setState(() {
+                _localRetryLoading = true;
+              });
+              ref
+                  .read(pokedexNotifierProvider.notifier)
+                  .fetchPokedexList()
+                  .whenComplete(() {
+                    if (!mounted) return;
+                    setState(() {
+                      _localRetryLoading = false;
+                    });
+                  });
+            },
+          ),
+        );
+        _lastStableContent = widget;
+        return widget;
+      },
+    );
+
     return Stack(
       children: [
         // Detectar toques fuera del TextField para ocultar el teclado
@@ -56,87 +170,7 @@ class _PokedexScreenState extends ConsumerState<PokedexScreen> {
             FocusScope.of(context).unfocus();
           },
           child: Scaffold(
-            body: state.when(
-              // Estado de carga de la pantalla
-              loading: () => const Center(child: CircularProgressIndicator()),
-              // Estado con la lista de Pokémon precargada
-              loaded: (pokemons, searchQuery, selectedTypes) => Column(
-                children: [
-                  SizedBox(height: 10),
-                  // Widget para filtrar en la lista de Pokémon
-                  SafeArea(
-                    bottom: false,
-                    child: PokedexFilters(
-                      searchQuery: searchQuery,
-                      selectedTypes: selectedTypes,
-                      onSearchChanged: (query) {
-                        ref
-                            .read(pokedexNotifierProvider.notifier)
-                            .updateSearchQuery(query);
-                      },
-                      onTypesSelected: (types) {
-                        ref
-                            .read(pokedexNotifierProvider.notifier)
-                            .updateSelectedTypes(types);
-                      },
-                    ),
-                  ),
-                  // Mostrar cantidad de resultados y botón para limpiar los filtros activos
-                  if (selectedTypes.isNotEmpty)
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 22,
-                        right: 22,
-                        bottom: 15,
-                      ),
-                      child: Row(
-                        children: [
-                          Text(
-                            l10n.pokedexLabelFilter1,
-                            style: AppTextStyles.textPoppins12Regular9E9E9E,
-                          ),
-                          Text(
-                            pokemons.length.toString() +
-                                l10n.pokedexLabelFilter2,
-                            style: AppTextStyles.textPoppins12Bold9E9E9E,
-                          ),
-                          const SizedBox(width: 8),
-                          GestureDetector(
-                            onTap: () {
-                              ref
-                                  .read(pokedexNotifierProvider.notifier)
-                                  .updateSelectedTypes([]);
-                            },
-                            child: Text(
-                              l10n.pokedexClearFilters,
-                              style: AppTextStyles
-                                  .textPoppins12Medium1E88E5Underline,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  // Lista de Pokémon
-                  Expanded(child: PokedexListView(pokemons: pokemons)),
-                ],
-              ),
-              // Estado de error con mensaje descriptivo
-              error: (errorMessage) => SafeArea(
-                // Widget de error personalizado
-                child: CustomInformation(
-                  imagePath: 'assets/common/information/information_image.png',
-                  title: l10n.onboardingInformationTitle,
-                  description: l10n.onboardingInformationDescription,
-                  showButton: true,
-                  buttonText: l10n.onboardingInformationRetryButton,
-                  onButtonTap: () {
-                    ref
-                        .read(pokedexNotifierProvider.notifier)
-                        .fetchPokedexList();
-                  },
-                ),
-              ),
-            ),
+            body: Stack(children: [Positioned.fill(child: content)]),
             // Footer generico de la aplicación
             bottomNavigationBar: CustomBottomNavigationBar(
               selectedIndex: 0,
@@ -154,6 +188,9 @@ class _PokedexScreenState extends ConsumerState<PokedexScreen> {
             ),
           ),
         ),
+        // Widget de carga generico de la aplicación
+        if (isLoading || _localRetryLoading)
+          const Positioned.fill(child: CustomLoading()),
       ],
     );
   }

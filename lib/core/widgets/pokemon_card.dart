@@ -6,13 +6,15 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../features/pokedex/domain/entities/pokedex_entity.dart';
+import '../theme_mode_notifier.dart';
 import 'pokemon_type_label.dart';
 import '../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 
-class PokemonCard extends StatelessWidget {
+class PokemonCard extends ConsumerWidget {
   // Información del Pokémon a mostrar
   final PokedexEntity pokemon;
   // Callback al tocar la card
@@ -34,13 +36,19 @@ class PokemonCard extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // Internationalización de los textos
     final l10n = AppLocalizations.of(context)!;
     // Tipo principal del Pokémon
     final primaryType = pokemon.types.first;
     // Color de fondo basado en el tipo principal
     final backgroundColor = PokemonTypeColors.getTypeColor(primaryType);
+    // Notificador de modo de tema de la aplicación
+    final themeModeNotifier = ref.watch(themeModeNotifierProvider);
+    // Estado actual del modo de tema
+    final themeMode = themeModeNotifier.value;
+    // Verificar si el tema es oscuro
+    final isDark = themeMode == ThemeMode.dark;
 
     return InkWell(
       onTap: onTap,
@@ -126,7 +134,12 @@ class PokemonCard extends StatelessWidget {
                         // ID del Pokémon
                         Text(
                           'N°${pokemon.id.toString().padLeft(4, '0')}',
-                          style: AppTextStyles.textPoppins12Semibold424242,
+                          style: AppTextStyles.textPoppins12Semibold424242
+                              .copyWith(
+                                color: isDark
+                                    ? AppColors.greyE0E0E0
+                                    : AppColors.grey424242,
+                              ),
                         ),
                         const SizedBox(height: 2),
                         // Nombre del Pokémon

@@ -31,7 +31,7 @@ class PokedexRemoteDatasource {
     * @returns Future<Map<String, dynamic>> Datos crudos del Pokémon.
     */
   Future<Map<String, dynamic>> fetchPokemonRaw(String nameOrUrl) async {
-    final url = nameOrUrl.startsWith('http')
+    final url = nameOrUrl.startsWith('https')
         ? nameOrUrl
         : '${AppConfig.pokeApiBaseUrl}/pokemon/$nameOrUrl';
     final response = await dio.get(url);
