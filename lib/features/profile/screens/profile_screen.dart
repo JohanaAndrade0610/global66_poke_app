@@ -15,6 +15,7 @@ import '../../../core/widgets/custom_app_bar.dart';
 import '../../../core/widgets/custom_bottom_navigation_bar.dart';
 import '../../../l10n/app_localizations.dart';
 import '../provider/profile_provider.dart';
+import '../widgets/rounded_selector.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -33,7 +34,6 @@ class ProfileScreen extends ConsumerWidget {
     final isDark = themeMode == ThemeMode.dark;
     // Internacionalización de los textos
     final l10n = AppLocalizations.of(context)!;
-
     // Lógica de la pantalla (provider)
     final logic = ref.read(profileLogicProvider);
 
@@ -60,11 +60,14 @@ class ProfileScreen extends ConsumerWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 12),
             // Nombre del usuario
             Text(
               l10n.profileGuest,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                decoration: TextDecoration.underline,
+              ),
             ),
             const SizedBox(height: 24),
             // Preferencias de usuario
@@ -72,7 +75,8 @@ class ProfileScreen extends ConsumerWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 l10n.profilePreferences,
-                style: AppTextStyles.textPoppins15Medium424242Underline.copyWith(
+                style: AppTextStyles.textPoppins15Medium424242Underline
+                    .copyWith(
                       color: isDark
                           ? AppColors.whiteFAFAFA
                           : AppColors.grey424242,
@@ -87,34 +91,33 @@ class ProfileScreen extends ConsumerWidget {
                 const Icon(Icons.language),
                 const SizedBox(width: 12),
                 // Etiqueta "Idioma"
-                Text(l10n.profileLanguage, style: AppTextStyles.textPoppins14Regular424242.copyWith(
-                      color: isDark
-                          ? AppColors.whiteFAFAFA
-                          : AppColors.grey424242,
-                    ),),
+                Text(
+                  l10n.profileLanguage,
+                  style: AppTextStyles.textPoppins14Regular424242.copyWith(
+                    color: isDark
+                        ? AppColors.whiteFAFAFA
+                        : AppColors.grey424242,
+                  ),
+                ),
                 const Spacer(),
-                // Botones de selección de idioma
-                ToggleButtons(
-                  isSelected: [
-                    locale == const Locale('es'),
-                    locale == const Locale('en'),
-                  ],
-                  onPressed: (index) {
-                    final newLocale = index == 0
-                        ? const Locale('es')
-                        : const Locale('en');
-                    logic.setLocale(newLocale);
-                  },
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 12),
-                      child: Text(l10n.profileSpanish),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 12),
-                      child: Text(l10n.profileEnglish),
-                    ),
-                  ],
+                // Selector de idiomas
+                SizedBox(
+                  width: 100,
+                  child: RoundedSelector<Locale>(
+                    options: const [Locale('es'), Locale('en')],
+                    selected: locale,
+                    onChanged: (newLocale) => logic.setLocale(newLocale),
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Text('ES'),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Text('EN'),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -123,21 +126,36 @@ class ProfileScreen extends ConsumerWidget {
             Row(
               children: [
                 // Icono de tema
-                const Icon(Icons.nightlight_round),
+                const Icon(Icons.contrast_outlined),
                 const SizedBox(width: 12),
                 // Etiqueta "Tema"
-                Text(l10n.profileTheme, style: AppTextStyles.textPoppins14Regular424242.copyWith(
-                      color: isDark
-                          ? AppColors.whiteFAFAFA
-                          : AppColors.grey424242,
-                    ),),
+                Text(
+                  l10n.profileTheme,
+                  style: AppTextStyles.textPoppins14Regular424242.copyWith(
+                    color: isDark
+                        ? AppColors.whiteFAFAFA
+                        : AppColors.grey424242,
+                  ),
+                ),
                 const Spacer(),
-                // Switch para cambiar entre modo claro y oscuro
-                Switch(
-                  value: isDark,
-                  onChanged: (value) {
-                    logic.toggleDark(value);
-                  },
+                // Selector de tema
+                SizedBox(
+                  width: 100,
+                  child: RoundedSelector<ThemeMode>(
+                    options: const [ThemeMode.light, ThemeMode.dark],
+                    selected: themeMode,
+                    onChanged: (mode) => logic.setThemeMode(mode),
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Icon(Icons.light_mode),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Icon(Icons.dark_mode),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -147,35 +165,50 @@ class ProfileScreen extends ConsumerWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 l10n.profileSupport,
-                style:  AppTextStyles.textPoppins15Medium424242Underline.copyWith(
+                style: AppTextStyles.textPoppins15Medium424242Underline
+                    .copyWith(
                       color: isDark
                           ? AppColors.whiteFAFAFA
                           : AppColors.grey424242,
                     ),
               ),
             ),
-            const SizedBox(height: 16),
-            // Icono de whatsApp
-            // WhatsApp
-            ListTile(
-              leading: Image.asset(
-                'assets/profile/whatsapp_icon.png', // Asegúrate de tener este PNG en tus assets
-                height: 32,
-                width: 32,
-              ),
-              title: Text(l10n.profileConnectWhatsapp, style: AppTextStyles.textPoppins14Regular424242.copyWith(
-                      color: isDark
-                          ? AppColors.whiteFAFAFA
-                          : AppColors.grey424242,
-                    ),),
-              onTap: () async {
-                final ok = await logic.openWhatsApp();
-                if (!ok) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('No se pudo abrir WhatsApp')),
-                  );
-                }
-              },
+            const SizedBox(height: 24),
+            // Icono de WhatsApp y comunicación
+            Row(
+              children: [
+                GestureDetector(
+                  onTap: () async {
+                    final ok = await logic.openWhatsApp();
+                    if (!ok) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('No se pudo abrir WhatsApp'),
+                        ),
+                      );
+                    }
+                  },
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        'assets/profile/whatsapp_icon.png',
+                        height: 28,
+                        width: 28,
+                      ),
+                      const SizedBox(width: 12),
+                      Text(
+                        l10n.profileConnectWhatsapp,
+                        style: AppTextStyles.textPoppins14Regular424242
+                            .copyWith(
+                              color: isDark
+                                  ? AppColors.whiteFAFAFA
+                                  : AppColors.grey424242,
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ],
         ),

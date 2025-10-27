@@ -443,18 +443,6 @@ abstract class AppLocalizations {
   /// **'Language'**
   String get profileLanguage;
 
-  /// No description provided for @profileSpanish.
-  ///
-  /// In en, this message translates to:
-  /// **'Spanish'**
-  String get profileSpanish;
-
-  /// No description provided for @profileEnglish.
-  ///
-  /// In en, this message translates to:
-  /// **'English'**
-  String get profileEnglish;
-
   /// No description provided for @profileTheme.
   ///
   /// In en, this message translates to:

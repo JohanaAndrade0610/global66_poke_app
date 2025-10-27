@@ -183,12 +183,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileLanguage => 'Language';
 
   @override
-  String get profileSpanish => 'Spanish';
-
-  @override
-  String get profileEnglish => 'English';
-
-  @override
   String get profileTheme => 'Theme';
 
   @override

@@ -183,19 +183,13 @@ class AppLocalizationsEs extends AppLocalizations {
   String get profileLanguage => 'Idioma';
 
   @override
-  String get profileSpanish => 'Español';
-
-  @override
-  String get profileEnglish => 'Inglés';
-
-  @override
   String get profileTheme => 'Tema';
 
   @override
   String get profileSupport => 'Soporte o ayuda';
 
   @override
-  String get profileConnectWhatsapp => 'Contectar por WhatsApp';
+  String get profileConnectWhatsapp => 'Contactar por WhatsApp';
 
   @override
   String get regionsTitle => '¡Muy pronto disponible!';

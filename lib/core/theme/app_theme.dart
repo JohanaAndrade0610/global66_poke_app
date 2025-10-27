@@ -30,7 +30,9 @@ class AppColors {
   // Tonos grises y negros
   static const Color greyE0E0E0 = Color(0xFFE0E0E0);
   static const Color greyEEEEEE = Color(0xFFEEEEEE);
+  static const Color greyBDBDBD = Color(0xFFBDBDBD);
   static const Color grey9E9E9E = Color(0xFF9E9E9E);
+  static const Color grey616161 = Color(0xFF616161);
   static const Color grey121212 = Color(0xFF121212);
   static const Color grey424242 = Color(0xFF424242);
   static const Color grey333333 = Color(0xFF333333);
