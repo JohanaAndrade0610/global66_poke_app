@@ -29,8 +29,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     // Fondo del footer
     final Color backgroundColor = isDark
-        ? const Color(0xFF23273A)
-        : const Color(0xFFFAFAFA);
+        ? AppColors.blue23273A
+        : AppColors.whiteFAFAFA;
     // Color para íconos y texto no seleccionados
     final Color unselectedColor = isDark
         ? AppColors.whiteFAFAFA

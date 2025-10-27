@@ -70,8 +70,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           }
         });
         return Scaffold(
-          // Fondo blanco para la pantalla de onboarding
-          backgroundColor: Colors.white,
+          // Fondo por defecto del tema (claro/oscuro)
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           body: Stack(
             children: [
               SafeArea(

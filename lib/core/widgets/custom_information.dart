@@ -37,7 +37,7 @@ class CustomInformation extends StatelessWidget {
         : AppTextStyles.textPoppins20Semibold333333;
     final descriptionStyle = isDark
         ? AppTextStyles.textPoppins14Regular4D4D4D.copyWith(
-            color: AppColors.whiteFAFAFA,
+            color: AppColors.greyE0E0E0,
           )
         : AppTextStyles.textPoppins14Regular4D4D4D;
     return Padding(

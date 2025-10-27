@@ -64,7 +64,7 @@ class RegionsScreen extends StatelessWidget {
                     l10n.regionsDescription,
                     style: AppTextStyles.textPoppins14Regular4D4D4D.copyWith(
                       color: isDarkMode
-                          ? AppColors.whiteFAFAFA
+                          ? AppColors.greyE0E0E0
                           : AppColors.grey4D4D4D,
                     ),
                     textAlign: TextAlign.center,

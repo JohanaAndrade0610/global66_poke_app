@@ -25,6 +25,8 @@ class OnboardingPageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Verificar si el tema es oscuro
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: Column(
@@ -47,14 +49,18 @@ class OnboardingPageWidget extends StatelessWidget {
           Text(
             title,
             textAlign: TextAlign.center,
-            style: AppTextStyles.textPoppins26Medium121212,
+            style: AppTextStyles.textPoppins26Medium121212.copyWith(
+              color: isDarkMode ? AppColors.whiteFAFAFA : AppColors.grey121212,
+            ),
           ),
           const SizedBox(height: 20),
           // Descripción de la página
           Text(
             description,
             textAlign: TextAlign.center,
-            style: AppTextStyles.textPoppins14Regular424242,
+            style: AppTextStyles.textPoppins14Regular424242.copyWith(
+              color: isDarkMode ? AppColors.greyE0E0E0 : AppColors.grey424242,
+            ),
           ),
           const SizedBox(height: 14),
         ],

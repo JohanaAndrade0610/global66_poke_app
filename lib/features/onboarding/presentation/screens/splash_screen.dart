@@ -121,8 +121,8 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
     });
 
     return Scaffold(
-      // Fondo blanco para el splash
-      backgroundColor: Colors.white,
+      // Fondo por defecto del tema (claro/oscuro)
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

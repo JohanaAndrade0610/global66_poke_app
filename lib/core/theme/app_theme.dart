@@ -17,6 +17,7 @@ class AppColors {
   static const Color blue173EA5 = Color(0xFF173EA5);
   static const Color blue2551C3 = Color(0xFF2551C3);
   static const Color blue0D47A1 = Color(0xFF0D47A1);
+  static const Color blue23273A = Color(0xFF23273A);
 
   // Tonos rojizos
   static const Color redCD3131 = Color(0xFFCD3131);
@@ -272,6 +273,6 @@ class AppTheme {
     textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme),
     brightness: Brightness.dark,
     primaryColor: AppColors.blue1E88E5,
-    scaffoldBackgroundColor: AppColors.grey292A36,
+    scaffoldBackgroundColor: AppColors.blue23273A,
   );
 }
