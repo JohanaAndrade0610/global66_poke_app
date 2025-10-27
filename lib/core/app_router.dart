@@ -13,7 +13,7 @@ import '../features/onboarding/presentation/screens/onboarding_screen.dart';
 import '../features/pokedex/presentation/screens/pokedex_screen.dart';
 import '../features/pokedex/presentation/screens/pokemon_detail_screen.dart';
 import '../features/regions/presentation/screens/regions_screen.dart';
-import '../features/profile/profile_screen.dart';
+import '../features/profile/screens/profile_screen.dart';
 
 class AppRouter {
   AppRouter._();

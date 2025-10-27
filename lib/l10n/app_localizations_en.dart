@@ -102,6 +102,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pokedexClearFilters => 'Clear filter';
 
   @override
+  String get pokedexCategory => 'Category';
+
+  @override
+  String get pokedexAbility => 'Ability';
+
+  @override
+  String get pokedexWeight => 'Weight';
+
+  @override
+  String get pokedexHeight => 'Height';
+
+  @override
+  String get pokedexGender => 'GENDER';
+
+  @override
+  String get pokedexWeaknesses => 'Weaknesses';
+
+  @override
   String get pokemonTypeBug => 'Bug';
 
   @override
@@ -159,6 +177,27 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileGuest => 'Guest';
 
   @override
+  String get profilePreferences => 'Preferences';
+
+  @override
+  String get profileLanguage => 'Language';
+
+  @override
+  String get profileSpanish => 'Spanish';
+
+  @override
+  String get profileEnglish => 'English';
+
+  @override
+  String get profileTheme => 'Theme';
+
+  @override
+  String get profileSupport => 'Support or help';
+
+  @override
+  String get profileConnectWhatsapp => 'Contact via WhatsApp';
+
+  @override
   String get regionsTitle => 'Coming soon!';
 
   @override
@@ -166,22 +205,4 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get splashText => 'For';
-
-  @override
-  String get pokedexCategory => 'Category';
-
-  @override
-  String get pokedexAbility => 'Ability';
-
-  @override
-  String get pokedexWeight => 'Weight';
-
-  @override
-  String get pokedexHeight => 'Height';
-
-  @override
-  String get pokedexGender => 'GENDER';
-
-  @override
-  String get pokedexWeaknesses => 'Weaknesses';
 }

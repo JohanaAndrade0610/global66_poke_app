@@ -157,7 +157,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               ),
               if (onboardingState.loading)
-                Positioned.fill(child: IgnorePointer(child: CustomLoading())),
+                Positioned.fill(
+                  child: AbsorbPointer(
+                    absorbing: true,
+                    child: const CustomLoading(),
+                  ),
+                ),
             ],
           ),
         );

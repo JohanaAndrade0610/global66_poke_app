@@ -118,12 +118,10 @@ class CustomBottomNavigationBar extends StatelessWidget {
                           items[i].label,
                           style: isSelected
                               ? AppTextStyles.textPoppinsBold0D47A1.copyWith(
-                                  fontSize: 12,
                                   color: selectedColor,
                                 )
                               : AppTextStyles.textPoppins14Medium424242
                                     .copyWith(
-                                      fontSize: 12,
                                       color: unselectedColor,
                                     ),
                           overflow: TextOverflow.ellipsis,

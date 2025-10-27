@@ -281,6 +281,42 @@ abstract class AppLocalizations {
   /// **'Clear filter'**
   String get pokedexClearFilters;
 
+  /// No description provided for @pokedexCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get pokedexCategory;
+
+  /// No description provided for @pokedexAbility.
+  ///
+  /// In en, this message translates to:
+  /// **'Ability'**
+  String get pokedexAbility;
+
+  /// No description provided for @pokedexWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight'**
+  String get pokedexWeight;
+
+  /// No description provided for @pokedexHeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Height'**
+  String get pokedexHeight;
+
+  /// No description provided for @pokedexGender.
+  ///
+  /// In en, this message translates to:
+  /// **'GENDER'**
+  String get pokedexGender;
+
+  /// No description provided for @pokedexWeaknesses.
+  ///
+  /// In en, this message translates to:
+  /// **'Weaknesses'**
+  String get pokedexWeaknesses;
+
   /// No description provided for @pokemonTypeBug.
   ///
   /// In en, this message translates to:
@@ -395,6 +431,48 @@ abstract class AppLocalizations {
   /// **'Guest'**
   String get profileGuest;
 
+  /// No description provided for @profilePreferences.
+  ///
+  /// In en, this message translates to:
+  /// **'Preferences'**
+  String get profilePreferences;
+
+  /// No description provided for @profileLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get profileLanguage;
+
+  /// No description provided for @profileSpanish.
+  ///
+  /// In en, this message translates to:
+  /// **'Spanish'**
+  String get profileSpanish;
+
+  /// No description provided for @profileEnglish.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get profileEnglish;
+
+  /// No description provided for @profileTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get profileTheme;
+
+  /// No description provided for @profileSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Support or help'**
+  String get profileSupport;
+
+  /// No description provided for @profileConnectWhatsapp.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact via WhatsApp'**
+  String get profileConnectWhatsapp;
+
   /// No description provided for @regionsTitle.
   ///
   /// In en, this message translates to:
@@ -412,42 +490,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'For'**
   String get splashText;
-
-  /// No description provided for @pokedexCategory.
-  ///
-  /// In en, this message translates to:
-  /// **'Category'**
-  String get pokedexCategory;
-
-  /// No description provided for @pokedexAbility.
-  ///
-  /// In en, this message translates to:
-  /// **'Ability'**
-  String get pokedexAbility;
-
-  /// No description provided for @pokedexWeight.
-  ///
-  /// In en, this message translates to:
-  /// **'Weight'**
-  String get pokedexWeight;
-
-  /// No description provided for @pokedexHeight.
-  ///
-  /// In en, this message translates to:
-  /// **'Height'**
-  String get pokedexHeight;
-
-  /// No description provided for @pokedexGender.
-  ///
-  /// In en, this message translates to:
-  /// **'GENDER'**
-  String get pokedexGender;
-
-  /// No description provided for @pokedexWeaknesses.
-  ///
-  /// In en, this message translates to:
-  /// **'Weaknesses'**
-  String get pokedexWeaknesses;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

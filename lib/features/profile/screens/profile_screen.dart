@@ -7,14 +7,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:global66_poke_app/core/theme/app_theme.dart';
 import 'package:go_router/go_router.dart';
-import '../../core/locale_notifier.dart';
-import '../../core/theme_mode_notifier.dart';
-import '../../core/config.dart';
-import '../../core/widgets/custom_app_bar.dart';
-import '../../core/widgets/custom_bottom_navigation_bar.dart';
-import '../../l10n/app_localizations.dart';
+import '../../../core/locale_notifier.dart';
+import '../../../core/theme_mode_notifier.dart';
+import '../../../core/widgets/custom_app_bar.dart';
+import '../../../core/widgets/custom_bottom_navigation_bar.dart';
+import '../../../l10n/app_localizations.dart';
+import '../provider/profile_provider.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -34,18 +34,8 @@ class ProfileScreen extends ConsumerWidget {
     // Internacionalización de los textos
     final l10n = AppLocalizations.of(context)!;
 
-    /*
-    * @method launchWhatsApp
-    * @description Método encargado de abrir WhatsApp para contacto.
-    */
-    Future<void> launchWhatsApp() async {
-      final url = Uri.parse('https://wa.me/${AppConfig.whatsappNumber}');
-      if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('No se pudo abrir WhatsApp')),
-        );
-      }
-    }
+    // Lógica de la pantalla (provider)
+    final logic = ref.read(profileLogicProvider);
 
     return Scaffold(
       // Appbar generico de la aplicación
@@ -60,12 +50,10 @@ class ProfileScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(height: 16),
             // Logo PokéApp
             Center(
               child: SizedBox(
-                height: 100,
-                width: 100,
+                width: MediaQuery.of(context).size.width * 0.4,
                 child: Image.asset(
                   'assets/profile/pokeapp_logo.png', // Cambia la ruta si tienes el logo en otro asset
                   fit: BoxFit.contain,
@@ -74,17 +62,21 @@ class ProfileScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 12),
             // Nombre del usuario
-            const Text(
-              'Invitado',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            Text(
+              l10n.profileGuest,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 24),
             // Preferencias de usuario
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Preferencias',
-                style: Theme.of(context).textTheme.titleMedium,
+                l10n.profilePreferences,
+                style: AppTextStyles.textPoppins15Medium424242Underline.copyWith(
+                      color: isDark
+                          ? AppColors.whiteFAFAFA
+                          : AppColors.grey424242,
+                    ),
               ),
             ),
             const SizedBox(height: 16),
@@ -95,7 +87,11 @@ class ProfileScreen extends ConsumerWidget {
                 const Icon(Icons.language),
                 const SizedBox(width: 12),
                 // Etiqueta "Idioma"
-                const Text('Idioma'),
+                Text(l10n.profileLanguage, style: AppTextStyles.textPoppins14Regular424242.copyWith(
+                      color: isDark
+                          ? AppColors.whiteFAFAFA
+                          : AppColors.grey424242,
+                    ),),
                 const Spacer(),
                 // Botones de selección de idioma
                 ToggleButtons(
@@ -107,16 +103,16 @@ class ProfileScreen extends ConsumerWidget {
                     final newLocale = index == 0
                         ? const Locale('es')
                         : const Locale('en');
-                    localeNotifier.value = newLocale;
+                    logic.setLocale(newLocale);
                   },
-                  children: const [
+                  children: [
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 12),
-                      child: Text('Español'),
+                      child: Text(l10n.profileSpanish),
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 12),
-                      child: Text('English'),
+                      child: Text(l10n.profileEnglish),
                     ),
                   ],
                 ),
@@ -130,26 +126,32 @@ class ProfileScreen extends ConsumerWidget {
                 const Icon(Icons.nightlight_round),
                 const SizedBox(width: 12),
                 // Etiqueta "Tema"
-                const Text('Tema'),
+                Text(l10n.profileTheme, style: AppTextStyles.textPoppins14Regular424242.copyWith(
+                      color: isDark
+                          ? AppColors.whiteFAFAFA
+                          : AppColors.grey424242,
+                    ),),
                 const Spacer(),
                 // Switch para cambiar entre modo claro y oscuro
                 Switch(
                   value: isDark,
                   onChanged: (value) {
-                    themeModeNotifier.value = value
-                        ? ThemeMode.dark
-                        : ThemeMode.light;
+                    logic.toggleDark(value);
                   },
                 ),
               ],
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: 24),
             // Etiqueta de soporte o ayuda
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Soporte o ayuda',
-                style: Theme.of(context).textTheme.titleMedium,
+                l10n.profileSupport,
+                style:  AppTextStyles.textPoppins15Medium424242Underline.copyWith(
+                      color: isDark
+                          ? AppColors.whiteFAFAFA
+                          : AppColors.grey424242,
+                    ),
               ),
             ),
             const SizedBox(height: 16),
@@ -161,8 +163,19 @@ class ProfileScreen extends ConsumerWidget {
                 height: 32,
                 width: 32,
               ),
-              title: const Text('Contactar por WhatsApp'),
-              onTap: launchWhatsApp,
+              title: Text(l10n.profileConnectWhatsapp, style: AppTextStyles.textPoppins14Regular424242.copyWith(
+                      color: isDark
+                          ? AppColors.whiteFAFAFA
+                          : AppColors.grey424242,
+                    ),),
+              onTap: () async {
+                final ok = await logic.openWhatsApp();
+                if (!ok) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('No se pudo abrir WhatsApp')),
+                  );
+                }
+              },
             ),
           ],
         ),
