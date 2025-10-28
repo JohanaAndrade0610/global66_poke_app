@@ -133,11 +133,10 @@ class AppTextStyles {
     fontWeight: fontWeightSemiBold,
   );
 
-  static TextStyle textPoppins15Medium424242Underline = GoogleFonts.poppins(
+  static TextStyle textPoppins15Medium424242 = GoogleFonts.poppins(
     fontSize: 15,
     color: AppColors.grey424242,
     fontWeight: fontWeightMedium,
-    decoration: TextDecoration.underline,
   );
 
   static const TextStyle textPoppins14Medium8A000000 = TextStyle(
