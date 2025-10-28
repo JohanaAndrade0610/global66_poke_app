@@ -89,6 +89,7 @@ class RoundedSelector<T> extends StatelessWidget {
                       : AppColors.greyBDBDBD; // Opción no seleccionada
                   return Expanded(
                     child: GestureDetector(
+                      behavior: HitTestBehavior.opaque,
                       onTap: () => onChanged(options[i]),
                       child: Container(
                         height: _height,
@@ -96,12 +97,12 @@ class RoundedSelector<T> extends StatelessWidget {
                         // Iconos correspondientes
                         child: IconTheme(
                           data: IconThemeData(color: itemColor, size: 18),
+                          // Textos correspondientes
                           child: DefaultTextStyle(
-                            // Texto correspondientes
                             style: TextStyle(
                               color: itemColor,
                               fontWeight: FontWeight.bold,
-                              fontSize: 13,
+                              fontSize: 12,
                             ),
                             child: children[i],
                           ),

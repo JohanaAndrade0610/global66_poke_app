@@ -90,9 +90,6 @@ class PokemonDetailScreen extends ConsumerWidget {
       ),
       body: Column(
         children: [
-          // Semicírculo superior con color dinámico según el tipo del Pokémon
-          // y el logo del tipo con máscara de degradado
-          // No aplicamos padding superior para que el color también cubra la zona del AppBar
           SizedBox(
             height: semicircleHeight,
             child: Stack(
