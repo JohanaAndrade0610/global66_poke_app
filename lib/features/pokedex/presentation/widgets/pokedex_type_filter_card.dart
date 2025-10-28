@@ -39,6 +39,14 @@ class PokedexTypeFilterCard extends StatelessWidget {
   Widget build(BuildContext context) {
     // Detectar modo oscuro
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
+    // Ordenar tipos seleccionados
+    final selectedTypes = List<String>.from(tempSelectedTypes)..sort();
+    final unselectedTypes =
+        allTypes.where((type) => !tempSelectedTypes.contains(type)).toList()
+          ..sort();
+    final sortedTypes = [...selectedTypes, ...unselectedTypes];
+
     // Contenedor del card de tipos
     return Container(
       decoration: BoxDecoration(
@@ -58,7 +66,7 @@ class PokedexTypeFilterCard extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 12,
-                  vertical: 4,
+                  vertical: 2,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -88,70 +96,77 @@ class PokedexTypeFilterCard extends StatelessWidget {
             if (isTypeCardExpanded) ...[
               SizedBox(height: 12),
               const Divider(height: 1, color: AppColors.greyE0E0E0),
-              // Lista de tipos de Pokemon con checkboxes
+              // Lista de tipos de Pokemon
               Padding(
                 padding: const EdgeInsets.all(4),
-                child: Column(
-                  children: allTypes.map((type) {
-                    final isSelected = tempSelectedTypes.contains(type);
-                    final typeColor = PokemonTypeColors.getTypeColor(type);
-                    return InkWell(
-                      onTap: () {
-                        onToggleType(type);
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 8,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.transparent,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Row(
-                          children: [
-                            // Icono del tipo de Pokémon
-                            SvgPicture.asset(
-                              PokemonTypeColors.getTypeLogoPath(type),
-                              width: 24,
-                              height: 24,
-                              colorFilter: ColorFilter.mode(
-                                typeColor,
-                                BlendMode.srcIn,
-                              ),
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: sortedTypes.map((type) {
+                        final isSelected = tempSelectedTypes.contains(type);
+                        final typeColor = PokemonTypeColors.getTypeColor(type);
+                        return InkWell(
+                          onTap: () {
+                            onToggleType(type);
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 8,
                             ),
-                            const SizedBox(width: 12),
-                            // Nombre del tipo de Pokémon
-                            Expanded(
-                              child: Text(
-                                type_localization.getPokemonTypeTranslatedName(
-                                  type,
-                                  l10n,
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Row(
+                              children: [
+                                // Icono del tipo de Pokémon
+                                SvgPicture.asset(
+                                  PokemonTypeColors.getTypeLogoPath(type),
+                                  width: 24,
+                                  height: 24,
+                                  colorFilter: ColorFilter.mode(
+                                    typeColor,
+                                    BlendMode.srcIn,
+                                  ),
                                 ),
-                                style: AppTextStyles.textPoppins12Medium424242
-                                    .copyWith(
-                                      color: isDarkMode
-                                          ? AppColors.greyE0E0E0
-                                          : AppColors.grey424242,
-                                    ),
-                              ),
+                                const SizedBox(width: 12),
+                                // Nombre del tipo de Pokémon
+                                Expanded(
+                                  child: Text(
+                                    type_localization
+                                        .getPokemonTypeTranslatedName(
+                                          type,
+                                          l10n,
+                                        ),
+                                    style: AppTextStyles
+                                        .textPoppins12Medium424242
+                                        .copyWith(
+                                          color: isDarkMode
+                                              ? AppColors.greyE0E0E0
+                                              : AppColors.grey424242,
+                                        ),
+                                  ),
+                                ),
+                                // Checkbox para seleccionar/deseleccionar el tipo
+                                Checkbox(
+                                  value: isSelected,
+                                  onChanged: (bool? value) {
+                                    onToggleType(type);
+                                  },
+                                  activeColor: typeColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
+                                ),
+                              ],
                             ),
-                            // Checkbox para seleccionar/deseleccionar el tipo
-                            Checkbox(
-                              value: isSelected,
-                              onChanged: (bool? value) {
-                                onToggleType(type);
-                              },
-                              activeColor: typeColor,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }).toList(),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
                 ),
               ),
             ],

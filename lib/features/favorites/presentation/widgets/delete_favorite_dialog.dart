@@ -36,6 +36,8 @@ class DeleteFavoriteDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     // Internationalización de los textos
     final l10n = AppLocalizations.of(context)!;
+    // Detectar modo oscuro
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     // Nombre del Pokémon con la primera letra en mayúscula
     final capitalizedName = pokemonName.isNotEmpty
         ? '${pokemonName[0].toUpperCase()}${pokemonName.substring(1).toLowerCase()}'
@@ -47,7 +49,9 @@ class DeleteFavoriteDialog extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         side: BorderSide(color: AppColors.redCD3131.withOpacity(0.3), width: 2),
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: isDarkMode
+          ? AppColors.blue23273A
+          : AppColors.whiteFFFFFF,
       shadowColor: AppColors.redCD3131.withOpacity(0.5),
       elevation: 20,
       titlePadding: const EdgeInsets.fromLTRB(24, 24, 24, 16),
@@ -73,7 +77,9 @@ class DeleteFavoriteDialog extends StatelessWidget {
       // Texto para asegurar la eliminación del pokémon de favoritos
       content: Text(
         '${l10n.favoritesDeleteDialogContent} $capitalizedName?',
-        style: AppTextStyles.textPoppins12Medium424242,
+        style: AppTextStyles.textPoppins12Medium424242.copyWith(
+          color: isDarkMode ? AppColors.greyE0E0E0 : AppColors.grey424242,
+        ),
         textAlign: TextAlign.center,
       ),
       actionsAlignment: MainAxisAlignment.spaceEvenly,
