@@ -139,10 +139,9 @@ class PokedexRepositoryImpl implements PokedexRepository {
     final genera = speciesData['genera'] as List;
     if (genera.isNotEmpty) {
       return genera.firstWhere(
-            (g) => g['language']['name'] == 'es',
-            orElse: () => genera[0],
-          )['genus']
-          as String;
+        (g) => g['language']['name'] == 'es',
+        orElse: () => <String, Object>{'genus': ''},
+      )['genus'] as String;
     }
     return '';
   }
@@ -157,13 +156,11 @@ class PokedexRepositoryImpl implements PokedexRepository {
     if (entries.isNotEmpty) {
       final entry = entries.firstWhere(
         (e) => e['language']['name'] == 'es',
-        orElse: () => null,
+        orElse: () => <String, Object>{'flavor_text': ''},
       );
-      if (entry != null) {
-        return (entry['flavor_text'] as String)
-            .replaceAll('\n', ' ')
-            .replaceAll('\f', ' ');
-      }
+      return (entry['flavor_text'] as String)
+          .replaceAll('\n', ' ')
+          .replaceAll('\f', ' ');
     }
     return '';
   }
