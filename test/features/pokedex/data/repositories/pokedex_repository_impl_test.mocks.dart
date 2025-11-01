@@ -47,9 +47,15 @@ class MockPokedexRemoteDatasource extends _i1.Mock
           as _i2.Dio);
 
   @override
-  _i4.Future<List<Map<String, dynamic>>> fetchPokedexRawList() =>
+  _i4.Future<List<Map<String, dynamic>>> fetchPokedexRawList({
+    required int? limit,
+    required int? offset,
+  }) =>
       (super.noSuchMethod(
-            Invocation.method(#fetchPokedexRawList, []),
+            Invocation.method(#fetchPokedexRawList, [], {
+              #limit: limit,
+              #offset: offset,
+            }),
             returnValue: _i4.Future<List<Map<String, dynamic>>>.value(
               <Map<String, dynamic>>[],
             ),

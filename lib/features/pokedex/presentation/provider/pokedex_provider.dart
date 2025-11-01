@@ -10,6 +10,7 @@ import '../../domain/entities/pokedex_entity.dart';
 import 'pokedex_state.dart';
 import '../../domain/usecases/get_pokedex_list_usecase.dart';
 import '../../../../di/injection.dart';
+import '../../domain/pagination/pagination_policy.dart';
 
 part 'pokedex_provider.g.dart';
 
@@ -17,6 +18,12 @@ part 'pokedex_provider.g.dart';
 class PokedexNotifier extends _$PokedexNotifier {
   // Lista completa de Pokémon (sin filtrar)
   List<PokedexEntity> _allPokemons = [];
+  // Paginación de la lista de Pokémon
+  int _offset = 0;
+  // Indicador de carga
+  bool _isFetching = false;
+  // Indicador de si hay más Pokémon para cargar
+  bool _hasMore = true;
 
   /*
   * @method build
@@ -35,14 +42,51 @@ class PokedexNotifier extends _$PokedexNotifier {
   */
   Future<void> fetchPokedexList({bool rethrowOnError = false}) async {
     state = const PokedexState.loading();
+    _offset = 0;
+    _hasMore = true;
     try {
       final usecase = getIt<GetPokedexListUsecase>();
-      final pokemons = await usecase.call();
+      final pokemons = await usecase.call(offset: _offset);
       _allPokemons = pokemons;
+      _offset += pokemons.length;
+      final pageSize = getIt<PaginationPolicy>().pageSize;
+      _hasMore = pokemons.length == pageSize;
       state = PokedexState.loaded(pokemons: pokemons);
     } catch (e) {
       state = PokedexState.error(e.toString());
       if (rethrowOnError) rethrow;
+    }
+  }
+
+  /*
+  * @method fetchMorePokemons
+  * @description Carga incremental de más Pokémon
+  */
+  Future<void> fetchMorePokemons() async {
+    if (_isFetching || !_hasMore) return;
+    _isFetching = true;
+    try {
+      final usecase = getIt<GetPokedexListUsecase>();
+      final nextBatch = await usecase.call(offset: _offset);
+      _allPokemons = [..._allPokemons, ...nextBatch];
+      _offset += nextBatch.length;
+      final pageSize = getIt<PaginationPolicy>().pageSize;
+      _hasMore = nextBatch.length == pageSize;
+
+      state.whenOrNull(
+        loaded: (pokemons, searchQuery, selectedTypes) {
+          final filtered = _getFilteredPokemons(searchQuery, selectedTypes);
+          state = PokedexState.loaded(
+            pokemons: filtered,
+            searchQuery: searchQuery,
+            selectedTypes: selectedTypes,
+          );
+        },
+      );
+    } catch (e) {
+      state = PokedexState.error(e.toString());
+    } finally {
+      _isFetching = false;
     }
   }
 

@@ -18,8 +18,11 @@ class PokedexRemoteDatasource {
     * @description Obtiene la lista de Pokémon desde la API de Pokedex.
     * @returns Future<List<PokedexModel>> Lista de modelos de Pokedex.
     */
-  Future<List<Map<String, dynamic>>> fetchPokedexRawList() async {
-    final url = '${AppConfig.pokeApiBaseUrl}/pokemon';
+  Future<List<Map<String, dynamic>>> fetchPokedexRawList({
+    required int limit,
+    required int offset,
+  }) async {
+    final url = '${AppConfig.pokeApiBaseUrl}/pokemon?limit=$limit&offset=$offset';
     final response = await dio.get(url);
     final results = response.data['results'] as List;
     return results.cast<Map<String, dynamic>>();

@@ -11,6 +11,7 @@ import '../features/pokedex/data/datasource/pokedex_remote_datasource.dart';
 import '../features/pokedex/data/repositories/pokedex_repository_impl.dart';
 import '../features/pokedex/domain/repositories/pokedex_repository.dart';
 import '../features/pokedex/domain/usecases/get_pokedex_list_usecase.dart';
+import '../features/pokedex/domain/pagination/pagination_policy.dart';
 import '../features/favorites/data/datasource/favorites_local_datasource.dart';
 import '../features/favorites/data/repositories/favorites_repository_impl.dart';
 import '../features/favorites/domain/repositories/favorites_repository.dart';
@@ -36,9 +37,17 @@ void init() {
     () => PokedexRepositoryImpl(getIt<PokedexRemoteDatasource>()),
   );
 
+  // Política de paginación de la lista de Pokédex
+  getIt.registerLazySingleton<PaginationPolicy>(
+    () => const DefaultPaginationPolicy(pageSize: 20),
+  );
+
   // Caso de uso para obtener la lista de Pokedex
   getIt.registerLazySingleton<GetPokedexListUsecase>(
-    () => GetPokedexListUsecase(getIt<PokedexRepository>()),
+    () => GetPokedexListUsecase(
+      getIt<PokedexRepository>(),
+      paginationPolicy: getIt<PaginationPolicy>(),
+    ),
   );
 
   // Caso de uso para obtener los detalles de un Pokémon

@@ -14,7 +14,7 @@ abstract class PokedexRepository {
     * @description Obtiene la lista completa de la Pokédex.
     * @returns Future<List<PokedexEntity>> Lista de entidades de la Pokédex.
     */
-  Future<List<PokedexEntity>> getPokedexList();
+  Future<List<PokedexEntity>> getPokedexList({required int limit, required int offset});
 
   /*
     * @method getPokemonDetail

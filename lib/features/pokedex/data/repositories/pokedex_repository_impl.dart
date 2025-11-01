@@ -18,18 +18,23 @@ class PokedexRepositoryImpl implements PokedexRepository {
   /*
   * @method getPokedexList
   * @description Obtiene la lista de Pokémons desde la fuente de datos remota y la convierte en una lista de entidades Pokedex.
+  * @params int - limit Límite de Pokémons a obtener, int - offset Desplazamiento para la paginación.
   */
   @override
-  Future<List<PokedexEntity>> getPokedexList() async {
-    final rawList = await remoteDatasource.fetchPokedexRawList();
-    final List<PokedexEntity> pokemons = [];
-    for (var item in rawList) {
-      final detail = await remoteDatasource.fetchPokemonRaw(
-        item['url'] as String,
-      );
-      pokemons.add(_parsePokedexEntity(detail));
-    }
-    return pokemons;
+  Future<List<PokedexEntity>> getPokedexList({
+    required int limit,
+    required int offset,
+  }) async {
+    final rawList = await remoteDatasource.fetchPokedexRawList(
+      limit: limit,
+      offset: offset,
+    );
+    final details = await Future.wait(
+      rawList.map(
+        (item) => remoteDatasource.fetchPokemonRaw(item['url'] as String),
+      ),
+    );
+    return details.map(_parsePokedexEntity).toList();
   }
 
   /* @method _parsePokedexEntity
@@ -139,9 +144,10 @@ class PokedexRepositoryImpl implements PokedexRepository {
     final genera = speciesData['genera'] as List;
     if (genera.isNotEmpty) {
       return genera.firstWhere(
-        (g) => g['language']['name'] == 'es',
-        orElse: () => <String, Object>{'genus': ''},
-      )['genus'] as String;
+            (g) => g['language']['name'] == 'es',
+            orElse: () => <String, Object>{'genus': ''},
+          )['genus']
+          as String;
     }
     return '';
   }

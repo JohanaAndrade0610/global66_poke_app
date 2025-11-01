@@ -12,6 +12,7 @@ import '../../domain/entities/pokedex_entity.dart';
 import '../../../../core/widgets/pokemon_card.dart';
 import '../../../favorites/presentation/provider/favorites_provider.dart';
 import '../provider/pokemon_detail_provider.dart';
+import '../provider/pokedex_provider.dart';
 
 class PokedexListView extends ConsumerWidget {
   // Lista de Pokémon a mostrar
@@ -34,39 +35,51 @@ class PokedexListView extends ConsumerWidget {
     final favoritesNotifier = ref.watch(favoritesNotifierProvider.notifier);
     ref.watch(favoritesNotifierProvider);
 
-    return ListView.builder(
-      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
-      itemCount: pokemons.length,
-      itemBuilder: (context, index) {
-        final pokemon = pokemons[index];
-        // Verificar si el Pokémon está en favoritos
-        final isFavorite = favoritesNotifier.isFavorite(pokemon.id);
-        return GestureDetector(
-          onTap: () async {
-            // Muestra el loading en la ventana de lista de pokémon
-            onLoadingStart?.call();
-            try {
-              // Se dispara la petición de detalle de un Pokémon al hacer tap
-              await ref
-                  .read(pokemonDetailNotifierProvider.notifier)
-                  .fetchDetail(pokemon.name);
-              if (!context.mounted) return;
-              // Navegación a la pantalla de detalle
-              context.go('/pokemon/${pokemon.name}');
-            } finally {
-              onLoadingEnd?.call();
-            }
-          },
-          child: PokemonCard(
-            pokemon: pokemon,
-            isFavorite: isFavorite,
-            onFavoriteTap: () {
-              // Icono del estado de favorito
-              favoritesNotifier.toggleFavorite(pokemon);
-            },
-          ),
-        );
+    return NotificationListener<ScrollNotification>(
+      onNotification: (notification) {
+        if (notification is ScrollUpdateNotification) {
+          final metrics = notification.metrics;
+          // Disparar la carga de más Pokémon al llegar al final de la lista
+          if (metrics.pixels >= metrics.maxScrollExtent) {
+            ref.read(pokedexNotifierProvider.notifier).fetchMorePokemons();
+          }
+        }
+        return false;
       },
+      child: ListView.builder(
+        padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+        itemCount: pokemons.length,
+        itemBuilder: (context, index) {
+          final pokemon = pokemons[index];
+          // Verificar si el Pokémon está en favoritos
+          final isFavorite = favoritesNotifier.isFavorite(pokemon.id);
+          return GestureDetector(
+            onTap: () async {
+              // Muestra el loading en la ventana de lista de pokémon
+              onLoadingStart?.call();
+              try {
+                // Se dispara la petición de detalle de un Pokémon al hacer tap
+                await ref
+                    .read(pokemonDetailNotifierProvider.notifier)
+                    .fetchDetail(pokemon.name);
+                if (!context.mounted) return;
+                // Navegación a la pantalla de detalle
+                context.go('/pokemon/${pokemon.name}');
+              } finally {
+                onLoadingEnd?.call();
+              }
+            },
+            child: PokemonCard(
+              pokemon: pokemon,
+              isFavorite: isFavorite,
+              onFavoriteTap: () {
+                // Icono del estado de favorito
+                favoritesNotifier.toggleFavorite(pokemon);
+              },
+            ),
+          );
+        },
+      ),
     );
   }
 }

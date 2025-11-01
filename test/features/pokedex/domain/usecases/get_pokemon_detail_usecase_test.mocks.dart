@@ -42,9 +42,15 @@ class MockPokedexRepository extends _i1.Mock implements _i3.PokedexRepository {
   }
 
   @override
-  _i4.Future<List<_i5.PokedexEntity>> getPokedexList() =>
+  _i4.Future<List<_i5.PokedexEntity>> getPokedexList({
+    required int? limit,
+    required int? offset,
+  }) =>
       (super.noSuchMethod(
-            Invocation.method(#getPokedexList, []),
+            Invocation.method(#getPokedexList, [], {
+              #limit: limit,
+              #offset: offset,
+            }),
             returnValue: _i4.Future<List<_i5.PokedexEntity>>.value(
               <_i5.PokedexEntity>[],
             ),

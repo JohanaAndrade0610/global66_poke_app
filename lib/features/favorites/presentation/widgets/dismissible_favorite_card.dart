@@ -7,12 +7,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/pokemon_card.dart';
 import '../../../pokedex/domain/entities/pokedex_entity.dart';
 import 'delete_favorite_dialog.dart';
+import '../../../pokedex/presentation/provider/pokemon_detail_provider.dart';
 
-class DismissibleFavoriteCard extends StatelessWidget {
+class DismissibleFavoriteCard extends ConsumerWidget {
   // Pokémon representado en la tarjeta
   final PokedexEntity pokemon;
   // Callback para manejar la eliminación del pokemon de favoritos
@@ -38,7 +41,7 @@ class DismissibleFavoriteCard extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Dismissible(
       // Clave única para cada pokemon
       key: Key('favorite_${pokemon.id}'),
@@ -69,6 +72,14 @@ class DismissibleFavoriteCard extends StatelessWidget {
       child: PokemonCard(
         pokemon: pokemon,
         isFavorite: true,
+        onTap: () async {
+          // Navegación a la pantalla de detalles del Pokémon al hacer tap sobre el card
+          await ref
+              .read(pokemonDetailNotifierProvider.notifier)
+              .fetchDetail(pokemon.name);
+          if (!context.mounted) return;
+          context.go('/pokemon/${pokemon.name}');
+        },
         onFavoriteTap: () => _handleDelete(context),
       ),
     );

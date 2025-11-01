@@ -3,14 +3,16 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
 import 'package:global66_poke_app/features/pokedex/domain/entities/pokedex_entity.dart'
-    as _i5;
+    as _i6;
+import 'package:global66_poke_app/features/pokedex/domain/pagination/pagination_policy.dart'
+    as _i3;
 import 'package:global66_poke_app/features/pokedex/domain/repositories/pokedex_repository.dart'
     as _i2;
 import 'package:global66_poke_app/features/pokedex/domain/usecases/get_pokedex_list_usecase.dart'
-    as _i3;
+    as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -33,11 +35,17 @@ class _FakePokedexRepository_0 extends _i1.SmartFake
     : super(parent, parentInvocation);
 }
 
+class _FakePaginationPolicy_1 extends _i1.SmartFake
+    implements _i3.PaginationPolicy {
+  _FakePaginationPolicy_1(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
 /// A class which mocks [GetPokedexListUsecase].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGetPokedexListUsecase extends _i1.Mock
-    implements _i3.GetPokedexListUsecase {
+    implements _i4.GetPokedexListUsecase {
   MockGetPokedexListUsecase() {
     _i1.throwOnMissingStub(this);
   }
@@ -54,12 +62,23 @@ class MockGetPokedexListUsecase extends _i1.Mock
           as _i2.PokedexRepository);
 
   @override
-  _i4.Future<List<_i5.PokedexEntity>> call() =>
+  _i3.PaginationPolicy get paginationPolicy =>
       (super.noSuchMethod(
-            Invocation.method(#call, []),
-            returnValue: _i4.Future<List<_i5.PokedexEntity>>.value(
-              <_i5.PokedexEntity>[],
+            Invocation.getter(#paginationPolicy),
+            returnValue: _FakePaginationPolicy_1(
+              this,
+              Invocation.getter(#paginationPolicy),
             ),
           )
-          as _i4.Future<List<_i5.PokedexEntity>>);
+          as _i3.PaginationPolicy);
+
+  @override
+  _i5.Future<List<_i6.PokedexEntity>> call({int? limit, int? offset = 0}) =>
+      (super.noSuchMethod(
+            Invocation.method(#call, [], {#limit: limit, #offset: offset}),
+            returnValue: _i5.Future<List<_i6.PokedexEntity>>.value(
+              <_i6.PokedexEntity>[],
+            ),
+          )
+          as _i5.Future<List<_i6.PokedexEntity>>);
 }
