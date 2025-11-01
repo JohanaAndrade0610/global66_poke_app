@@ -1,5 +1,5 @@
 /*
- * @widget PokemonTypeLabel
+ * @widget CustomPokemonTypeLabel
  * @description Widget encargado de mostrar la etiqueta del tipo y debilidades del Pokémon.
  * @autor Angela Andrade
  * @version 1.0 24/10/2025
@@ -11,13 +11,13 @@ import '../../../features/pokedex/presentation/utils/pokemon_type_localization.d
 import '../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 
-class PokemonTypeLabel extends StatelessWidget {
+class CustomPokemonTypeLabel extends StatelessWidget {
   // Tipo o debilidad del Pokémon
   final String type;
   // Internacionalización del texto del tipo o debilidad
   final AppLocalizations l10n;
 
-  const PokemonTypeLabel({Key? key, required this.type, required this.l10n})
+  const CustomPokemonTypeLabel({Key? key, required this.type, required this.l10n})
     : super(key: key);
 
   @override

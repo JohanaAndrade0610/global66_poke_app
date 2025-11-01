@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import '../../../../../../core/theme/app_theme.dart';
-import '../../../../../../core/widgets/skeleton_shimmer.dart';
+import '../../../../../../core/widgets/custom_skeleton_shimmer.dart';
 
 class PokemonDetailInfoGridSkeleton extends StatelessWidget {
   // Número de columnas en la cuadrícula
@@ -81,7 +81,7 @@ class _InfoBoxSkeleton extends StatelessWidget {
         Row(
           children: [
             // Efecto cargando y widget del ícono
-            SkeletonShimmer(
+            CustomSkeletonShimmer(
               baseColor: base,
               highlightColor: highlight,
               child: Container(
@@ -92,7 +92,7 @@ class _InfoBoxSkeleton extends StatelessWidget {
             ),
             const SizedBox(width: 6),
             // Efecto cargando y titulo de la caja de información
-            SkeletonShimmer(
+            CustomSkeletonShimmer(
               baseColor: base,
               highlightColor: highlight,
               child: Container(
@@ -108,7 +108,7 @@ class _InfoBoxSkeleton extends StatelessWidget {
         ),
         const SizedBox(height: 6),
         // Efecto cargando y caja de información
-        SkeletonShimmer(
+        CustomSkeletonShimmer(
           baseColor: base,
           highlightColor: highlight,
           child: Container(

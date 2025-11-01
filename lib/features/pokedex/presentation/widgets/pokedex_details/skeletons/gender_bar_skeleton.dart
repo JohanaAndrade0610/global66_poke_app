@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import '../../../../../../core/theme/app_theme.dart';
-import '../../../../../../core/widgets/skeleton_shimmer.dart';
+import '../../../../../../core/widgets/custom_skeleton_shimmer.dart';
 
 class PokemonDetailGenderBarSkeleton extends StatelessWidget {
   const PokemonDetailGenderBarSkeleton({super.key});
@@ -32,7 +32,7 @@ class PokemonDetailGenderBarSkeleton extends StatelessWidget {
         children: [
           Center(
             // Efecto de cargando y título de la barra de género
-            child: SkeletonShimmer(
+            child: CustomSkeletonShimmer(
               baseColor: base,
               highlightColor: highlight,
               child: Container(
@@ -47,7 +47,7 @@ class PokemonDetailGenderBarSkeleton extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           // Efecto de cargando y barra de género
-          SkeletonShimmer(
+          CustomSkeletonShimmer(
             baseColor: base,
             highlightColor: highlight,
             child: Container(
@@ -65,7 +65,7 @@ class PokemonDetailGenderBarSkeleton extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  SkeletonShimmer(
+                  CustomSkeletonShimmer(
                     baseColor: base,
                     highlightColor: highlight,
                     child: Container(
@@ -78,7 +78,7 @@ class PokemonDetailGenderBarSkeleton extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 4),
-                  SkeletonShimmer(
+                  CustomSkeletonShimmer(
                     baseColor: base,
                     highlightColor: highlight,
                     child: Container(
@@ -95,7 +95,7 @@ class PokemonDetailGenderBarSkeleton extends StatelessWidget {
               // Efecto de cargando y porcentajes laterales
               Row(
                 children: [
-                  SkeletonShimmer(
+                  CustomSkeletonShimmer(
                     baseColor: base,
                     highlightColor: highlight,
                     child: Container(
@@ -108,7 +108,7 @@ class PokemonDetailGenderBarSkeleton extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 4),
-                  SkeletonShimmer(
+                  CustomSkeletonShimmer(
                     baseColor: base,
                     highlightColor: highlight,
                     child: Container(

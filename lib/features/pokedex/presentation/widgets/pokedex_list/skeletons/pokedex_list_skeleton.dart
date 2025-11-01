@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import '../../../../../../core/theme/app_theme.dart';
-import '../../../../../../core/widgets/skeleton_shimmer.dart';
+import '../../../../../../core/widgets/custom_skeleton_shimmer.dart';
 
 class PokedexListSkeleton extends StatelessWidget {
   // Cantidad de elementos en la lista
@@ -46,7 +46,7 @@ class _PokemonCardSkeleton extends StatelessWidget {
         : AppColors.greyEEEEEE;
 
     // Efecto de carga y card del Pokémon
-    return SkeletonShimmer(
+    return CustomSkeletonShimmer(
       baseColor: base,
       highlightColor: highlight,
       child: Container(

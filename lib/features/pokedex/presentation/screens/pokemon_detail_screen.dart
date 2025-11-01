@@ -12,7 +12,7 @@ import '../../../../core/theme/app_theme.dart';
 import '../../../../core/theme_mode_notifier.dart';
 import '../../../../core/widgets/custom_app_bar.dart';
 import '../../../../core/widgets/custom_bottom_navigation_bar.dart';
-import '../../../../core/widgets/pokemon_type_label.dart';
+import '../../../../core/widgets/custom_pokemon_type_label.dart';
 import '../widgets/pokedex_details/info_box_grid.dart';
 import '../widgets/pokedex_details/gender_bar.dart';
 import '../../../../l10n/app_localizations.dart';
@@ -162,7 +162,7 @@ class PokemonDetailScreen extends ConsumerWidget {
                             children: detail.types
                                 .map(
                                   (type) =>
-                                      PokemonTypeLabel(type: type, l10n: l10n),
+                                      CustomPokemonTypeLabel(type: type, l10n: l10n),
                                 )
                                 .toList(),
                           ),
@@ -248,7 +248,7 @@ class PokemonDetailScreen extends ConsumerWidget {
                             children: detail.weaknesses
                                 .map(
                                   (type) =>
-                                      PokemonTypeLabel(type: type, l10n: l10n),
+                                      CustomPokemonTypeLabel(type: type, l10n: l10n),
                                 )
                                 .toList(),
                           ),

@@ -1,5 +1,5 @@
 /*
- * @widget PokemonCard
+ * @widget CustomPokemonCard
  * @description Widget genérico para mostrar la información de un Pokémon en formato de card reutilizable.
  * @autor Angela Andrade
  * @version 1.0 24/10/2025 Creación y documentación de la clase.
@@ -10,11 +10,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../features/pokedex/domain/entities/pokedex_entity.dart';
 import '../theme_mode_notifier.dart';
-import 'pokemon_type_label.dart';
+import 'custom_pokemon_type_label.dart';
 import '../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 
-class PokemonCard extends ConsumerWidget {
+class CustomPokemonCard extends ConsumerWidget {
   // Información del Pokémon a mostrar
   final PokedexEntity pokemon;
   // Callback al tocar la card
@@ -26,7 +26,7 @@ class PokemonCard extends ConsumerWidget {
   // Indica si el Pokémon es favorito
   final bool isFavorite;
 
-  const PokemonCard({
+  const CustomPokemonCard({
     Key? key,
     required this.pokemon,
     this.onTap,
@@ -171,7 +171,7 @@ class PokemonCard extends ConsumerWidget {
                                     ? 6
                                     : 0,
                               ),
-                              child: PokemonTypeLabel(type: type, l10n: l10n),
+                              child: CustomPokemonTypeLabel(type: type, l10n: l10n),
                             );
                           }).toList(),
                         ),

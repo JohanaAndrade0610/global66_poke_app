@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import '../../../../../../core/theme/app_theme.dart';
-import '../../../../../../core/widgets/skeleton_shimmer.dart';
+import '../../../../../../core/widgets/custom_skeleton_shimmer.dart';
 
 class PokemonHeaderSkeleton extends StatelessWidget {
   // Altura del header
@@ -32,7 +32,7 @@ class PokemonHeaderSkeleton extends StatelessWidget {
       height: height,
       width: double.infinity,
       // Efecto de carga del header
-      child: SkeletonShimmer(
+      child: CustomSkeletonShimmer(
         baseColor: base,
         highlightColor: highlight,
         child: const DecoratedBox(

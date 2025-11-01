@@ -1,5 +1,5 @@
 /*
- * @widget SkeletonShimmer
+ * @widget CustomSkeletonShimmer
  * @description Aplica un efecto shimmer (barrido) sobre su child para simular carga.
  * @autor Angela Andrade
  * @version 1.0 01/11/2025 Documentación y creación de la clase.
@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 
-class SkeletonShimmer extends StatefulWidget {
+class CustomSkeletonShimmer extends StatefulWidget {
   // Child sobre el que se aplicará el efecto shimmer
   final Widget child;
   // Color base del skeleton
@@ -17,7 +17,7 @@ class SkeletonShimmer extends StatefulWidget {
   // Duración del ciclo de animación
   final Duration duration;
 
-  const SkeletonShimmer({
+  const CustomSkeletonShimmer({
     super.key,
     required this.child,
     required this.baseColor,
@@ -26,10 +26,10 @@ class SkeletonShimmer extends StatefulWidget {
   });
 
   @override
-  State<SkeletonShimmer> createState() => _SkeletonShimmerState();
+  State<CustomSkeletonShimmer> createState() => _CustomSkeletonShimmerState();
 }
 
-class _SkeletonShimmerState extends State<SkeletonShimmer>
+class _CustomSkeletonShimmerState extends State<CustomSkeletonShimmer>
     with SingleTickerProviderStateMixin {
   // Controlador de la animación
   late final AnimationController _controller;

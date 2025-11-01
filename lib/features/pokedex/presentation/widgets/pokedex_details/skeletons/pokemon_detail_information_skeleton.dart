@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import '../../../../../../core/theme/app_theme.dart';
-import '../../../../../../core/widgets/skeleton_shimmer.dart';
+import '../../../../../../core/widgets/custom_skeleton_shimmer.dart';
 
 class PokemonDetailInformationSkeleton extends StatelessWidget {
   // Espacio de superposición entre el header y la información
@@ -44,7 +44,7 @@ class PokemonDetailInformationSkeleton extends StatelessWidget {
             children: [
               SizedBox(height: overlapSpace),
               // Efecto de carga y nombre del Pokémon
-              SkeletonShimmer(
+              CustomSkeletonShimmer(
                 baseColor: base,
                 highlightColor: highlight,
                 child: Container(
@@ -58,7 +58,7 @@ class PokemonDetailInformationSkeleton extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               // Efecto de carga y número (ID) del Pokémon
-              SkeletonShimmer(
+              CustomSkeletonShimmer(
                 baseColor: base,
                 highlightColor: highlight,
                 child: Container(
@@ -106,7 +106,7 @@ class _TypeChipSkeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Efecto de carga y chip de tipo
-    return SkeletonShimmer(
+    return CustomSkeletonShimmer(
       baseColor: baseColor,
       highlightColor: highlightColor,
       child: Container(
@@ -152,7 +152,7 @@ class _PokemonDetailDescriptionAndDividerSkeleton extends StatelessWidget {
               builder: (context, constraints) {
                 final w = constraints.maxWidth * widths[i];
                 // Efecto de carga y línea de descripción
-                return SkeletonShimmer(
+                return CustomSkeletonShimmer(
                   baseColor: baseColor,
                   highlightColor: highlightColor,
                   child: Container(

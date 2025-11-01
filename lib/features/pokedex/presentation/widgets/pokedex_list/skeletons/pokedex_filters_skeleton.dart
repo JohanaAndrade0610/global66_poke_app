@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import '../../../../../../core/theme/app_theme.dart';
-import '../../../../../../core/widgets/skeleton_shimmer.dart';
+import '../../../../../../core/widgets/custom_skeleton_shimmer.dart';
 
 class PokedexFiltersSkeleton extends StatelessWidget {
   const PokedexFiltersSkeleton({super.key});
@@ -28,7 +28,7 @@ class PokedexFiltersSkeleton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       // Efecto de carga y barra de búsqueda
-      child: SkeletonShimmer(
+      child: CustomSkeletonShimmer(
         baseColor: base,
         highlightColor: highlight,
         child: Row(

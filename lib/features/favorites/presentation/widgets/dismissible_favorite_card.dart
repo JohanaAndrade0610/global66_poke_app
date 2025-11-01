@@ -10,7 +10,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_theme.dart';
-import '../../../../core/widgets/pokemon_card.dart';
+import '../../../../core/widgets/custom_pokemon_card.dart';
 import '../../../pokedex/domain/entities/pokedex_entity.dart';
 import 'delete_favorite_dialog.dart';
 import '../../../pokedex/presentation/provider/pokemon_detail_provider.dart';
@@ -69,7 +69,7 @@ class DismissibleFavoriteCard extends ConsumerWidget {
         onDelete();
       },
       // Card del Pokémon
-      child: PokemonCard(
+      child: CustomPokemonCard(
         pokemon: pokemon,
         isFavorite: true,
         onTap: () {
