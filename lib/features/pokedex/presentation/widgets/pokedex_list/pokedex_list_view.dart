@@ -54,20 +54,13 @@ class PokedexListView extends ConsumerWidget {
           // Verificar si el Pokémon está en favoritos
           final isFavorite = favoritesNotifier.isFavorite(pokemon.id);
           return GestureDetector(
-            onTap: () async {
-              // Muestra el loading en la ventana de lista de pokémon
-              onLoadingStart?.call();
-              try {
-                // Se dispara la petición de detalle de un Pokémon al hacer tap
-                await ref
-                    .read(pokemonDetailNotifierProvider.notifier)
-                    .fetchDetail(pokemon.name);
-                if (!context.mounted) return;
-                // Navegación a la pantalla de detalle
-                context.push('/pokemon/${pokemon.name}');
-              } finally {
-                onLoadingEnd?.call();
-              }
+            onTap: () {
+              // Navega de una vez y deja la carga del detalle en segundo plano
+              ref
+                  .read(pokemonDetailNotifierProvider.notifier)
+                  .fetchDetail(pokemon.name);
+              if (!context.mounted) return;
+              context.push('/pokemon/${pokemon.name}');
             },
             child: PokemonCard(
               pokemon: pokemon,

@@ -13,13 +13,14 @@ import '../../../../core/theme_mode_notifier.dart';
 import '../../../../core/widgets/custom_app_bar.dart';
 import '../../../../core/widgets/custom_bottom_navigation_bar.dart';
 import '../../../../core/widgets/pokemon_type_label.dart';
-import '../widgets/info_box_grid.dart';
-import '../widgets/gender_bar.dart';
+import '../widgets/pokedex_details/info_box_grid.dart';
+import '../widgets/pokedex_details/gender_bar.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../provider/pokemon_detail_provider.dart';
 import '../../../favorites/presentation/provider/favorites_provider.dart';
 import '../../domain/entities/pokedex_entity.dart';
-import '../widgets/pokemon_header.dart';
+import '../widgets/pokedex_details/pokemon_header.dart';
+import 'pokemon_detail_skeleton_screen.dart';
 
 class PokemonDetailScreen extends ConsumerWidget {
   // Nombre del Pokémon cuyos detalles se mostrarán
@@ -88,45 +89,40 @@ class PokemonDetailScreen extends ConsumerWidget {
           );
         },
       ),
-      body: Column(
-        children: [
-          SizedBox(
-            height: semicircleHeight,
-            child: Stack(
-              clipBehavior: Clip.none,
-              children: [
-                SafeArea(
-                  top: false,
-                  child: PokemonHeader(
-                    height: semicircleHeight,
-                    primaryType: state.maybeWhen(
-                      loaded: (d) => d.types.first,
-                      orElse: () => null,
+      body: state.when(
+        // Estado cargado
+        loaded: (detail) => Column(
+          children: [
+            SizedBox(
+              height: semicircleHeight,
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  SafeArea(
+                    top: false,
+                    child: PokemonHeader(
+                      height: semicircleHeight,
+                      primaryType: detail.types.first,
+                      imageUrl: detail.imageUrl,
+                      imageWidthFactor: 0.8,
+                      imageHeightFactor: imgHFactor,
+                      overlapFactor: overlapFactor,
                     ),
-                    imageUrl: state.maybeWhen(
-                      loaded: (d) => d.imageUrl,
-                      orElse: () => null,
+                  ),
+                  Positioned(
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: MediaQuery.of(context).padding.top,
+                    child: Container(
+                      color: Theme.of(context).scaffoldBackgroundColor,
                     ),
-                    imageWidthFactor: 0.8,
-                    imageHeightFactor: imgHFactor,
-                    overlapFactor: overlapFactor,
                   ),
-                ),
-                Positioned(
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  height: MediaQuery.of(context).padding.top,
-                  child: Container(
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Expanded(
-            child: state.when(
-              loaded: (detail) => SingleChildScrollView(
+            Expanded(
+              child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -263,11 +259,16 @@ class PokemonDetailScreen extends ConsumerWidget {
                   ],
                 ),
               ),
-              error: (error) => Center(child: Text(error)),
-              loading: () => const SizedBox.shrink(),
             ),
-          ),
-        ],
+          ],
+        ),
+        // Estado error
+        error: (error) => Center(child: Text(error)),
+        // Estado cargando
+        loading: () => PokemonDetailSkeletonScreen(
+          semicircleHeight: semicircleHeight,
+          overlapSpace: pokemonImageOverlap + 8,
+        ),
       ),
       // Footer generico de la aplicación
       bottomNavigationBar: CustomBottomNavigationBar(

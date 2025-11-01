@@ -72,9 +72,9 @@ class DismissibleFavoriteCard extends ConsumerWidget {
       child: PokemonCard(
         pokemon: pokemon,
         isFavorite: true,
-        onTap: () async {
+        onTap: () {
           // Navegación a la pantalla de detalles del Pokémon al hacer tap sobre el card
-          await ref
+          ref
               .read(pokemonDetailNotifierProvider.notifier)
               .fetchDetail(pokemon.name);
           if (!context.mounted) return;

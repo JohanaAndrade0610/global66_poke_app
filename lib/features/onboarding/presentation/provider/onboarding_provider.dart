@@ -5,6 +5,7 @@
  * @version 1.0 22/10/2025 Documentación y creación de la clase.
  */
 
+import 'dart:async';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../pokedex/presentation/provider/pokedex_provider.dart';
 import 'onboarding_state.dart';
@@ -31,7 +32,8 @@ class OnboardingController extends _$OnboardingController {
   void onSplashAnimationCompleted() {
     state = state.copyWith(
       splashCompleted: true,
-      navigationRoute: '/onboarding', // Ruta a la que se debe navegar después del splash
+      navigationRoute:
+          '/onboarding', // Ruta a la que se debe navegar después del splash
     );
   }
 
@@ -75,20 +77,16 @@ class OnboardingController extends _$OnboardingController {
     * @description Método encargado de llamar a la API para obtener los datos necesarios para la pantalla Pokedex.
     */
   Future<void> callApiPokedex() async {
-    state = state.copyWith(loading: true);
-    try {
-      await ref.read(pokedexNotifierProvider.notifier).fetchPokedexList();
-      state = state.copyWith(
-        completed: true,
-        canNavigateToPokedex: true,
-        navigationRoute: '/pokedex', // Ruta a la que se debe navegar después de cargar los datos
-      );
-    } catch (e) {
-      state = state.copyWith(
-        error: e.toString(),
-        navigationRoute: '/pokedex', // Ruta a la que se debe navegar en caso de error
-      );
-    }
+    // Navegar inmediatamente a Pokedex y cargar datos en segundo plano
+    state = state.copyWith(
+      loading: false,
+      completed: false,
+      canNavigateToPokedex: true,
+      navigationRoute: '/pokedex',
+    );
+
+    // Disparar la carga sin bloquear la navegación; Pokedex mostrará skeleton mientras tanto
+    unawaited(ref.read(pokedexNotifierProvider.notifier).fetchPokedexList());
   }
 
   /*

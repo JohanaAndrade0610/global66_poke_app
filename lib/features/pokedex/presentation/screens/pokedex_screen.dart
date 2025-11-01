@@ -10,14 +10,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/widgets/custom_bottom_navigation_bar.dart';
 import '../../../../core/widgets/custom_information.dart';
-import '../../../../core/widgets/custom_loading.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../onboarding/presentation/provider/onboarding_provider.dart';
 import '../../../favorites/presentation/provider/favorites_provider.dart';
 import '../provider/pokedex_provider.dart';
-import '../widgets/pokedex_list_view.dart';
-import '../widgets/pokemon_filters.dart';
+import '../widgets/pokedex_list/pokedex_list_view.dart';
+import 'pokedex_skeleton_screen.dart';
+import '../widgets/pokedex_list/pokemon_filters.dart';
 
 class PokedexScreen extends ConsumerStatefulWidget {
   const PokedexScreen({Key? key}) : super(key: key);
@@ -27,11 +27,6 @@ class PokedexScreen extends ConsumerStatefulWidget {
 }
 
 class _PokedexScreenState extends ConsumerState<PokedexScreen> {
-  // Flag local para mostrar el overlay de carga inmediatamente al tocar "Reintentar"
-  bool _localRetryLoading = false;
-  // Último contenido estable (loaded o error) para mantenerlo visible bajo el overlay
-  Widget? _lastStableContent;
-
   /*
   * @method initState
   * @description Inicializa el estado y limpia el loading de onboarding.
@@ -51,13 +46,13 @@ class _PokedexScreenState extends ConsumerState<PokedexScreen> {
   Widget build(BuildContext context) {
     // Obtener el estado actual de la pantalla Pokédex
     final state = ref.watch(pokedexNotifierProvider);
-    // Flag para controlar el overlay de carga
-    final isLoading = state.maybeWhen(loading: () => true, orElse: () => false);
     // Internacionalización de los textos
     final l10n = AppLocalizations.of(context)!;
     Widget content = state.when(
-      // Estado de carga
-      loading: () => _lastStableContent ?? Container(),
+      // Estado de carga: mostrar skeleton de los widgets
+      loading: () {
+        return const PokedexSkeletonScreen();
+      },
       // Estado con la lista de Pokémon precargada
       loaded: (pokemons, searchQuery, selectedTypes) {
         final widget = Column(
@@ -116,17 +111,14 @@ class _PokedexScreenState extends ConsumerState<PokedexScreen> {
                 pokemons: pokemons,
                 onLoadingStart: () {
                   if (!mounted) return;
-                  setState(() => _localRetryLoading = true);
                 },
                 onLoadingEnd: () {
                   if (!mounted) return;
-                  setState(() => _localRetryLoading = false);
                 },
               ),
             ),
           ],
         );
-        _lastStableContent = widget;
         return widget;
       },
       // Estado de error con mensaje descriptivo
@@ -141,22 +133,17 @@ class _PokedexScreenState extends ConsumerState<PokedexScreen> {
             buttonText: l10n.onboardingInformationRetryButton,
             onButtonTap: () {
               // Mostrar el overlay inmediatamente mientras el provider entra en loading
-              setState(() {
-                _localRetryLoading = true;
-              });
+              setState(() {});
               ref
                   .read(pokedexNotifierProvider.notifier)
                   .fetchPokedexList()
                   .whenComplete(() {
                     if (!mounted) return;
-                    setState(() {
-                      _localRetryLoading = false;
-                    });
+                    setState(() {});
                   });
             },
           ),
         );
-        _lastStableContent = widget;
         return widget;
       },
     );
@@ -188,9 +175,6 @@ class _PokedexScreenState extends ConsumerState<PokedexScreen> {
             ),
           ),
         ),
-        // Widget de carga generico de la aplicación
-        if (isLoading || _localRetryLoading)
-          const Positioned.fill(child: CustomLoading()),
       ],
     );
   }
