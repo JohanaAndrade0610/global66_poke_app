@@ -22,7 +22,8 @@ class PokedexRemoteDatasource {
     required int limit,
     required int offset,
   }) async {
-    final url = '${AppConfig.pokeApiBaseUrl}/pokemon?limit=$limit&offset=$offset';
+    final url =
+        '${AppConfig.pokeApiBaseUrl}/pokemon?limit=$limit&offset=$offset';
     final response = await dio.get(url);
     final results = response.data['results'] as List;
     return results.cast<Map<String, dynamic>>();
@@ -47,7 +48,7 @@ class PokedexRemoteDatasource {
     * @returns Future<Map<String, dynamic>> Datos crudos del tipo de Pokémon.
     */
   Future<Map<String, dynamic>> fetchTypeRaw(String type) async {
-    final url = '${AppConfig.pokeApiBaseUrl}/type/$type';
+    final url = '${AppConfig.pokeApiBaseUrl}/type/${Uri.encodeComponent(type)}';
     final response = await dio.get(url);
     return response.data as Map<String, dynamic>;
   }
@@ -57,8 +58,11 @@ class PokedexRemoteDatasource {
     * @description Obtiene los datos crudos de la especie de un Pokémon desde la API por nombre.
     * @returns Future<Map<String, dynamic>> Datos crudos de la especie del Pokémon.
     */
-  Future<Map<String, dynamic>> fetchSpeciesRaw(String name) async {
-    final url = '${AppConfig.pokeApiBaseUrl}/pokemon-species/$name';
+  Future<Map<String, dynamic>> fetchSpeciesRaw(String nameOrUrl) async {
+    final clean = nameOrUrl.trim();
+    final url = clean.startsWith('https')
+        ? clean
+        : '${AppConfig.pokeApiBaseUrl}/pokemon-species/${Uri.encodeComponent(clean)}';
     final response = await dio.get(url);
     return response.data as Map<String, dynamic>;
   }

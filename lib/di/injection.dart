@@ -46,7 +46,7 @@ void init() {
   getIt.registerLazySingleton<GetPokedexListUsecase>(
     () => GetPokedexListUsecase(
       getIt<PokedexRepository>(),
-      paginationPolicy: getIt<PaginationPolicy>(),
+      getIt<PaginationPolicy>(),
     ),
   );
 

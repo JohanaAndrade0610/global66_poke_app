@@ -78,7 +78,7 @@ class DismissibleFavoriteCard extends ConsumerWidget {
               .read(pokemonDetailNotifierProvider.notifier)
               .fetchDetail(pokemon.name);
           if (!context.mounted) return;
-          context.go('/pokemon/${pokemon.name}');
+          context.push('/pokemon/${pokemon.name}');
         },
         onFavoriteTap: () => _handleDelete(context),
       ),

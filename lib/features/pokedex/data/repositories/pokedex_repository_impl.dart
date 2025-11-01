@@ -59,11 +59,16 @@ class PokedexRepositoryImpl implements PokedexRepository {
   */
   @override
   Future<PokemonDetailEntity> getPokemonDetail(String name) async {
-    final data = await remoteDatasource.fetchPokemonRaw(name);
+    // Normaliza el nombre: minúsculas y guiones
+    final normalizedName = name.trim().toLowerCase().replaceAll(' ', '-');
+    final data = await remoteDatasource.fetchPokemonRaw(normalizedName);
     final types = _parseTypes(data);
     final ability = _parseAbility(data);
     final weaknesses = await _fetchWeaknesses(types);
-    final speciesData = await remoteDatasource.fetchSpeciesRaw(name);
+    // Usa la URL de species entregada por la API del Pokémon para evitar problemas de nombres con guiones/espacios/mayúsculas
+    final speciesData = await remoteDatasource.fetchSpeciesRaw(
+      (data['species'] as Map<String, dynamic>)['url'] as String,
+    );
     final genderRates = _parseGenderRates(speciesData);
     final category = _parseCategory(speciesData);
     final description = _parseDescription(speciesData);

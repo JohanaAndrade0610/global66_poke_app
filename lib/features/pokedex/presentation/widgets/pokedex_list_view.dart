@@ -64,7 +64,7 @@ class PokedexListView extends ConsumerWidget {
                     .fetchDetail(pokemon.name);
                 if (!context.mounted) return;
                 // Navegación a la pantalla de detalle
-                context.go('/pokemon/${pokemon.name}');
+                context.push('/pokemon/${pokemon.name}');
               } finally {
                 onLoadingEnd?.call();
               }

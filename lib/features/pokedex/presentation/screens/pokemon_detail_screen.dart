@@ -68,7 +68,7 @@ class PokemonDetailScreen extends ConsumerWidget {
         isFavorite: isFavorite,
         forceLightIcon: true,
         onBackTap: () {
-          context.go('/pokedex');
+          context.pop();
         },
         // Manejo del tap en el ícono de favorito
         onFavoriteTap: () {

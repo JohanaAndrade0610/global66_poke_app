@@ -133,7 +133,7 @@ class PokemonCard extends ConsumerWidget {
                       children: [
                         // ID del Pokémon
                         Text(
-                          'N°${pokemon.id.toString().padLeft(4, '0')}',
+                          'N°${pokemon.id < 100 ? pokemon.id.toString().padLeft(3, '0') : pokemon.id}',
                           style: AppTextStyles.textPoppins12Semibold424242
                               .copyWith(
                                 color: isDark
