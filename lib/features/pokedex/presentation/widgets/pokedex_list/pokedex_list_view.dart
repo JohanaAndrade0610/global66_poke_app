@@ -8,11 +8,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../../domain/entities/pokedex_entity.dart';
-import '../../../../core/widgets/pokemon_card.dart';
-import '../../../favorites/presentation/provider/favorites_provider.dart';
-import '../provider/pokemon_detail_provider.dart';
-import '../provider/pokedex_provider.dart';
+import '../../../domain/entities/pokedex_entity.dart';
+import '../../../../../core/widgets/pokemon_card.dart';
+import '../../../../favorites/presentation/provider/favorites_provider.dart';
+import '../../provider/pokemon_detail_provider.dart';
+import '../../provider/pokedex_provider.dart';
 
 class PokedexListView extends ConsumerWidget {
   // Lista de Pokémon a mostrar

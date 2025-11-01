@@ -73,9 +73,9 @@ class MockGetPokedexListUsecase extends _i1.Mock
           as _i3.PaginationPolicy);
 
   @override
-  _i5.Future<List<_i6.PokedexEntity>> call({int? limit, int? offset = 0}) =>
+  _i5.Future<List<_i6.PokedexEntity>> call({int? offset = 0}) =>
       (super.noSuchMethod(
-            Invocation.method(#call, [], {#limit: limit, #offset: offset}),
+            Invocation.method(#call, [], {#offset: offset}),
             returnValue: _i5.Future<List<_i6.PokedexEntity>>.value(
               <_i6.PokedexEntity>[],
             ),

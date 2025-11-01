@@ -6,8 +6,8 @@
  */
 
 import 'package:flutter/material.dart';
-import '../../../../core/theme/app_theme.dart';
-import '../../../../l10n/app_localizations.dart';
+import '../../../../../core/theme/app_theme.dart';
+import '../../../../../l10n/app_localizations.dart';
 import 'pokedex_type_filter_card.dart';
 
 class PokedexTypeFilter extends StatefulWidget {

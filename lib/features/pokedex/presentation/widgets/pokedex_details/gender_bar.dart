@@ -8,9 +8,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../../core/theme/app_theme.dart';
-import '../../../../core/theme_mode_notifier.dart';
-import '../../../../l10n/app_localizations.dart';
+import '../../../../../core/theme/app_theme.dart';
+import '../../../../../core/theme_mode_notifier.dart';
+import '../../../../../l10n/app_localizations.dart';
 
 class GenderBar extends ConsumerWidget {
   // Porcentaje de género masculino.

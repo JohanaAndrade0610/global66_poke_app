@@ -83,9 +83,9 @@ class MockPokedexRemoteDatasource extends _i1.Mock
           as _i4.Future<Map<String, dynamic>>);
 
   @override
-  _i4.Future<Map<String, dynamic>> fetchSpeciesRaw(String? name) =>
+  _i4.Future<Map<String, dynamic>> fetchSpeciesRaw(String? nameOrUrl) =>
       (super.noSuchMethod(
-            Invocation.method(#fetchSpeciesRaw, [name]),
+            Invocation.method(#fetchSpeciesRaw, [nameOrUrl]),
             returnValue: _i4.Future<Map<String, dynamic>>.value(
               <String, dynamic>{},
             ),

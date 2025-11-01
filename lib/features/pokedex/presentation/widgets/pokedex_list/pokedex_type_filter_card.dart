@@ -7,9 +7,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../../core/theme/app_theme.dart';
-import '../../../../l10n/app_localizations.dart';
-import '../utils/pokemon_type_localization.dart' as type_localization;
+import '../../../../../core/theme/app_theme.dart';
+import '../../../../../l10n/app_localizations.dart';
+import '../../utils/pokemon_type_localization.dart' as type_localization;
 
 class PokedexTypeFilterCard extends StatelessWidget {
   // Lista de todos los tipos de Pokémon disponibles
