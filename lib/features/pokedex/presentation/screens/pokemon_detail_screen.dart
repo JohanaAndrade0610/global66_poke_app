@@ -63,31 +63,35 @@ class PokemonDetailScreen extends ConsumerWidget {
       // Permite que el cuerpo se dibuje detrás del AppBar para que el color del semicírculo lo cubra
       extendBodyBehindAppBar: true,
       // Appbar generico de la aplicación
-      appBar: CustomAppBar(
-        showTitle: false,
-        showFavoriteIcon: true,
-        isFavorite: isFavorite,
-        forceLightIcon: true,
-        onBackTap: () {
-          context.pop();
-        },
-        // Manejo del tap en el ícono de favorito
-        onFavoriteTap: () {
-          state.maybeWhen(
-            loaded: (detail) {
-              favoritesNotifier.toggleFavorite(
-                PokedexEntity(
-                  id: detail.id,
-                  name: detail.name,
-                  imageUrl: detail.imageUrl,
-                  types: detail.types,
-                ),
-              );
-              ref.invalidate(favoritesNotifierProvider);
-            },
-            orElse: () {},
-          );
-        },
+      appBar: state.when(
+        loaded: (_) => CustomAppBar(
+          showTitle: false,
+          showFavoriteIcon: true,
+          isFavorite: isFavorite,
+          forceLightIcon: true,
+          onBackTap: () {
+            context.pop();
+          },
+          // Manejo del tap en el ícono de favorito
+          onFavoriteTap: () {
+            state.maybeWhen(
+              loaded: (detail) {
+                favoritesNotifier.toggleFavorite(
+                  PokedexEntity(
+                    id: detail.id,
+                    name: detail.name,
+                    imageUrl: detail.imageUrl,
+                    types: detail.types,
+                  ),
+                );
+                ref.invalidate(favoritesNotifierProvider);
+              },
+              orElse: () {},
+            );
+          },
+        ),
+        error: (_) => null,
+        loading: () => null,
       ),
       body: state.when(
         // Estado cargado
@@ -161,8 +165,10 @@ class PokemonDetailScreen extends ConsumerWidget {
                             runSpacing: 8,
                             children: detail.types
                                 .map(
-                                  (type) =>
-                                      CustomPokemonTypeLabel(type: type, l10n: l10n),
+                                  (type) => CustomPokemonTypeLabel(
+                                    type: type,
+                                    l10n: l10n,
+                                  ),
                                 )
                                 .toList(),
                           ),
@@ -247,8 +253,10 @@ class PokemonDetailScreen extends ConsumerWidget {
                             runSpacing: 8,
                             children: detail.weaknesses
                                 .map(
-                                  (type) =>
-                                      CustomPokemonTypeLabel(type: type, l10n: l10n),
+                                  (type) => CustomPokemonTypeLabel(
+                                    type: type,
+                                    l10n: l10n,
+                                  ),
                                 )
                                 .toList(),
                           ),

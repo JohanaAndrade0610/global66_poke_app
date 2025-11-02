@@ -49,38 +49,54 @@ class GenderBar extends ConsumerWidget {
           ),
         ),
         const SizedBox(height: 8),
-        Row(
-          children: [
-            // Parte de género masculino en la barra.
-            Expanded(
-              flex: (malePercent * 1000).round(),
-              child: Container(
+        total == 0
+            ? Container(
                 height: 12,
                 decoration: BoxDecoration(
-                  color: AppColors.blue2551C3,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(6),
-                    bottomLeft: Radius.circular(6),
-                  ),
+                  color: isDark ? AppColors.grey424242 : AppColors.greyE0E0E0,
+                  borderRadius: BorderRadius.circular(6),
                 ),
-              ),
-            ),
-            // Parte de género femenino en la barra.
-            Expanded(
-              flex: (femalePercent * 1000).round(),
-              child: Container(
-                height: 12,
-                decoration: BoxDecoration(
-                  color: AppColors.pinkFF7596,
-                  borderRadius: const BorderRadius.only(
-                    topRight: Radius.circular(6),
-                    bottomRight: Radius.circular(6),
+              )
+            : Row(
+                children: [
+                  // Parte de género masculino en la barra.
+                  Expanded(
+                    flex: (malePercent * 1000).round(),
+                    child: Container(
+                      height: 12,
+                      decoration: BoxDecoration(
+                        color: AppColors.blue2551C3,
+                        borderRadius: malePercent == 1.0
+                            ? BorderRadius.circular(6)
+                            : malePercent == 0.0
+                            ? BorderRadius.zero
+                            : const BorderRadius.only(
+                                topLeft: Radius.circular(6),
+                                bottomLeft: Radius.circular(6),
+                              ),
+                      ),
+                    ),
                   ),
-                ),
+                  // Parte de género femenino en la barra.
+                  Expanded(
+                    flex: (femalePercent * 1000).round(),
+                    child: Container(
+                      height: 12,
+                      decoration: BoxDecoration(
+                        color: AppColors.pinkFF7596,
+                        borderRadius: femalePercent == 1.0
+                            ? BorderRadius.circular(6)
+                            : femalePercent == 0.0
+                            ? BorderRadius.zero
+                            : const BorderRadius.only(
+                                topRight: Radius.circular(6),
+                                bottomRight: Radius.circular(6),
+                              ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
-        ),
         const SizedBox(height: 8),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -97,7 +113,9 @@ class GenderBar extends ConsumerWidget {
                 const SizedBox(width: 4),
                 // Porcentaje calculado del género masculino.
                 Text(
-                  '${maleRate.toStringAsFixed(1).replaceAll('.', ',')}%',
+                  maleRate == 100.0
+                      ? '100%'
+                      : '${maleRate.toStringAsFixed(1).replaceAll('.', ',')}%',
                   style: AppTextStyles.textPoppins12Medium424242.copyWith(
                     color: isDark ? AppColors.greyE0E0E0 : AppColors.grey424242,
                   ),
@@ -116,7 +134,9 @@ class GenderBar extends ConsumerWidget {
                 const SizedBox(width: 4),
                 // Porcentaje calculado del género femenino.
                 Text(
-                  '${femaleRate.toStringAsFixed(1).replaceAll('.', ',')}%',
+                  femaleRate == 100.0
+                      ? '100%'
+                      : '${femaleRate.toStringAsFixed(1).replaceAll('.', ',')}%',
                   style: AppTextStyles.textPoppins12Medium424242.copyWith(
                     color: isDark ? AppColors.greyE0E0E0 : AppColors.grey424242,
                   ),

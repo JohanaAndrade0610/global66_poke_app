@@ -35,10 +35,12 @@ class PokemonHeaderSkeleton extends StatelessWidget {
       child: CustomSkeletonShimmer(
         baseColor: base,
         highlightColor: highlight,
-        child: const DecoratedBox(
+        child: DecoratedBox(
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
+            color: isDark
+                ? AppColors.grey424242.withOpacity(0.45)
+                : Colors.white,
+            borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(180),
               bottomRight: Radius.circular(200),
             ),
