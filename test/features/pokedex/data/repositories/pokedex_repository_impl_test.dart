@@ -21,6 +21,8 @@ void main() {
     });
 
     test('getPokedexList retorna lista de entidades correctamente', () async {
+      const limit = 20;
+      const offset = 0;
       final rawList = [
         {'url': 'url1'},
         {'url': 'url2'},
@@ -37,10 +39,11 @@ void main() {
         'sprites': {'front_default': 'img2'},
         'types': [ {'type': {'name': 'planta'}} ],
       };
-      when(mockDatasource.fetchPokedexRawList()).thenAnswer((_) async => rawList);
+      when(mockDatasource.fetchPokedexRawList(limit: limit, offset: offset))
+          .thenAnswer((_) async => rawList);
       when(mockDatasource.fetchPokemonRaw('url1')).thenAnswer((_) async => detail1);
       when(mockDatasource.fetchPokemonRaw('url2')).thenAnswer((_) async => detail2);
-      final result = await repository.getPokedexList();
+      final result = await repository.getPokedexList(limit: limit, offset: offset);
       expect(result, isA<List<PokedexEntity>>());
       expect(result.length, 2);
       expect(result[0].name, 'bulbasaur');
@@ -48,6 +51,7 @@ void main() {
     });
 
     test('getPokemonDetail retorna entidad con datos correctos', () async {
+      final speciesUrl = 'https://pokeapi.co/api/v2/pokemon-species/pikachu';
       final data = {
         'id': 25,
         'name': 'pikachu',
@@ -56,6 +60,8 @@ void main() {
         'weight': 60,
         'height': 4,
         'abilities': [ {'ability': {'name': 'static'}} ],
+        // La API real entrega un objeto species con una URL; el repo usa esa URL
+        'species': {'url': speciesUrl},
       };
       final typeData = {
         'damage_relations': {
@@ -70,9 +76,10 @@ void main() {
         ],
         'flavor_text_entries': [ {'language': {'name': 'es'}, 'flavor_text': 'Pokémon ratón.'} ]
       };
-      when(mockDatasource.fetchPokemonRaw('pikachu')).thenAnswer((_) async => data);
+  when(mockDatasource.fetchPokemonRaw('pikachu')).thenAnswer((_) async => data);
       when(mockDatasource.fetchTypeRaw('eléctrico')).thenAnswer((_) async => typeData);
-      when(mockDatasource.fetchSpeciesRaw('pikachu')).thenAnswer((_) async => speciesData);
+  // El repositorio llama con la URL completa proveniente de data['species']['url']
+  when(mockDatasource.fetchSpeciesRaw(speciesUrl)).thenAnswer((_) async => speciesData);
       final result = await repository.getPokemonDetail('pikachu');
       expect(result, isA<PokemonDetailEntity>());
       expect(result.name, 'pikachu');

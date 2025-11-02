@@ -20,14 +20,16 @@ void main() {
     });
 
   test('fetchPokedexRawList llama la URL correcta y parsea los resultados', () async {
-      final url = '${AppConfig.pokeApiBaseUrl}/pokemon';
+      const limit = 20;
+      const offset = 0;
+      final url = '${AppConfig.pokeApiBaseUrl}/pokemon?limit=$limit&offset=$offset';
       final mockResponse = Response(
         data: {'results': [ {'name': 'bulbasaur', 'url': 'url1'} ]},
         statusCode: 200,
         requestOptions: RequestOptions(path: url),
       );
       when(mockDio.get(url)).thenAnswer((_) async => mockResponse);
-      final result = await datasource.fetchPokedexRawList();
+      final result = await datasource.fetchPokedexRawList(limit: limit, offset: offset);
       expect(result, isA<List<Map<String, dynamic>>>());
       expect(result.first['name'], 'bulbasaur');
     });

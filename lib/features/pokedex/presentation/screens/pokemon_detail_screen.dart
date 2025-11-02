@@ -84,7 +84,6 @@ class PokemonDetailScreen extends ConsumerWidget {
                     types: detail.types,
                   ),
                 );
-                ref.invalidate(favoritesNotifierProvider);
               },
               orElse: () {},
             );
@@ -281,12 +280,14 @@ class PokemonDetailScreen extends ConsumerWidget {
       // Footer generico de la aplicación
       bottomNavigationBar: CustomBottomNavigationBar(
         selectedIndex: 0,
-        onItemTapped: (index) {
+        onItemTapped: (index) async {
           if (index == 0) {
             // Ventana actual
           } else if (index == 1) {
             context.go('/regions');
           } else if (index == 2) {
+            // Actualizar favoritos desde la base de datos antes de navegar
+            await favoritesNotifier.loadFavorites();
             context.go('/favorites');
           } else if (index == 3) {
             context.go('/profile');

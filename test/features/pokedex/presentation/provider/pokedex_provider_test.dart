@@ -8,6 +8,7 @@ import 'package:global66_poke_app/features/pokedex/presentation/provider/pokedex
 import 'package:global66_poke_app/features/pokedex/presentation/provider/pokedex_state.dart';
 import 'package:global66_poke_app/features/pokedex/domain/entities/pokedex_entity.dart';
 import 'package:global66_poke_app/features/pokedex/domain/usecases/get_pokedex_list_usecase.dart';
+import 'package:global66_poke_app/features/pokedex/domain/pagination/pagination_policy.dart';
 import 'package:global66_poke_app/di/injection.dart';
 import 'pokedex_provider_test.mocks.dart';
 
@@ -24,6 +25,11 @@ void main() {
         getIt.unregister<GetPokedexListUsecase>();
       }
       getIt.registerSingleton<GetPokedexListUsecase>(mockUsecase);
+      // Registrar una política de paginación para evitar errores de GetIt
+      if (getIt.isRegistered<PaginationPolicy>()) {
+        getIt.unregister<PaginationPolicy>();
+      }
+      getIt.registerSingleton<PaginationPolicy>(const DefaultPaginationPolicy(pageSize: 20));
       container = ProviderContainer();
       notifier = container.read(pokedexNotifierProvider.notifier);
     });
