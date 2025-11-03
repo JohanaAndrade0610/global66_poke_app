@@ -11,7 +11,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/theme_mode_notifier.dart';
 import '../../../../core/widgets/custom_app_bar.dart';
-import '../../../../core/widgets/custom_bottom_navigation_bar.dart';
 import '../../../../core/widgets/custom_pokemon_type_label.dart';
 import '../widgets/pokedex_details/info_box_grid.dart';
 import '../widgets/pokedex_details/gender_bar.dart';
@@ -276,23 +275,6 @@ class PokemonDetailScreen extends ConsumerWidget {
           semicircleHeight: semicircleHeight,
           overlapSpace: pokemonImageOverlap + 8,
         ),
-      ),
-      // Footer generico de la aplicación
-      bottomNavigationBar: CustomBottomNavigationBar(
-        selectedIndex: 0,
-        onItemTapped: (index) async {
-          if (index == 0) {
-            // Ventana actual
-          } else if (index == 1) {
-            context.go('/regions');
-          } else if (index == 2) {
-            // Actualizar favoritos desde la base de datos antes de navegar
-            await favoritesNotifier.loadFavorites();
-            context.go('/favorites');
-          } else if (index == 3) {
-            context.go('/profile');
-          }
-        },
       ),
     );
   }

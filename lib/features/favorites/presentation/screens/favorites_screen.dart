@@ -29,81 +29,77 @@ class FavoritesScreen extends ConsumerWidget {
     // Notifier del provider de favoritos
     final favoritesNotifier = ref.watch(favoritesNotifierProvider.notifier);
 
-    return Scaffold(
-      // AppBar condicionado a aparecer dependiendo de si hay favoritos
-      appBar: favoritesState.maybeWhen(
-        loaded: (favorites, favoriteIds) => favorites.isNotEmpty
-            ? CustomAppBar(
-                title: l10n.bottomNavigationBarFavorites,
-                showTitle: true,
-                showFavoriteIcon: false,
-                onBackTap: () => context.go('/pokedex'),
-              )
-            : null,
-        orElse: () => null,
-      ),
-      body: favoritesState.when(
-        // Estado de carga
-        loading: () => const Center(child: CircularProgressIndicator()),
-        // Estado de error
-        error: (message) => Center(
-          child: CustomInformation(
-            imagePath: 'assets/common/information/information_image.png',
-            title: l10n.errorInformationTitle,
-            description: l10n.errorInformationDescription,
-            showButton: false,
-          ),
+    // AppBar condicionado a aparecer dependiendo de si hay favoritos
+    final appBar = favoritesState.maybeWhen(
+      loaded: (favorites, favoriteIds) => favorites.isNotEmpty
+          ? CustomAppBar(
+              title: l10n.bottomNavigationBarFavorites,
+              showTitle: true,
+              showFavoriteIcon: false,
+              onBackTap: () {
+                // Si hay algo que hacer pop en este branch, vuelve.
+                if (Navigator.of(context).canPop()) {
+                  context.pop();
+                } else {
+                  // Si está en la raíz del branch, vuelve a la pestaña principal (Pokédex)
+                  context.go('/pokedex');
+                }
+              },
+            )
+          : null,
+      orElse: () => null,
+    );
+    final body = favoritesState.when(
+      // Estado de carga
+      loading: () => const Center(child: CircularProgressIndicator()),
+      // Estado de error
+      error: (message) => Center(
+        child: CustomInformation(
+          imagePath: 'assets/common/information/information_image.png',
+          title: l10n.errorInformationTitle,
+          description: l10n.errorInformationDescription,
+          showButton: false,
         ),
-        // Estado de Pokémon favoritos cargados
-        loaded: (favorites, favoriteIds) {
-          // Widget de información en caso de no haber favoritos
-          if (favorites.isEmpty) {
-            return Center(
-              child: CustomInformation(
-                imagePath: 'assets/common/information/information_image.png',
-                title: l10n.favoritesInformationTitle,
-                description: l10n.favoritesInformationDescription,
-                showButton: false,
-              ),
-            );
-          }
-          // Lista de Pokémon favoritos
-          return ListView.builder(
-            padding: const EdgeInsets.all(16),
-            itemCount: favorites.length,
-            itemBuilder: (context, index) {
-              final favorite = favorites[index];
-              // Convertir FavoriteEntity a PokedexEntity
-              final pokemon = PokedexEntity(
-                id: favorite.id,
-                name: favorite.name,
-                imageUrl: favorite.imageUrl,
-                types: favorite.types,
-              );
-
-              return DismissibleFavoriteCard(
-                pokemon: pokemon,
-                onDelete: () => favoritesNotifier.toggleFavorite(pokemon),
-              );
-            },
+      ),
+      // Estado de Pokémon favoritos cargados
+      loaded: (favorites, favoriteIds) {
+        // Widget de información en caso de no haber favoritos
+        if (favorites.isEmpty) {
+          return Center(
+            child: CustomInformation(
+              imagePath: 'assets/common/information/information_image.png',
+              title: l10n.favoritesInformationTitle,
+              description: l10n.favoritesInformationDescription,
+              showButton: false,
+            ),
           );
-        },
-      ),
-      // Footer generico de la aplicación
-      bottomNavigationBar: CustomBottomNavigationBar(
-        selectedIndex: 2,
-        onItemTapped: (index) {
-          if (index == 0) {
-            context.go('/pokedex');
-          } else if (index == 1) {
-            context.go('/regions');
-          } else if (index == 2) {
-            // Ventana actual
-          } else if (index == 3) {
-            context.go('/profile');
-          }
-        },
-      ),
+        }
+        // Lista de Pokémon favoritos
+        return ListView.builder(
+          padding: const EdgeInsets.all(16),
+          itemCount: favorites.length,
+          itemBuilder: (context, index) {
+            final favorite = favorites[index];
+            // Convertir FavoriteEntity a PokedexEntity
+            final pokemon = PokedexEntity(
+              id: favorite.id,
+              name: favorite.name,
+              imageUrl: favorite.imageUrl,
+              types: favorite.types,
+            );
+            return DismissibleFavoriteCard(
+              pokemon: pokemon,
+              onDelete: () => favoritesNotifier.toggleFavorite(pokemon),
+            );
+          },
+        );
+      },
+    );
+    return Column(
+      children: [
+        if (appBar != null) appBar,
+        Expanded(child: body),
+      ],
     );
   }
 }

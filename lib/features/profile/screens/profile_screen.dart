@@ -12,7 +12,6 @@ import 'package:go_router/go_router.dart';
 import '../../../core/locale_notifier.dart';
 import '../../../core/theme_mode_notifier.dart';
 import '../../../core/widgets/custom_app_bar.dart';
-import '../../../core/widgets/custom_bottom_navigation_bar.dart';
 import '../../../l10n/app_localizations.dart';
 import '../provider/profile_provider.dart';
 import '../widgets/rounded_selector.dart';
@@ -312,21 +311,6 @@ class ProfileScreen extends ConsumerWidget {
             ],
           ),
         ),
-      ),
-      // Barra de navegación generica de la aplicación
-      bottomNavigationBar: CustomBottomNavigationBar(
-        selectedIndex: 3,
-        onItemTapped: (index) {
-          if (index == 0) {
-            context.go('/pokedex');
-          } else if (index == 1) {
-            context.go('/regions');
-          } else if (index == 2) {
-            context.go('/favorites');
-          } else if (index == 3) {
-            // Ventana actual
-          }
-        },
       ),
     );
   }

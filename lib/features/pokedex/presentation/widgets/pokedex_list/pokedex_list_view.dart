@@ -60,7 +60,7 @@ class PokedexListView extends ConsumerWidget {
                   .read(pokemonDetailNotifierProvider.notifier)
                   .fetchDetail(pokemon.name);
               if (!context.mounted) return;
-              context.push('/pokemon/${pokemon.name}');
+              context.push('/pokedex/pokemon/${pokemon.name}');
             },
             child: CustomPokemonCard(
               pokemon: pokemon,

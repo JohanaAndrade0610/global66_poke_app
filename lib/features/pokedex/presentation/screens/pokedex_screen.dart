@@ -7,8 +7,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import '../../../../core/widgets/custom_bottom_navigation_bar.dart';
 import '../../../../core/widgets/custom_information.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../core/theme/app_theme.dart';
@@ -158,21 +156,6 @@ class _PokedexScreenState extends ConsumerState<PokedexScreen> {
           },
           child: Scaffold(
             body: Stack(children: [Positioned.fill(child: content)]),
-            // Footer generico de la aplicación
-            bottomNavigationBar: CustomBottomNavigationBar(
-              selectedIndex: 0,
-              onItemTapped: (index) {
-                if (index == 0) {
-                  // Ventana actual
-                } else if (index == 1) {
-                  context.go('/regions');
-                } else if (index == 2) {
-                  context.go('/favorites');
-                } else if (index == 3) {
-                  context.go('/profile');
-                }
-              },
-            ),
           ),
         ),
       ],
